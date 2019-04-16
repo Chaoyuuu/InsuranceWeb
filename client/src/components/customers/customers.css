@@ -1,0 +1,28 @@
+main {
+    margin-top: 20px;
+  }
+
+  form {
+    width: 350px;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    margin-bottom: 0px;
+  }
+
+  button {
+    margin-bottom: 10px;
+  }
+
+  nobr {
+    size : 30px;
+    color:rgb(46, 46, 75);
+    font-size: 20px;
+  }
+  
+  .header {
+    margin-top: 20px;
+    color:rgb(63, 63, 197);
+    font-size: 15px;
+  }
