@@ -1,47 +1,88 @@
 import React, { Component } from 'react';
+
+import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import getWeb3 from "./utils/getWeb3";
 // import './customers.css';
 
-class Customers extends Component{
-    render() {
-        return (
-            <div>
-                <h2> the new start !!!</h2>
-                <title>Insurance Dapp</title>
+// class Customers extends Component{
+//     render() {
+//         return (
+//             <div>
+//                 <h2> the new start !!!</h2>
+//                 <title>Insurance Dapp</title>
+//             </div>
+//         );
+//     }
+// }
 
-  <body>
-    <p class="text-center header">My account : <span id="account"></span></p>
-    <p class="text-center header">My balance : <span id="balanceOf"></span></p>
-  
-    <div id="loader" class="text-center">
-        <p class="text-center">Loading...</p>
-    </div>
-    
-    <div class="container-fluid" align ="center">
-      <div id="userRow" class="row">
-        <main role="main" class="col-lg-12 d-flex justify-content-center">
-          <h1 class="text-center"> Insurance DApp</h1>
-          
-          <form>     
-            <div class="inputBox central" >
-              <input class="form-control" id="userName" placeholder="input userName" name="userName">
-             
-              <input class="form-control" id="userBirth" placeholder="input userBirth" name="userBirth" >
-               
-              <input class="form-control" id="userID" placeholder="input userID" name="userID" >
-              
-              <input class="form-control" id="StartTime" placeholder="input startTime" name="StartTime">
-             
-              <input class="form-control" id="EndTime" placeholder="input endTime" name="EndTime" >
-              
-            </div>
-          </form>  
+// export default Customers;
 
-          <button type="button" class="btn btn-info btn-submit" id="submit_btn" onclick="App.getInputData();">submit</button>
-         
-  </body>
-            </div>
-        );
+
+class Customers extends Component {
+  constructor(props) {
+    super(props);    this.state = { items: [], text: '' };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>TODO</h3>
+        <Cust items={this.state.items} />
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="new-todo">
+            What needs to be done?
+          </label>
+          <input
+            id="new-todo"
+            onChange={this.handleChange}
+            value={this.state.text}
+          />
+          <button>
+            Add #{this.state.items.length + 1}
+          </button>
+        </form>
+      </div>
+    );
+  }
+
+  handleChange(e) {
+    this.setState({ text: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (!this.state.text.length) {
+      return;
     }
+    const newItem = {
+      text: this.state.text,
+      id: Date.now()
+    };
+    this.setState(state => ({
+      items: state.items.concat(newItem),
+      text: ''
+    }));
+  }
+}
+
+class Cust extends Component {
+  render() {
+    return (
+      <ul>
+        {this.props.items.map(item => (
+          <li key={item.id}>{item.text}</li>
+        ))}
+      </ul>
+    );
+  }
 }
 
 export default Customers;
+
+
+// ReactDOM.render(
+//   <TodoApp />,
+//   document.getElementById('todos-example')
+// );
