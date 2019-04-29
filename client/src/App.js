@@ -1,13 +1,21 @@
 import React, { Component } from "react";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./utils/getWeb3";
-
 import "./App.css";
-// import Customers from "./components/customers/customers.js";
-// import Customers from "./components/customers/customers.js";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      storageValue: 0,
+      web3: null,
+      accounts: null,
+      contract: null
+    }
+    this.setContract = this.setContract.bind(this)
+  }
+  // state = { storageValue: 0, web3: null, accounts: null, contract: null };
 
   componentDidMount = async () => {
     try {
@@ -28,6 +36,7 @@ class App extends Component {
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance }, this.runExample);
+
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -36,24 +45,6 @@ class App extends Component {
       console.error(error);
     }
   };
-
-  
-
-  render() {
-    if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
-    }
-    return (
-      <div>
-        <p>hiii</p>
-        {/* <p>{this.state.storageValue}</p> */}
-        <Customers />
-        {/* <Runcontract a={this.state.storageValue}/> */}
-
-      </div>
-    );
-  }
-
 
   runExample = async () => {
     const { accounts, contract } = this.state;
@@ -66,38 +57,68 @@ class App extends Component {
 
     // Update state with the result.
     this.setState({ storageValue: response });
-  };
-  
-}
+   
+  };  
 
-class Runcontract extends Component {
+  setContract = async (content) => {
+    const { accounts, contract } = this.state;
+
+    // Stores a given value, 5 by default.
+    await contract.methods.set(content).send({ from: accounts[0] });
+
+    // Get the value from the contract to prove it worked.
+    const response = await contract.methods.get().call();
+
+    // Update state with the result.
+    this.setState({ storageValue: response });
+  }
+
   render() {
+    if (!this.state.web3) {
+      return <div>Loading Web3, accounts, and contract...</div>;
+    }
     return (
-      <div className="App">
+      <div className="container">
+        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+          <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="https://github.com/Chaoyuuu/InsuranceWeb" target="_blank">BlockChain Dapp | Insurance Web</a>
+          <ul className="navbar-nav px-3">
+            <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
+              <small><a className="nav-link" href="#"><span id="account">{this.state.accounts[0]}</span></a></small>
+            </li>
+          </ul>
+        </nav>
+        <div className="container-fluid">
+          <div className="row">
+            <main role="main" className="col-lg-12 d-flex justify-content-center">
+            <ToList setContract={this.setContract}/>
+            </main>
+          </div>
+        </div>
+
+        <p>the value = {this.state.storageValue}</p>
         {/* <Customers /> */}
-        <h1>Good to Go!</h1>
-        <div>The stored value is: {this.props.items.map(item => (<div key={item.id}>{item.text}</div>))}</div>
-        {/* <div>The stored value is: {this.props.i.text}</div> */}
+        {/* <SetValue a={this.state.storageValue}/> */}
+
       </div>
     );
-  }
+  } 
 }
 
-class Customers extends Component {
+class ToList extends Component {
   constructor(props) {
     super(props);    
     this.state = { items: [], text: '' };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.text = '';
   }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
   render() {
     return (
       <div>
         <h3>TODO</h3>
-        <Cust items={this.state.items} />
-        {/* <Runcontract items={this.state.text}/> */}
-
+        <SetList items={this.state.items} />
+  
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="new-todo">
             What needs to be done?
@@ -106,14 +127,15 @@ class Customers extends Component {
             id="new-todo"
             onChange={this.handleChange}
             value={this.state.text}
+            ref={(input) => this.task = input}
           />
           <button>
             Add #{this.state.items.length + 1}
           </button>
         </form>
-        <Runcontract items={this.state.items}/>
-      </div>
 
+        <SetValue items={this.state.items}/>
+      </div>
     );
   }
 
@@ -131,6 +153,9 @@ class Customers extends Component {
       id: Date.now()
       
     };
+
+    this.props.setContract(this.task.value)
+
     this.setState(state => ({
       items: state.items.concat(newItem),
       text: ''
@@ -138,7 +163,7 @@ class Customers extends Component {
   }
 }
 
-class Cust extends Component {
+class SetList extends Component {
   render() {
     return (
       <ul>
@@ -146,6 +171,22 @@ class Cust extends Component {
           <li key={item.id}>{item.text}</li>
         ))}
       </ul>
+    );
+  }
+}
+
+class SetValue extends Component {
+  render() {
+    return (
+      <div className="App">
+        <h1>Good to Go!</h1>
+        {/* <div>The stored value is: {this.props.items.map(item => (<div key={item.id}>{item.text}</div>))}</div> */}
+        <div>The stored value is: 
+          {this.props.items.map(item => (
+            <div key={item.id}> {item.text} </div>
+          ))}
+        </div>
+      </div>
     );
   }
 }
