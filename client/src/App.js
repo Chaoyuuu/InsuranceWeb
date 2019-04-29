@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
+// import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import SimpleStorageContract from "./contracts/Insurance.json";
 import getWeb3 from "./utils/getWeb3";
 import "./App.css";
 
@@ -35,7 +36,8 @@ class App extends Component {
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
+      // this.setState({ web3, accounts, contract: instance }, this.runExample);
+      this.setState({ web3, accounts, contract: instance });
 
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -46,31 +48,31 @@ class App extends Component {
     }
   };
 
-  runExample = async () => {
-    const { accounts, contract } = this.state;
+  // runExample = async () => {
+  //   const { accounts, contract } = this.state;
 
-    // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
+  //   // Stores a given value, 5 by default.
+  //   await contract.methods.set(5, 6).send({ from: accounts[0] });
 
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
+  //   // Get the value from the contract to prove it worked.
+  //   const response = await contract.methods.get().call();
 
-    // Update state with the result.
-    this.setState({ storageValue: response });
+  //   // Update state with the result.
+  //   this.setState({ storageValue: response });
    
-  };  
+  // };  
 
-  setContract = async (content) => {
+  setContract = async (content1, content2, content3, content4, content5) => {
     const { accounts, contract } = this.state;
 
     // Stores a given value, 5 by default.
-    await contract.methods.set(content).send({ from: accounts[0] });
+    await contract.methods.setUserInfo(content1, content2, content3, content4, content5).send({ from: accounts[0] });
 
     // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
+    // const response = await contract.methods.get().call();
 
     // Update state with the result.
-    this.setState({ storageValue: response });
+    // this.setState({ storageValue: response });
   }
 
   render() {
@@ -95,10 +97,8 @@ class App extends Component {
           </div>
         </div>
 
-        <p>the value = {this.state.storageValue}</p>
-        {/* <Customers /> */}
-        {/* <SetValue a={this.state.storageValue}/> */}
-
+        {/* <p>the value = {this.state.storageValue}</p> */}
+      
       </div>
     );
   } 
@@ -107,71 +107,105 @@ class App extends Component {
 class ToList extends Component {
   constructor(props) {
     super(props);    
-    this.state = { items: [], text: '' };
+    this.state = {items:[], name:'', birth:'', ID:'', sDate:'', eDate:'' };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.text = '';
   }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
   render() {
     return (
       <div>
         <h3>TODO</h3>
-        <SetList items={this.state.items} />
-  
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="new-todo">
+          <h2 htmlFor="new-todo">
             What needs to be done?
-          </label>
+          </h2>
+          <form onSubmit={this.handleSubmit}>
+          <label>Name: </label>
           <input
-            id="new-todo"
+            id="name"
+            name = "name"
+            placeholder="Your name"
             onChange={this.handleChange}
-            value={this.state.text}
-            ref={(input) => this.task = input}
+            value={this.state.name}
+            // ref={(input) => this.task_x = input}
           />
-          <button>
+          <br/>
+          <label>Birth: </label>
+          <input
+            id="birth"
+            name = "birth"
+            placeholder="Your birth (MM/DD)"
+            onChange={this.handleChange}
+            value={this.state.birth}
+            // ref={(input) => this.task_y = input}
+          />
+          <br/>
+          <label>ID: </label>
+          <input
+            id="ID"
+            name = "ID"
+            placeholder="Your ID"
+            onChange={this.handleChange}
+            value={this.state.ID}
+            // ref={(input) => this.task_y = input}
+          />
+          <br/>
+          <label>StartDate: </label>
+          <input
+            id="sDate"
+            name = "sDate"
+            placeholder="Contract StartDate"
+            onChange={this.handleChange}
+            value={this.state.sDate}
+            // ref={(input) => this.task_y = input}
+          />
+          <br/>
+          <label>EndDate: </label>
+          <input
+            id="eDate"
+            name = "eDate"
+            placeholder="Contract EndDate"
+            onChange={this.handleChange}
+            value={this.state.eDate}
+            // ref={(input) => this.task_y = input}
+          />
+          <br/>
+          <input type="submit" value="Submit"/>
+          {/* <button onClick={this.handleSubmit}>
             Add #{this.state.items.length + 1}
-          </button>
+          </button> */}
         </form>
 
-        <SetValue items={this.state.items}/>
+        <SetValue a={this.state}/>
+
       </div>
     );
   }
 
   handleChange(e) {
-    this.setState({ text: e.target.value });
+    let changeName = e.target.name
+    console.log(changeName)
+    this.setState({ [changeName]: e.target.value})
+    // this.setState({ text: e.target.value })
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    if (!this.state.text.length) {
+    if (!this.state.name.length) {
+      console.log("is in")
       return;
     }
-    const newItem = {
-      text: this.state.text,
-      id: Date.now()
-      
-    };
+    console.log("is in handle")
 
-    this.props.setContract(this.task.value)
+    // this.props.setContract(this.task_x.value, this.task_y.value)
+    this.props.setContract(this.state.name, this.state.birth, this.state.ID, this.state.sDate, this.state.eDate)
 
-    this.setState(state => ({
-      items: state.items.concat(newItem),
-      text: ''
-    }));
-  }
-}
 
-class SetList extends Component {
-  render() {
-    return (
-      <ul>
-        {this.props.items.map(item => (
-          <li key={item.id}>{item.text}</li>
-        ))}
-      </ul>
-    );
+    // this.setState(state => ({
+    //   // items: state.items.concat(newItem),
+    //   text: '',
+    //   text2: ''
+    // }));
   }
 }
 
@@ -179,13 +213,18 @@ class SetValue extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Good to Go!</h1>
-        {/* <div>The stored value is: {this.props.items.map(item => (<div key={item.id}>{item.text}</div>))}</div> */}
-        <div>The stored value is: 
+        <br/>
+        <h3>Good to Go!</h3>
+        {/* <div>The stored value is: 
           {this.props.items.map(item => (
             <div key={item.id}> {item.text} </div>
           ))}
-        </div>
+        </div> */}
+        <li>Name = {this.props.a.name}</li>
+        <li>Birth = {this.props.a.birth}</li>
+        <li>ID = {this.props.a.ID}</li>
+        <li>StartDate = {this.props.a.sDate}</li>
+        <li>EndDate = {this.props.a.eDate}</li>
       </div>
     );
   }
