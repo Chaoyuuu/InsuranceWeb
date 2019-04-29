@@ -117,64 +117,52 @@ class ToList extends Component {
       <div>
         <h3>TODO</h3>
           <h2 htmlFor="new-todo">
-            What needs to be done?
+            Please Input User Information
           </h2>
-          <form onSubmit={this.handleSubmit}>
-          <label>Name: </label>
-          <input
-            id="name"
-            name = "name"
-            placeholder="Your name"
-            onChange={this.handleChange}
-            value={this.state.name}
-            // ref={(input) => this.task_x = input}
-          />
-          <br/>
-          <label>Birth: </label>
-          <input
-            id="birth"
-            name = "birth"
-            placeholder="Your birth (MM/DD)"
-            onChange={this.handleChange}
-            value={this.state.birth}
-            // ref={(input) => this.task_y = input}
-          />
-          <br/>
-          <label>ID: </label>
-          <input
-            id="ID"
-            name = "ID"
-            placeholder="Your ID"
-            onChange={this.handleChange}
-            value={this.state.ID}
-            // ref={(input) => this.task_y = input}
-          />
-          <br/>
-          <label>StartDate: </label>
-          <input
-            id="sDate"
-            name = "sDate"
-            placeholder="Contract StartDate"
-            onChange={this.handleChange}
-            value={this.state.sDate}
-            // ref={(input) => this.task_y = input}
-          />
-          <br/>
-          <label>EndDate: </label>
-          <input
-            id="eDate"
-            name = "eDate"
-            placeholder="Contract EndDate"
-            onChange={this.handleChange}
-            value={this.state.eDate}
-            // ref={(input) => this.task_y = input}
-          />
-          <br/>
-          <input type="submit" value="Submit"/>
-          {/* <button onClick={this.handleSubmit}>
+          <form className="form-horizontal" role="form">
+            <FormStyle 
+              label={"Name"}
+              placeholder={"Your name"} 
+              name={"name"}
+              onChange={this.handleChange}
+              value={this.state.name}
+            />
+            <FormStyle
+              label={"Birth"}
+              name = {"birth"}
+              placeholder={"Your birth (MM/DD)"}
+              onChange={this.handleChange}
+              value={this.state.birth}
+            />
+            <FormStyle
+              label={"ID"}
+              name ={"ID"}
+              placeholder={"Your ID"}
+              onChange={this.handleChange}
+              value={this.state.ID}
+            />
+            <FormStyle
+              label={"StartDate"}
+              name = {"sDate"}
+              placeholder={"Contract StartDate"}
+              onChange={this.handleChange}
+              value={this.state.sDate}
+            />
+            <FormStyle
+              label={"EndDate"}
+              name = {"eDate"}
+              placeholder={"Contract EndDate"}
+              onChange={this.handleChange}
+              value={this.state.eDate}
+            />
+            <button type="button" className="btn btn-primary" onClick={this.handleSubmit}> Submit </button>
+          </form>
+
+
+        {/* <button onClick={this.handleSubmit}>
             Add #{this.state.items.length + 1}
           </button> */}
-        </form>
+
 
         <SetValue a={this.state}/>
 
@@ -230,4 +218,24 @@ class SetValue extends Component {
   }
 }
 
+class FormStyle extends Component {
+  render() {
+    return(
+      <div className="input-group mb-3">
+        <div className="input-group-prepend">
+          <span className="input-group-text" id="basic-addon1">{this.props.label}</span>
+        </div>
+      <input 
+        type="text" 
+        className="form-control" 
+        placeholder={this.props.placeholder} 
+        name={this.props.name} 
+        onChange={this.props.onChange}
+        value={this.props.value}/>            
+      </div>
+    );
+  }
+}
+
 export default App;
+
