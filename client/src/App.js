@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link} from "react-router-dom";
 // import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import SimpleStorageContract from "./contracts/Insurance.json";
 import getWeb3 from "./utils/getWeb3";
@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      storageValue: 0,
+      storageValue: null,
       web3: null,
       accounts: null,
       contract: null
@@ -68,13 +68,15 @@ class App extends Component {
     const { accounts, contract } = this.state;
 
     // Stores a given value, 5 by default.
-    await contract.methods.setUserInfo(content1, content2, content3, content4, content5).send({ from: accounts[0] });
+    const output = await contract.methods.setUserInfo(content1, content2, content3, content4, content5).send({ from: accounts[0] });
+    console.log("output")
 
+    console.log(output)
     // Get the value from the contract to prove it worked.
     // const response = await contract.methods.get().call();
 
     // Update state with the result.
-    // this.setState({ storageValue: response });
+    // this.setState({ storageValue: output });
   }
 
   render() {
@@ -99,7 +101,7 @@ class App extends Component {
           </div>
         </div>
 
-        {/* <p>the value = {this.state.storageValue}</p> */}
+        {/* <p>the output = {this.state.storageValue}</p> */}
       
       </div>
     );
@@ -117,6 +119,8 @@ class ToList extends Component {
   render() {
     return (
       <div>
+        <br/>
+        <br/>
         <br/>
           <h2 htmlFor="new-todo">
             Please Input User Information
@@ -157,7 +161,7 @@ class ToList extends Component {
               onChange={this.handleChange}
               value={this.state.eDate}
             />
-            <button type="button" className="btn btn-primary" onClick={this.handleSubmit}> Submit </button>
+            <button type="button" className="btn btn-primary" onClick={this.handleSubmit }> Submit </button>
           </form>
 
 
@@ -189,7 +193,6 @@ class ToList extends Component {
 
     // this.props.setContract(this.task_x.value, this.task_y.value)
     this.props.setContract(this.state.name, this.state.birth, this.state.ID, this.state.sDate, this.state.eDate)
-
 
     // this.setState(state => ({
     //   // items: state.items.concat(newItem),

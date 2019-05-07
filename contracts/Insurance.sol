@@ -93,7 +93,7 @@ contract Insurance{
         _;
     }
 
-    function setUserInfo(string memory _Name, uint _ID, uint _birth, uint _startTime, uint _endTime) public {
+    function setUserInfo(string memory _Name, uint _ID, uint _birth, uint _startTime, uint _endTime) public returns (string memory){
         total_usr++;
         user_ID = _ID; 
         
@@ -115,6 +115,8 @@ contract Insurance{
         document[user_ID].C = false;
 
         emit e_Detail(user_ID, detail[user_ID].startTime, detail[user_ID].endTime, detail[user_ID].accident);
+
+        return ("receive UserInfo");
     }
     
     //be sure the user already do setUserInfo

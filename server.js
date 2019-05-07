@@ -1,24 +1,26 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
+const items = require('./routes/api/items');
 
 const app = express();
-
   
-app.get('/apt/custom', function(req, res) {
-    const customers = [
-        {id: 1, firstName: 'John', lastName: 'Doe'},
-        {id: 2, firstName: 'Steve', lastName: 'Smith'}
+// Bodyparser Middleware
+app.use(bodyParser.json());
 
-    ];
+//DB Config
+const db = require('./config/keys').mongoURI;
 
-    res.json(customers);
-    // res.send('Hello World!');
-});
+// Connect to Mongo
+mongoose
+    .connect(db)
+    .then(() => console.log('MongoDB Connected...'))
+    .catch(err => console.log(err));
 
-// app.use(function(req, res, next) {
-//     res.status(404).send('Sorry cant find that!');
-//   });
+// Use Routes
+app.use('/api/items', items);
 
-const port = 5000;
-
-app.listen(port, () => console.log(`server started on port ${port}`));
+const port = process.env.PORT || 5000;
+app.listen(port, () => console.log(`Srever started on port ${port}`));
 
