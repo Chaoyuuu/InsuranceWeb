@@ -5,7 +5,9 @@ import Home from "./components/Home.js";
 import About from "./components/About.js";
 import Contact from "./components/Contact";
 import Error from "./components/Error.js";
-import Navigation from "./components/Navigation.js"
+import Connect from "./components/Connect.js";
+
+// import Navigation from "./components/Navigation.js"
 import App from './App'
 
 class Main extends Component {
@@ -20,6 +22,7 @@ class Main extends Component {
             <Route path="/" component={Home} exact />
             <Route path="/App" component={App} />
             <Route path="/about" component={About}  /> 
+            <Route path="/connect" component={Connect}  /> 
             <Route path="/contact" component={Contact}  />
             <Route component={Error} />
           </Switch>

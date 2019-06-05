@@ -28,6 +28,12 @@ class Home extends Component {
                             <a className="nav-link" href="/App">SetUserInfo</a>
                         </li>
                         <li className="nav-item">
+                            <a className="nav-link" href="/Connect">Connect</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/About">About</a>
+                        </li>
+                        <li className="nav-item">
                             {/* <a className="nav-link disabled" href="#">Disabled</a> */}
                             <a className="nav-link" href="/contact">Contact</a>
 
