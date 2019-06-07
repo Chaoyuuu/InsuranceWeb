@@ -31,9 +31,14 @@ class Connect extends Component{
                 
         };
 
-        axios.post('http://localhost:5000/api/items', {data: user}, {headers: headers})
-            .then(res => console.log(`hiiiii: ${res.data}`))
-            .catch(error => console.log("error in axios"));
+        axios.post('http://localhost:5000/api/items', {user})
+            .then(res => {
+                console.log(`hiiiii: ${res.data}`);
+                res.status(200).send(res);
+            })
+            .catch((err, res) => {
+                console.log(err);
+            });
         
     }
 

@@ -17,10 +17,11 @@ router.get('/', (req, res) => {
 // @desc    crerate a post
 // @access  Public
 router.post('/', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000/connect");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    // res.header("Access-Control-Allow-Origin", "http://localhost:3000/connect");
+    // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const newItem = new Item({
-        name: req.body.name
+        name: req.body.name,
+        n2: req.body.n2
     });
 
     newItem.save().then(item => res.json(item));
