@@ -5,7 +5,7 @@ class Connect extends Component{
 
     constructor(props) {
         super(props);    
-        this.state= {input:""};
+        this.state= {input:'noooinput'};
         // this.state = {items:[], name:'', birth:'', ID:'', sDate:'', eDate:'' };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,21 +25,30 @@ class Connect extends Component{
             name: this.state.input,
         };
 
+        console.log(`const user: ${user.name}`);
         
-        var headers = {
-                'Access-Control-Allow-Origin': '*',
+        // var headers = {
+        //         'Access-Control-Allow-Origin': '*',
                 
-        };
+        // };
 
-        axios.post('http://localhost:5000/api/items', {user})
-            .then(res => {
-                console.log(`hiiiii: ${res.data}`);
-                res.status(200).send(res);
+        axios.post('http://localhost:5000/api/items', user)
+            .then((req, res) => {
+                console.log('Successfully connected to db')
+                console.log(`Successfully connected to db ${req.data}`)
+                // res.status(200).send(res)
+                // const newItem = new Item({
+                //     name: req.body.name,
+                //     n2: req.body.n2
+                // });
+            
+                // newItem.save().then(item => res.json(item));
             })
             .catch((err, res) => {
-                console.log(err);
+                console.log(`Not connected to db ${err}`)
             });
-        
+
+    
     }
 
     render(){
