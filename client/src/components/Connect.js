@@ -37,12 +37,7 @@ class Connect extends Component{
                 console.log('Successfully connected to db')
                 console.log(`Successfully connected to db ${req.data}`)
                 // res.status(200).send(res)
-                // const newItem = new Item({
-                //     name: req.body.name,
-                //     n2: req.body.n2
-                // });
-            
-                // newItem.save().then(item => res.json(item));
+              
             })
             .catch((err, res) => {
                 console.log(`Not connected to db ${err}`)

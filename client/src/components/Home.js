@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+// import { Button } from 'reactstrap';
+
+import {Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Carousel} from "react-bootstrap";
 
 class Home extends Component {
     constructor(props){
@@ -13,41 +16,82 @@ class Home extends Component {
 
     render() {
         return (
+            
             <div>               
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-                        <a className="navbar-brand" href="https://github.com/Chaoyuuu/InsuranceWeb">Inurance Dapp</a>
-                        <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/" exact="true">Home <span className="sr-only">(current)</span></a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/App">SetUserInfo</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/Connect">Connect</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/About">About</a>
-                        </li>
-                        <li className="nav-item">
-                            {/* <a className="nav-link disabled" href="#">Disabled</a> */}
-                            <a className="nav-link" href="/contact">Contact</a>
-
-                        </li>
-                        </ul>
-                        <form className="form-inline my-2 my-lg-0">
-                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                    </div>
-                </nav>
-
+               
+                {/* <Container> */}
+                <Navbar bg="light" expand="lg">
+                <Navbar.Brand href="https://github.com/Chaoyuuu/InsuranceWeb">Insurance Dapp</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto mt-2 mt-lg-0">
+                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/App">SetUserInfo</Nav.Link>
+                    <Nav.Link href="/About">About</Nav.Link>
+                    <Nav.Link href="/Connect DB">Connect</Nav.Link>
+                    <Nav.Link href="/Contact">Contact</Nav.Link>
+                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                    </NavDropdown>
+                    </Nav>
+                    <Form inline>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                    <Button variant="outline-success">Search</Button>
+                    </Form>
+                </Navbar.Collapse>
+                </Navbar>
+                {/* </Container>  */}
                 <h3>Home page :-)</h3>
-           </div>
+
+
+                <Carousel>
+  <Carousel.Item>
+    <img
+      className="d-block w-100"
+      src="https://i.imgur.com/eAOeogN.jpg"
+      alt="First slide"
+    />
+    <Carousel.Caption>
+      <h3>First slide label</h3>
+      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+    </Carousel.Caption>
+  </Carousel.Item>
+  <Carousel.Item>
+    <img
+      className="d-block w-100"
+      src="https://i.imgur.com/bDxQpOD.jpg"
+      alt="Third slide"
+    />
+
+    <Carousel.Caption>
+      <h3>Second slide label</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </Carousel.Caption>
+  </Carousel.Item>
+  <Carousel.Item>
+    <img
+      className="d-block w-100"
+      src="https://i.imgur.com/Y0ytK8r.jpg"
+      alt="Third slide"
+    />
+
+    <Carousel.Caption>
+      <h3>Third slide label</h3>
+      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+    </Carousel.Caption>
+  </Carousel.Item>
+</Carousel>
+
+
+
+             
+    </div>
+
+        
         );
     }
 };
