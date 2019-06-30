@@ -1,7 +1,9 @@
 var Insurance = artifacts.require("./Insurance.sol");
 
 module.exports = function(deployer) {
-	deployer.deploy(Insurance);
+	// instance.deposit(accounts[0], {msg.value: 50 ether});
+	deployer.deploy(Insurance, {value: 50000000000000000000});
+	// deployer.deploy(Insurance);
 }; 
 
 
