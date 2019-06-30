@@ -18,7 +18,6 @@ class App extends Component {
     }
     this.setContract = this.setContract.bind(this)
   }
-  // state = { storageValue: 0, web3: null, accounts: null, contract: null };
 
   componentDidMount = async () => {
     try {
@@ -50,25 +49,28 @@ class App extends Component {
     }
   };
 
-  // runExample = async () => {
-  //   const { accounts, contract } = this.state;
-
-  //   // Stores a given value, 5 by default.
-  //   await contract.methods.set(5, 6).send({ from: accounts[0] });
-
-  //   // Get the value from the contract to prove it worked.
-  //   const response = await contract.methods.get().call();
-
-  //   // Update state with the result.
-  //   this.setState({ storageValue: response });
-   
-  // };  
-
-  setContract = async (content1, content2, content3, content4, content5) => {
+  /*
+  runExample = async () => {
     const { accounts, contract } = this.state;
 
     // Stores a given value, 5 by default.
-    const output = await contract.methods.setUserInfo(content1, content2, content3, content4, content5).send({ from: accounts[0] });
+    await contract.methods.set(5, 6).send({ from: accounts[0] });
+
+    // Get the value from the contract to prove it worked.
+    const response = await contract.methods.get().call();
+
+    // Update state with the result.
+    this.setState({ storageValue: response });
+   
+  };  
+  */
+
+  setContract = async (content1, content2, content3, content4) => {
+    const { accounts, contract } = this.state;
+
+    // Stores a given value, 5 by default.
+    // const output = await contract.methods.setUserInfo(content1, content2, content3, content4, content5).send({ from: accounts[0] });
+    const output = await contract.methods.SetDetail(content1, content2, content3, content4).send({ from: accounts[0] });
     console.log("output")
 
     console.log(output)
@@ -111,11 +113,32 @@ class App extends Component {
 class ToList extends Component {
   constructor(props) {
     super(props);    
-    this.state = {items:[], name:'', birth:'', ID:'', sDate:'', eDate:'' };
+    this.state = {items:[], name:'', birth:'', ID:'', startM:'', startD:'', endM:'', endD:'' };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+  handleChange(e) {
+    let changeName = e.target.name
+    console.log(changeName)
+    this.setState({ [changeName]: e.target.value})
+    // this.setState({ text: e.target.value })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (!this.state.name.length) {
+      console.log("is in")
+      return;
+    }
+    console.log("is in handle")
+
+    // this.props.setContract(this.task_x.value, this.task_y.value)
+    // this.props.setContract(this.state.name, this.state.birth, this.state.ID, this.state.sDate, this.state.eDate)
+    this.props.setContract(this.state.startM, this.state.startD, this.state.endM, this.state.endD)
+
+  }
+
   render() {
     return (
       <div>
@@ -148,18 +171,32 @@ class ToList extends Component {
               value={this.state.ID}
             />
             <FormStyle
-              label={"StartDate"}
-              name = {"sDate"}
-              placeholder={"Contract StartDate"}
+              label={"StartDate_M"}
+              name = {"startM"}
+              placeholder={"Contract StartDate_M"}
               onChange={this.handleChange}
-              value={this.state.sDate}
+              value={this.state.startM}
             />
             <FormStyle
-              label={"EndDate"}
-              name = {"eDate"}
-              placeholder={"Contract EndDate"}
+              label={"StartDate_D"}
+              name = {"startD"}
+              placeholder={"Contract StartDate_D"}
               onChange={this.handleChange}
-              value={this.state.eDate}
+              value={this.state.startD}
+            />
+            <FormStyle
+              label={"EndDate_M"}
+              name = {"endM"}
+              placeholder={"Contract EndDate_M"}
+              onChange={this.handleChange}
+              value={this.state.endM}
+            />
+            <FormStyle
+              label={"EndDate_D"}
+              name = {"endD"}
+              placeholder={"Contract EndDate_D"}
+              onChange={this.handleChange}
+              value={this.state.endD}
             />
             <button type="button" className="btn btn-primary" onClick={this.handleSubmit }> Submit </button>
           </form>
@@ -168,37 +205,11 @@ class ToList extends Component {
         {/* <button onClick={this.handleSubmit}>
             Add #{this.state.items.length + 1}
           </button> */}
-
-
+          
         <SetValue a={this.state}/>
 
       </div>
     );
-  }
-
-  handleChange(e) {
-    let changeName = e.target.name
-    console.log(changeName)
-    this.setState({ [changeName]: e.target.value})
-    // this.setState({ text: e.target.value })
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    if (!this.state.name.length) {
-      console.log("is in")
-      return;
-    }
-    console.log("is in handle")
-
-    // this.props.setContract(this.task_x.value, this.task_y.value)
-    this.props.setContract(this.state.name, this.state.birth, this.state.ID, this.state.sDate, this.state.eDate)
-
-    // this.setState(state => ({
-    //   // items: state.items.concat(newItem),
-    //   text: '',
-    //   text2: ''
-    // }));
   }
 }
 
@@ -216,12 +227,13 @@ class SetValue extends Component {
         <li>Name = {this.props.a.name}</li>
         <li>Birth = {this.props.a.birth}</li>
         <li>ID = {this.props.a.ID}</li>
-        <li>StartDate = {this.props.a.sDate}</li>
-        <li>EndDate = {this.props.a.eDate}</li>
+        <li>StartDate = {this.props.a.startM} / {this.props.a.startD}</li>
+        <li>EndDate = {this.props.a.endM} / {this.props.a.endD}</li>
       </div>
     );
   }
 }
+
 
 class FormStyle extends Component {
   render() {

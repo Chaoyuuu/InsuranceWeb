@@ -25,6 +25,7 @@ class Home extends Component {
                     <Nav className="mr-auto mt-2 mt-lg-0">
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/App">SetUserInfo</Nav.Link>
+                    <Nav.Link href="/Claim">Claim</Nav.Link>
                     <Nav.Link href="/About">About</Nav.Link>
                     <Nav.Link href="/Connect DB">Connect</Nav.Link>
                     <Nav.Link href="/Contact">Contact</Nav.Link>
