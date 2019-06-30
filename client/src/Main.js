@@ -6,9 +6,10 @@ import About from "./components/About.js";
 import Contact from "./components/Contact";
 import Error from "./components/Error.js";
 import Connect from "./components/Connect.js";
+import App from './App'
+
 
 // import Navigation from "./components/Navigation.js"
-import App from './App'
 
 class Main extends Component {
   render() {

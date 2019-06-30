@@ -2,84 +2,61 @@ pragma solidity ^0.5.0;
 
 contract Insurance{
     uint public total_usr = 0;
-    uint public user_ID;
-    uint public money = 1000;
+    uint public pay_money = 5 ether;    
     address payable public user;
-    address payable public receiver;
-    bytes32 Document_A = 'docA';
-    bytes32 Document_B = "docB";
-    bytes32 Document_C = "docC";
-    enum State {SetInfo, SetDetail, GetAccident, GetDocument, Finish} 
-    State public state;
-    
-    struct UserInfo{
+    address payable public insurer;
+    enum State {Start, SetDetail, EndContract} 
+
+    struct Detail{      //contract detail
         State state;
-        address addr;
-        
-        string Name;
-        uint birth;
-        uint ID;
+        address user_addr;
+        uint startM;
+        uint startD;
+        uint endM;
+        uint endD;
+        bool if_accident;
     }
     
-    struct Detail{
-        uint startTime;
-        uint endTime;
-        bool accident;
-    }
-    
-    struct Document{
-        uint count;
+    struct Document{   //claim document
         bool A;
         bool B;
         bool C;
     }
     
-    mapping(uint => Detail) public detail;
-    mapping(uint => UserInfo) public userInfo;
-    mapping(uint => Document) public document;
-    
+    mapping(address => Detail) public detail;
+    mapping(address => Document) public document;
     mapping(address => uint256) balanceOf;
-    
-    event e_UserInfo(
-        uint userID,
-        string Name,
-        uint birth,
-        uint ID
-    );
 
-    event e_Detail( //contract detail
-        uint userID,
-        uint startTime,
-        uint endTime,
+    event e_Detail( 
+        // uint userID,
+        address user_addr,
+        uint startM,
+        uint startD,
+        uint endM,
+        uint endD,
         bool accident
     );
 
     event e_Document(
-        uint userID,
-        uint count,
+        address user_addr,
         bool A,
         bool B,
-        bool C
+        bool C,
+        int num
     );
-
-    constructor() public{   
-        // user = msg.sender;
-        //receiver = receiver.address
-        //balanceOf[receiver] = 1000;
-        setUserInfo("test", 6506, 26, 5, 10);
-    }
-    
-    modifier check_date(uint time){   //??????????????????????
+  
+    //modifier function
+    modifier check_claim(uint S){
         require(
-            time <= detail[user_ID].endTime && time >= detail[user_ID].startTime, 
-            "not in the right time"
+            S == 1,
+            "fail in claim"
         );
         _;
     }
     
     modifier check_user(){
         require(
-            msg.sender == userInfo[user_ID].addr,
+            msg.sender == detail[user].user_addr,
             "Wrong user"
         );
         _;
@@ -87,125 +64,92 @@ contract Insurance{
     
     modifier inState(State _state){
         require(
-            userInfo[user_ID].state == _state,
+            detail[user].state == _state,
             "Invalid state"
         );
         _;
     }
-
-    function setUserInfo(string memory _Name, uint _ID, uint _birth, uint _startTime, uint _endTime) public returns (string memory){
+    
+    //start
+    //get into constructor when contract be deployed - only one time
+    constructor() public payable{   
+       insurer = msg.sender;
+        balanceOf[insurer] = msg.value;
+        // setUserInfo("test", 0000, 00, 0, 0);
+    }
+    
+    function SetDetail(uint _startM, uint _startD, uint _endM,  uint _endD) public returns (string memory){
+        //init
+        user = msg.sender;
         total_usr++;
-        user_ID = _ID; 
+        balanceOf[user]=user.balance;
         
-        userInfo[user_ID].addr = msg.sender;
-        userInfo[user_ID].ID = _ID;
-        userInfo[user_ID].Name = _Name;
-        userInfo[user_ID].birth = _birth; 
-
-        balanceOf[userInfo[user_ID].addr] = 99;
+        //set detail struct data
+        detail[user].user_addr = user;
+        detail[user].startM = _startM;
+        detail[user].startD = _startD;
+        detail[user].endM = _endM;
+        detail[user].endD = _endD;
+        detail[user].if_accident = false;
+        detail[user].state = State.SetDetail;
         
-        emit e_UserInfo(user_ID, userInfo[user_ID].Name, userInfo[user_ID].birth, userInfo[user_ID].ID);
-
-        detail[user_ID].startTime = _startTime;
-        detail[user_ID].endTime = _endTime;
-        detail[user_ID].accident = false;
+        emit e_Detail(detail[user].user_addr, detail[user].startM, detail[user].startD, detail[user].endM, detail[user].endD, detail[user].if_accident);
         
-        document[user_ID].A = false;
-        document[user_ID].B = false;
-        document[user_ID].C = false;
+        //init document
+        document[user].A = false;
+        document[user].B = false;
+        document[user].C = false;
 
-        emit e_Detail(user_ID, detail[user_ID].startTime, detail[user_ID].endTime, detail[user_ID].accident);
+        emit e_Document(user, document[user].A, document[user].B, document[user].C, 0);
 
-        return ("receive UserInfo");
-    }
-    
-    //be sure the user already do setUserInfo
-    /*
-    function setContract(uint _ID, uint _startTime, uint _endTime, uint _money) public check_user {
-        user_ID = _ID; 
-        detail[user_ID].startTime = _startTime;
-        detail[user_ID].endTime = _endTime;
-        detail[user_ID].money = _money;
-        detail[user_ID].accident = false;
-        
-        document[user_ID].A = false;
-        document[user_ID].B = false;
-        document[user_ID].C = false;
-
-        emit e_Detail(user_ID, detail[user_ID].startTime, detail[user_ID].endTime, detail[user_ID].money, detail[user_ID].accident);
-    }
-    */
-
-    function getAccident(uint _ID) public returns(string memory){
-        user_ID = _ID;
-        detail[user_ID].accident = true;
-        return("please give me some document");
+        return ("set detail");
     }
 
-    function getDocument(uint _ID) public{
-        user_ID = _ID;
-        document[user_ID].A = true;
-        document[user_ID].B = true;
-        document[user_ID].C = true;
-
-        transfer();
-        emit e_Document(user_ID, document[user_ID].count, document[user_ID].A, document[user_ID].B, document[user_ID].C);
-
-    }
-    
-    /*
-    function getDocument(uint _ID, string memory _document) public returns(string memory){  //how to upload file???? make to do list????
-        user_ID = _ID;
-        if(_document == Document_A){
-            if(document[user_ID].A == false){
-                document[user_ID].A = true;
-                document[user_ID].count++;
-            }else{
-                return("already get docA");
-            }
-            
-        }else if(_document == Document_B){
-            if(document[user_ID].B == false){
-                document[user_ID].B = true;
-                document[user_ID].count++;
-            }else{
-                return("already get docB");
-            }
-            
-        }else if(_document == Document_C){
-            if(document[user_ID].C == false){
-                document[user_ID].C = true;
-                document[user_ID].count++;
-            }else{
-                return("already get docC");
-            }
+    function getDocument(string memory _A, string memory  _B, uint _M, uint _D) public inState(State.SetDetail) returns (string memory){
+        user = msg.sender;
+        
+        if(keccak256(bytes(_A))==keccak256(bytes("bed")) && keccak256(bytes(_B))==keccak256(bytes("hostipal"))){
+            document[user].A = true;
+            document[user].B = true;
+            document[user].C = true;
         }else{
-            return("wrong input doc");
+            is_error();
         }
         
-        if(document[user_ID].count == 3){ //transfer money
+        if(detail[user].startM >= _M){
+            is_error();
+        }else if(detail[user].startM == _M && detail[user].startD >= _D){
+            is_error();
+        }else if(detail[user].endM < _M){
+            is_error();
+        }else if(detail[user].endM == _M && detail[user].endD <= _D){
+            is_error();
+        }else{
+            detail[user].if_accident = true;
+            // detail[user].state = State.EndContract;
             transfer();
-            return("transfer money");
         }
-        return("get doc"); //not going
-
-        emit e_Document(user_ID, document[user_ID].count, document[user_ID].A, document[user_ID].B, document[user_ID].C);
-    }
-    */
-
         
-    function() external payable{} 
-    
-    function transfer() public {
-        // user.transfer(address(this).balance);
-        balanceOf[userInfo[user_ID].addr] += 10; 
+        emit e_Document(user, document[user].A, document[user].B, document[user].C, 23);
+        
+        return ("in getDocument");
     }
     
-    // function Balance() public view returns(uint){
-    //     return address(this).balance;
-    // }
+    // function() external payable{} ///????????????????????????
+    
+    function transfer() public payable{
+        //1. check insurer's balance, if pay_money < insurer.balance
+        //2. transfer to user
+        user.transfer(pay_money);
+        
+        //reset balanceOf
+        balanceOf[user] += user.balance;
+        balanceOf[insurer] -= insurer.balance;
+    }
     
     function getbalanceOf(address a) public view returns(uint256){
         return balanceOf[a];
     }
+    
+    function is_error() public pure check_claim(0){}
 }
