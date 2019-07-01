@@ -8,9 +8,19 @@ const Item = require('../../models/Item');
 // @desc    GET All Items
 // @access  Public
 router.get('/', (req, res) => {
-    Item.find()
-        .sort({ date: -1 })
-        .then(items => res.json(items))
+    console.log("in get")
+    // Item.find()
+    //     .sort({ date: -1 })
+    //     .then(items => res.json(items))
+    Item.find(function (err, docs) {
+        if (err){
+            console.log(`error: ${err}`)
+        }else{
+            console.log(docs)
+            return res.json(docs);
+        }
+            
+    });
 });
 
 // @route   POST api/items
@@ -19,12 +29,28 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     // res.header("Access-Control-Allow-Origin", "http://localhost:3000/connect");
     // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    console.log("in router")
+    console.log(req)
     const newItem = new Item({
         name: req.body.name,
         n2: req.body.n2
     });
 
     newItem.save().then(item => res.json(item));
+});
+
+router.put('/', (req, res) => {
+
+    console.log("in put")
+    console.log(req.body)
+
+    Item.findOne({ 'name': 'Milk' }, function (err, Item) {
+        if (err) 
+            console.log(`error: ${err}`)
+        else
+        // Prints "Space Ghost is a talk show host".
+        console.log(` in find ${Item.name}, ${Item._id}, ${Item.date}`)
+    });
 });
 
 // @route   DELETE api/items
