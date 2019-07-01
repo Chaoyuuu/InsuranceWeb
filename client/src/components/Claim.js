@@ -12,7 +12,8 @@ class Claim extends Component {
       storageValue: null,
       web3: null,
       accounts: null,
-      contract: null
+      contract: null,
+      if_claim: 0
     }
     this.setContract = this.setContract.bind(this)
   }
@@ -51,10 +52,27 @@ class Claim extends Component {
     const { accounts, contract } = this.state;
 
     // Stores a given value, 5 by default.
-    const output = await contract.methods.getDocument(content1, content2, content3, content4).send({ from: accounts[0] });
-    console.log("output")
+    // const output = await contract.methods.getDocument(content1, content2, content3, content4, function(error, result){
+    //                                                                                             if(error)
+    //                                                                                               console.error(error);
+    //                                                                                           })
+    //                                      .send({ from: accounts[0] });
 
-    console.log(output)
+    // const output;
+    await contract.methods.getDocument(content1, content2, content3, content4)
+                          .send({ from: accounts[0] }, function(error, result){
+                            if(!error){
+                              console.log("claim success")
+                              console.log(result)
+                              this.setState({if_claim: 1})
+                            }else{
+                              // console.error(error);
+                              console.log("claim error");
+                              console.log(error);
+                              this.setState({if_claim: 0})
+                            }
+                          }.bind(this));
+
     // Get the value from the contract to prove it worked.
     // const response = await contract.methods.get().call();
 
@@ -82,6 +100,9 @@ class Claim extends Component {
             <ToList setContract={this.setContract}/>
             </main>
           </div>
+          {/* <td align="center">{$vo['flag']==1?'未审核':'已审核'}</td> */}
+          <h2> if_claim</h2>
+          <h2>{this.state.if_claim == 1 ? 'you got 5 dollars' : 'fail to claim'}</h2>
         </div>
       </div>
     );
