@@ -17,11 +17,9 @@ class Connect extends Component{
     }
 
     handleChange(e) {
-        //console.log(e.target.value)
-        this.setState({_contract: e.target.value})
-        this.setState({_start: e.target.value})
-        this.setState({_due: e.target.value})
-        this.setState({_action: e.target.value})
+        let changeName = e.target.name
+        console.log(changeName)
+        this.setState({ [changeName]: e.target.value})
     }
 
     handleSubmit(e) {
@@ -65,6 +63,7 @@ class Connect extends Component{
                     />
                     <input
                     label={"Start"}
+                    name={"_start"}
                     placeholder={"start"} 
                     onChange={this.handleChange}
                     value={this.state._start}
@@ -72,12 +71,14 @@ class Connect extends Component{
                     <input
                     label={"Due"}
                     placeholder={"_due"} 
+                    name={"_due"}
                     onChange={this.handleChange}
                     value={this.state._due}
                     />
                     <input
                     label={"Action"}
                     placeholder={"_action"} 
+                    name={"_action"}
                     onChange={this.handleChange}
                     value={this.state._action}
                     />

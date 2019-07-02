@@ -7,6 +7,11 @@ const ItemSchema = new Schema({
     // <th>Start Date</th>
     // <th>Due Date</th>
     // <th>Action</th>
+    _addr: {
+        type: String,
+        // required: true 
+    },
+
     _contract: {
         type: String,
         // required: true 
@@ -23,7 +28,7 @@ const ItemSchema = new Schema({
     _action: {
         type: String,
     },
-    
+
     date: {
         type: Date,
         default: Date.now

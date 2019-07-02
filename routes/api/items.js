@@ -48,6 +48,7 @@ router.post('/', (req, res) => {
     console.log("in router")
     console.log(req)
     const newItem = new Item({
+        _addr: req.body._addr,
         _contract: req.body._contract,
         _start: req.body._start,
         _due: req.body._due,
