@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import NavBar from "./NavBar.js"
 import getWeb3 from "../utils/getWeb3";
-import { Table, Container } from "react-bootstrap";
+import { Table, Container, Button } from "react-bootstrap";
 
 
 class MyContract extends Component{
@@ -43,7 +43,7 @@ class MyContract extends Component{
             <div>
                 <NavBar/>
                 <h2> MyContract addr = {this.state.accounts} </h2>
-                <GetContract a={this.state.accounts}/>
+                <GetContract a={this.state}/>
             </div>
         );
     }
@@ -73,38 +73,65 @@ class GetContract extends Component{
         super(props);    
         this.state = {
             my_Constrat:[],
-            addr: this.props.a
+            addr: ''
         }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+       
+        
     }
 
-    componentDidMount = async () => {
-        axios.get('http://localhost:5000/api/items/'+this.state.addr)
+    
+    handleSubmit (e) {
+        e.preventDefault();
+        console.log(`is in handle, addr ${this.props.a.accounts}`)
+        var test
+        axios.get('http://localhost:5000/api/items/'+this.props.a.accounts)
             .then(function(response) {
                 console.log('Successfully connected to db in get didmount')
-                console.log(response)
-                this.setState({my_Constrat: response.data})
+                console.log(response.data)
+                test = response.data
+                console.log(test)
+                
                 // console.log(`Successfully connected to db in get ${res.data}`)
                 
             })
             .catch((err, res) => {
                 console.log(`Not connected to db in put${err}`)
             });
+
+        this.setState({my_Constrat: test})
     }
 
-    componentDidUpdate() {
-        axios.get('http://localhost:5000/api/items/'+this.state.addr)
-        .then(function(response) {
-            console.log('Successfully connected to db in get didupdate')
-            console.log(response)
-            this.setState({my_Constrat: response.data})
-        })
-        .catch(function (error) {
-            console.log(error);
-        })   
-    }
+    // componentDidMount = async () => {
+    //     console.log('hiiiii')
+    //     axios.get('http://localhost:5000/api/items/'+this.state.addr)
+    //         .then(function(response) {
+    //             console.log('Successfully connected to db in get didmount')
+    //             console.log(response)
+    //             this.setState({my_Constrat: response.data})
+    //             // console.log(`Successfully connected to db in get ${res.data}`)
+                
+    //         })
+    //         .catch((err, res) => {
+    //             console.log(`Not connected to db in put${err}`)
+    //         });
+    // }
+
+    // componentDidUpdate() {
+    //     axios.get('http://localhost:5000/api/items/'+this.state.addr)
+    //     .then(function(response) {
+    //         console.log('Successfully connected to db in get didupdate')
+    //         console.log(response)
+    //         this.setState({my_Constrat: response.data})
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error);
+    //     })   
+    // }
 
     ContractList() {
-        return this.state.my_Constrat.map(function(currentList, i) {
+        return this.state.my_Constract.map(function(currentList, i) {
             return <SetTable c={currentList} key={i} />;
         });
     }
@@ -125,9 +152,12 @@ class GetContract extends Component{
                             </tr>
                         </thead>
                         <tbody>
+                        
                             { this.ContractList() }
                         </tbody>
                     </Table>
+
+                    <Button onClick={this.handleSubmit } > click </Button>
                 </Container>
             </div>
         );

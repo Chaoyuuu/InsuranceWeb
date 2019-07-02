@@ -25,8 +25,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:addr', (req, res) => {
-    console.log("in get")
-    Item.find({addr: req.params.addr}, function (err, docs) {
+    console.log(`in get ${req.params.addr}`)
+    Item.find({_addr: req.params.addr}, function (err, docs) {
+        // Item.find({_addr: '0xC7a8E02ab30B57e438e407fe0eDBa82E9117068F'}, function (err, docs) {
+
         if (err){
             console.log(`error: ${err}`)
         }else{
@@ -41,7 +43,7 @@ router.get('/:addr', (req, res) => {
 // @desc    crerate a post
 // @access  Public
 router.post('/', (req, res) => {
-    // res.header("Access-Control-Allow-Origin", "http://localhost:3000/connect");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000/connect");
     // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     // schema : _contract, _start, _due, _action
 
