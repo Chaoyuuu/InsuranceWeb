@@ -200,11 +200,6 @@ class ToList extends Component {
             />
             <button type="button" className="btn btn-primary" onClick={this.handleSubmit }> Submit </button>
           </form>
-
-
-        {/* <button onClick={this.handleSubmit}>
-            Add #{this.state.items.length + 1}
-          </button> */}
           
         <SetValue a={this.state}/>
 

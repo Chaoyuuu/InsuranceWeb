@@ -12,7 +12,21 @@ router.get('/', (req, res) => {
     // Item.find()
     //     .sort({ date: -1 })
     //     .then(items => res.json(items))
-    Item.find(function (err, docs) {
+    // res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    Item.find({name: 'Milk'}, function (err, docs) {
+        if (err){
+            console.log(`error: ${err}`)
+        }else{
+            console.log(docs)
+            return res.json(docs);
+        }
+            
+    });
+});
+
+router.get('/:addr', (req, res) => {
+    console.log("in get")
+    Item.find({addr: req.params.addr}, function (err, docs) {
         if (err){
             console.log(`error: ${err}`)
         }else{
@@ -29,11 +43,15 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     // res.header("Access-Control-Allow-Origin", "http://localhost:3000/connect");
     // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    // schema : _contract, _start, _due, _action
+
     console.log("in router")
     console.log(req)
     const newItem = new Item({
-        name: req.body.name,
-        n2: req.body.n2
+        _contract: req.body._contract,
+        _start: req.body._start,
+        _due: req.body._due,
+        _action: req.body._action,
     });
 
     newItem.save().then(item => res.json(item));

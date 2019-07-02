@@ -1,40 +1,41 @@
 import React, { Component } from "react";
 import axios from 'axios';
-
-// const decRef = firestore.doc()
-// const outputHeader = document.querySelector("Name");
+import NavBar from "./NavBar.js"
 
 class Connect extends Component{
 
     constructor(props) {
         super(props);    
-        this.state= {input:'noooinput'};
-        // this.state = {items:[], name:'', birth:'', ID:'', sDate:'', eDate:'' };
+        this.state= {
+            _contract: '',
+            _start: '',
+            _due: '',
+            _action: ''
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(e) {
         //console.log(e.target.value)
-        this.setState({input: e.target.value})
+        this.setState({_contract: e.target.value})
+        this.setState({_start: e.target.value})
+        this.setState({_due: e.target.value})
+        this.setState({_action: e.target.value})
     }
 
     handleSubmit(e) {
         e.preventDefault();
 
-        console.log(`in hundlesubmit: ${this.state.input}`);
+        console.log(`in hundlesubmit: ${this.state._contract}`);
 
         const user = {
-            name: this.state.input,
+            // name: this.state.input,
+            _contract: this.state._contract,
+            _start: this.state._start,
+            _due: this.state._due,
+            _action: this.state._action,
         };
-
-        console.log(`const user: ${user.name}`);
-        
-        /*
-        var headers = {
-                'Access-Control-Allow-Origin': '*',      
-        };
-        */
 
         axios.post('http://localhost:5000/api/items', user)
             .then((req, res) => {
@@ -52,14 +53,33 @@ class Connect extends Component{
     render(){
         return (
             <div>
+                <NavBar/>
                 <h3> mongodb </h3>
                 <form className="form-horizontal" role="form">
                     <input
-                    label={"Name"}
-                    placeholder={"input"} 
-        
+                    label={"Contract"}
+                    name={"_contract"} 
+                    placeholder={"_contract"} 
                     onChange={this.handleChange}
-                    value={this.state.input}
+                    value={this.state._contract}
+                    />
+                    <input
+                    label={"Start"}
+                    placeholder={"start"} 
+                    onChange={this.handleChange}
+                    value={this.state._start}
+                    />
+                    <input
+                    label={"Due"}
+                    placeholder={"_due"} 
+                    onChange={this.handleChange}
+                    value={this.state._due}
+                    />
+                    <input
+                    label={"Action"}
+                    placeholder={"_action"} 
+                    onChange={this.handleChange}
+                    value={this.state._action}
                     />
                 </form>
 
@@ -94,21 +114,8 @@ class Queryy extends Component {
 
         console.log(`const user: ${user.name}`);
 
-
-        // axios.put('http://localhost:5000/api/items', user)
-        //     .then((req, res) => {
-        //         console.log('Successfully connected to db in put')
-        //         console.log(`Successfully connected to db in put ${req.data}`)
-        //         console.log(res)
-        //         // res.status(200).send(res)
-              
-        //     })
-        //     .catch((err, res) => {
-        //         console.log(`Not connected to db in put${err}`)
-        //     });
-
         axios.get('http://localhost:5000/api/items')
-            .then((req, response) => {
+            .then(function(response) {
                 console.log('Successfully connected to db in get')
                 console.log(response)
                 // this.setState({item_table: res.data})
@@ -119,6 +126,18 @@ class Queryy extends Component {
                 console.log(`Not connected to db in put${err}`)
             });
                
+        // axios.get('http://localhost:5000/api/items')
+        //     .then(function (response) {
+        //       // handle success
+        //       console.log(response.data);
+        //     })
+        //     .catch(function (error) {
+        //       // handle error
+        //       console.log(error);
+        //     })
+            // .finally(function () {
+            //   // always executed
+            // });
     }
 
     render(){

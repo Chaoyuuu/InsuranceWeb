@@ -3,13 +3,27 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const ItemSchema = new Schema({
-    name: {
+    // <th>My Contract</th>
+    // <th>Start Date</th>
+    // <th>Due Date</th>
+    // <th>Action</th>
+    _contract: {
         type: String,
-        // required: true
+        // required: true 
     },
-    n2: {
+    
+    _start: {
         type: String,
     },
+
+    _due: {
+        type: String,
+    },
+
+    _action: {
+        type: String,
+    },
+    
     date: {
         type: Date,
         default: Date.now
