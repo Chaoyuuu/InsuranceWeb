@@ -72,12 +72,12 @@ class GetContract extends Component{
     constructor(props) {
         super(props);    
         this.state = {
-            my_Constrat:[],
+            my_Constract:[],
             addr: ''
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
-       
+        this.SetList = this.SetList.bind(this);
         
     }
 
@@ -100,7 +100,7 @@ class GetContract extends Component{
                 console.log(`Not connected to db in put${err}`)
             });
 
-        this.setState({my_Constrat: test})
+        this.setState({my_Constract: test})
     }
 
     // componentDidMount = async () => {
@@ -130,10 +130,53 @@ class GetContract extends Component{
     //     })   
     // }
 
-    ContractList() {
-        return this.state.my_Constract.map(function(currentList, i) {
-            return <SetTable c={currentList} key={i} />;
-        });
+    // ContractList() {
+    //     return this.state.my_Constract.map(function(currentList, i) {
+    //         return <SetTable c={currentList} key={i} />;
+    //     });
+    // }
+
+    
+    // SetList(props) {
+    //     const numbers = props.numbers;
+    //     const listItems = this.state.my_Constrat.map((number) =>
+    //       <li key={number.toString()}>
+    //         {number}
+    //       </li>
+    //     );
+    //     return (
+    //       <ul>{listItems}</ul>
+    //     );
+    //   }
+
+    componentDidUpdate() {
+            axios.get('http://localhost:5000/api/items/'+this.state.addr)
+            .then(function(response) {
+                console.log('Successfully connected to db in get didupdate')
+                console.log(response)
+                this.setState({my_Constrat: response.data})
+            })
+            .catch(function (error) {
+                console.log(error);
+            })   
+    }
+
+     SetList(){
+         console.log(`in setlist ${this.state.my_Constract}`)
+        const ContractList = this.state.my_Constract.map((my_C) => 
+            <SetTable c={my_C}/>
+            // <tr>
+            //     <td>{my_C._contract}</td>
+            // <td>{my_C._start}</td>
+            // <td>{my_C._due}</td>
+            // <td>{my_C._action}</td>
+            // <td>link !!! </td>
+            // </tr>
+        );
+
+        return( 
+            <ul>{ContractList}</ul> 
+        );
     }
 
     render(){
@@ -153,7 +196,7 @@ class GetContract extends Component{
                         </thead>
                         <tbody>
                         
-                            { this.ContractList() }
+                            { this.SetList() }
                         </tbody>
                     </Table>
 
