@@ -78,14 +78,14 @@ class MyContract extends Component{
                         let tmp = response.data.map((topbarLinks, key) => {
                             console.log(`in map ${topbarLinks._id}`)
                             return (
-                                <dev>
-                                <p key={topbarLinks._id}>
-                                _id = {topbarLinks._id}
-                                _start = {topbarLinks._start}
-                                _due = {topbarLinks._due}
-                                _link = {topbarLinks._contract}
-                                </p>
-                                </dev>
+                                
+                                <tr key={topbarLinks._id}>
+                                <td> _id = {topbarLinks._id}/</td>
+                                <td> _start = {topbarLinks._start}</td>
+                                <td> _due = {topbarLinks._due}</td>
+                                <td>_link = {topbarLinks._contract}</td>
+                                </tr>
+                                
                             )
                         })
 
@@ -120,11 +120,26 @@ class MyContract extends Component{
                 <NavBar/>
                 <h2> MyContract addr = {this.state.accounts} </h2>
                 
-                <p> code : {this.state.my_Constract}</p>
-                {this.state.my_Constract}
+                {/* <h2> code : {this.state.my_Constract}</h2> */}
+            
                 
                 {/* <GetContract a={this.state}/> */}
-
+                <Container>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                {/* <th>#</th> */}
+                                <th>My Contract</th>
+                                <th>Start Date</th>
+                                <th>Due Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.my_Constract}
+                        </tbody>
+                    </Table>
+                </Container>
 
             </div>
         );
