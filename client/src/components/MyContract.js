@@ -4,51 +4,6 @@ import NavBar from "./NavBar.js"
 import getWeb3 from "../utils/getWeb3";
 import { Table, Container, Button } from "react-bootstrap";
 
-
-class MyContract extends Component{
-
-    constructor(props) {
-        super(props)
-        this.state = {
-          storageValue: null,
-          web3: null,
-          accounts: null,
-        //   contract: null
-        }
-        // this.setContract = this.setContract.bind(this)
-    }
-    
-      componentDidMount = async () => {
-        try {
-          // Get network provider and web3 instance.
-          const web3 = await getWeb3();
-    
-          // Use web3 to get the user's accounts.
-          const accounts = await web3.eth.getAccounts();
-          console.log(`account ${accounts}`)
-
-          this.setState({ web3, accounts: accounts });
-    
-        } catch (error) {
-          // Catch any errors for any of the above operations.
-          alert(
-            `Failed to load web3, accounts. Check console for details. in MyContract`,
-          );
-          console.error(error);
-        }
-      };
-
-    render(){
-        return (
-            <div>
-                <NavBar/>
-                <h2> MyContract addr = {this.state.accounts} </h2>
-                <GetContract a={this.state}/>
-            </div>
-        );
-    }
-};
-
 const SetTable = props => (
     <tr>
         {/* <td className={props.c._contract ? 'completed' : ''}>{props.todo.todo_description}</td>
@@ -67,12 +22,122 @@ const SetTable = props => (
     </tr>
 )
 
+
+class MyContract extends Component{
+
+    constructor(props) {
+        super(props)
+        this.state = {
+          storageValue: null,
+          web3: null,
+          accounts: null,
+          my_Constract:[],
+        //   contract: null
+        }
+        // this.setContract = this.setContract.bind(this)
+    }
+    
+        componentDidMount = async() => {
+            try {
+                
+                // Get network provider and web3 instance.
+                const web3 = await getWeb3();
+            
+                // Use web3 to get the user's accounts.
+                const accounts = await web3.eth.getAccounts();
+                console.log(`account ${accounts}`)
+                
+                this.setState({ web3, accounts: accounts });
+
+
+                const self = this
+                axios.get('http://localhost:5000/api/items/'+this.state.accounts)
+                    .then(function(response) {
+                        console.log('Successfully connected to db in get didmount')
+                        console.log(response.data)
+
+
+
+
+                        // let topbarLinks = myJson.topbarLinks.map((topbarLinks, key) => {
+                        //     return (
+                        //       <Link
+                        //         key={topbarLinks.id}
+                        //         text={topbarLinks.text}
+                        //         icon={topbarLinks.icon}
+                        //         link={topbarLinks.link}
+                        //       />
+                        //     )
+                        //   })
+                        //   this.setState({topbarLinks: topbarLinks});  // <--
+                            
+                        // var test = Object.keys(response.data[0]).map(function(k) { return (response.data[0])[k] });
+                        // console.log(typeof(test))
+                        // console.log(`test is ${test["_id"]}`)
+
+                        let tmp = response.data.map((topbarLinks, key) => {
+                            console.log(`in map ${topbarLinks._id}`)
+                            return (
+                                <dev>
+                                <p key={topbarLinks._id}>
+                                _id = {topbarLinks._id}
+                                _start = {topbarLinks._start}
+                                _due = {topbarLinks._due}
+                                _link = {topbarLinks._contract}
+                                </p>
+                                </dev>
+                            )
+                        })
+
+                        self.setState({my_Constract: tmp});
+                                    
+                        // console.log(typeof(test))
+                        // console.log(`test is ${test["_id"]}`)
+
+                        // response.data[0].map(obj => this.setState({ my_Constract: Object.values(obj) }))
+                        
+                    })
+                    .catch((err, res) => {
+                        console.log(`Not connected to db in put${err}`)
+                    });
+
+            } catch (error) {
+                // Catch any errors for any of the above operations.
+                alert(
+                    `Failed to load web3, accounts. Check console for details. in MyContract`,
+                );
+                console.error(error);
+            }
+        };
+
+
+    render(){
+        console.log(`hii ${this.state.my_Constract}`)
+        const numbers = [1, 2, 3, 4, 5];
+        const num = numbers.map((number) => <li key={number}>{number}</li> );
+        return (
+            <div>
+                <NavBar/>
+                <h2> MyContract addr = {this.state.accounts} </h2>
+                
+                <p> code : {this.state.my_Constract}</p>
+                {this.state.my_Constract}
+                
+                {/* <GetContract a={this.state}/> */}
+
+
+            </div>
+        );
+    }
+};
+
+
 class GetContract extends Component{
 
     constructor(props) {
         super(props);    
         this.state = {
-            my_Constract:[],
+            // my_Constract:[],
             addr: ''
         }
 
@@ -149,21 +214,21 @@ class GetContract extends Component{
     //     );
     //   }
 
-    componentDidUpdate() {
-            axios.get('http://localhost:5000/api/items/'+this.state.addr)
-            .then(function(response) {
-                console.log('Successfully connected to db in get didupdate')
-                console.log(response)
-                this.setState({my_Constrat: response.data})
-            })
-            .catch(function (error) {
-                console.log(error);
-            })   
-    }
+    // componentDidUpdate() {
+    //         axios.get('http://localhost:5000/api/items/'+this.state.addr)
+    //         .then(function(response) {
+    //             console.log('Successfully connected to db in get didupdate')
+    //             console.log(response)
+    //             this.setState({my_Constrat: response.data})
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         })   
+    // }
 
      SetList(){
-         console.log(`in setlist ${this.state.my_Constract}`)
-        const ContractList = this.state.my_Constract.map((my_C) => 
+        console.log(`in setlist ${this.props.a.my_Constract}`)
+        const ContractList = this.props.a.my_Constract.map((my_C) => 
             <SetTable c={my_C}/>
             // <tr>
             //     <td>{my_C._contract}</td>
