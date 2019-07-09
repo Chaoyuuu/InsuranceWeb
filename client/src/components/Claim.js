@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Link} from "react-router-dom";
 import SimpleStorageContract from "../contracts/Insurance.json";
 import getWeb3 from "../utils/getWeb3";
+import NavBar from "./NavBar.js"
+import { Container } from "react-bootstrap";
 
 
 class Claim extends Component {
@@ -82,31 +84,20 @@ class Claim extends Component {
 
   render() {
     if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
+          return <div>Loading Web3, accounts, and contract...</div>;
     }
     return (
-      <div className="container">
-        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-          <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="https://github.com/Chaoyuuu/InsuranceWeb" target="_blank">BlockChain Dapp | Insurance Web</a>
-          <ul className="navbar-nav px-3">
-            <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
-              <small><a className="nav-link" href="#"><span id="account">{this.state.accounts[0]}</span></a></small>
-            </li>
-          </ul>
-        </nav>
-        <div className="container-fluid">
-          <div className="row">
-            <main role="main" className="col-lg-12 d-flex justify-content-center">
-            <ToList setContract={this.setContract}/>
-            </main>
-          </div>
-          {/* <td align="center">{$vo['flag']==1?'未审核':'已审核'}</td> */}
-          <h2> if_claim</h2>
-          <h2>{this.state.if_claim == 1 ? 'you got 5 dollars' : 'fail to claim'}</h2>
+        <div><NavBar/>
+            <Container>
+                    <ToList setContract={this.setContract}/>
+                    
+                    <h2> if_claim</h2>
+                    <h2>{this.state.if_claim == 1 ? 'you got 5 dollars' : 'fail to claim'}</h2>
+                    
+            </Container>
         </div>
-      </div>
-    );
-  } 
+        );
+    } 
 }
 
 class ToList extends Component {

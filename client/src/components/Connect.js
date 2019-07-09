@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import NavBar from "./NavBar.js"
+import { Container } from "react-bootstrap";
 
 class Connect extends Component{
 
@@ -52,7 +53,7 @@ class Connect extends Component{
         return (
             <div>
                 <NavBar/>
-                <h3> mongodb </h3>
+                <h3> mongodb Item </h3>
                 <form className="form-horizontal" role="form">
                     <input
                     label={"Contract"}
@@ -85,7 +86,114 @@ class Connect extends Component{
                 </form>
 
                 <button onClick={this.handleSubmit}> click</button>
+                <HostConnect/>
                 <Queryy/>
+            </div>
+        );
+    }
+};
+
+class HostConnect extends Component{
+
+    constructor(props) {
+        super(props);    
+        this.state= {
+            _name: '',
+            _userid: '',
+            _date: '',
+            _emergency: '',
+            _surgery: '',
+            _admission: '',
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(e) {
+        let changeName = e.target.name
+        console.log(changeName)
+        this.setState({ [changeName]: e.target.value})
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        console.log(`in hundlesubmit: ${this.state._name}`);
+
+        const user = {
+            // schema : _name, _userid, _date, _emergency, _surgery, _admission
+            // name: this.state.input,
+            _name: this.state._name,
+            _userid: this.state._userid,
+            _date: this.state._date,
+            _emergency: this.state._emergency,
+            _surgery: this.state._surgery,
+            _admission: this.state._admission,
+        };
+
+        axios.post('http://localhost:5000/api/hospitals', user)
+            .then((req, res) => {
+                console.log('Successfully connected to db')
+                console.log(`Successfully connected to db ${req.data}`)
+                console.log(res)
+                // res.status(200).send(res)
+              
+            })
+            .catch((err, res) => {
+                console.log(`Not connected to db ${err}`)
+            });
+    }
+
+    render(){
+        return (
+            <div>
+                <h3> mongodb Item </h3>
+                <form className="form-horizontal" role="form">
+                    <input
+                    label={"Name"}
+                    name={"_name"} 
+                    placeholder={"_name"} 
+                    onChange={this.handleChange}
+                    value={this.state._name}
+                    />
+                    <input
+                    label={"Id"}
+                    name={"_userid"}
+                    placeholder={"Your ID"} 
+                    onChange={this.handleChange}
+                    value={this.state._userid}
+                    />
+                    <input
+                    label={"Date"}
+                    placeholder={"_date"} 
+                    name={"_date"}
+                    onChange={this.handleChange}
+                    value={this.state._date}
+                    />
+                    <input
+                    label={"Emergency"}
+                    placeholder={"_emergency"} 
+                    name={"_emergency"}
+                    onChange={this.handleChange}
+                    value={this.state._emergency}
+                    />
+                    <input
+                    label={"Surgery"}
+                    placeholder={"_surgery"} 
+                    name={"_surgery"}
+                    onChange={this.handleChange}
+                    value={this.state._surgery}
+                    />
+                    <input
+                    label={"Admission"}
+                    placeholder={"_admission"} 
+                    name={"_admission"}
+                    onChange={this.handleChange}
+                    value={this.state._admission}
+                    />
+                </form>
+
+                <button onClick={this.handleSubmit}> click</button>
             </div>
         );
     }
@@ -126,25 +234,12 @@ class Queryy extends Component {
             .catch((err, res) => {
                 console.log(`Not connected to db in put${err}`)
             });
-               
-        // axios.get('http://localhost:5000/api/items')
-        //     .then(function (response) {
-        //       // handle success
-        //       console.log(response.data);
-        //     })
-        //     .catch(function (error) {
-        //       // handle error
-        //       console.log(error);
-        //     })
-            // .finally(function () {
-            //   // always executed
-            // });
     }
 
     render(){
         return (
             <div>
-                <h3> firebase </h3>
+                <h3> query </h3>
                 <form className="form-horizontal" role="form">
                     <input
                     label={"Name"}

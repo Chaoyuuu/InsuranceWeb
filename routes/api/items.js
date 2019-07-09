@@ -32,7 +32,7 @@ router.get('/:addr', (req, res) => {
         if (err){
             console.log(`error: ${err}`)
         }else{
-            console.log(docs)
+            // console.log(docs)
             return res.json(docs);
         }
             
@@ -43,7 +43,7 @@ router.get('/:addr', (req, res) => {
 // @desc    crerate a post
 // @access  Public
 router.post('/', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000/connect");
+    // res.header("Access-Control-Allow-Origin", "http://localhost:3000/connect");
     // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     // schema : _contract, _start, _due, _action
 

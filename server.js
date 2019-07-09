@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const items = require('./routes/api/items');
+const hospitals = require('./routes/api/hospitals');
 
 const app = express();
   
@@ -22,6 +23,7 @@ mongoose
 
 // Use Routes
 app.use('/api/items', items);
+app.use('/api/hospitals', hospitals);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Srever started on port ${port}`));
