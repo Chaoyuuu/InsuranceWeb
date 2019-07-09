@@ -8,94 +8,138 @@ import { Container } from "react-bootstrap";
 
 class Claim extends Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      storageValue: null,
-      web3: null,
-      accounts: null,
-      contract: null,
-      if_claim: 0
+    constructor(props) {
+        super(props)
+        this.state = {
+            storageValue: null,
+            web3: null,
+            accounts: null,
+            contract: null,
+            if_claim: 0,
+            flag: 0
+        }
+        this.setContract = this.setContract.bind(this)
+        this.getUserId = this.getUserId.bind(this)
     }
-    this.setContract = this.setContract.bind(this)
-  }
 
-  componentDidMount = async () => {
-    try {
-      // Get network provider and web3 instance.
-      const web3 = await getWeb3();
+    componentDidMount = async () => {
+        try {
+            // Get network provider and web3 instance.
+            const web3 = await getWeb3();
 
-      // Use web3 to get the user's accounts.
-      const accounts = await web3.eth.getAccounts();
+            // Use web3 to get the user's accounts.
+            const accounts = await web3.eth.getAccounts();
 
-      // Get the contract instance.
-      const networkId = await web3.eth.net.getId();
-      const deployedNetwork = SimpleStorageContract.networks[networkId];
-      const instance = new web3.eth.Contract(
-        SimpleStorageContract.abi,
-        deployedNetwork && deployedNetwork.address,
-      );
+            // Get the contract instance.
+            const networkId = await web3.eth.net.getId();
+            const deployedNetwork = SimpleStorageContract.networks[networkId];
+            const instance = new web3.eth.Contract(
+                SimpleStorageContract.abi,
+                deployedNetwork && deployedNetwork.address,
+                
+            );
 
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      // this.setState({ web3, accounts, contract: instance }, this.runExample);
-      this.setState({ web3, accounts, contract: instance });
+            // Set web3, accounts, and contract to the state, and then proceed with an
+            // example of interacting with the contract's methods.
+            // this.setState({ web3, accounts, contract: instance }, this.runExample);
+            {
+                this.setState({ web3, accounts, contract: instance });
+                this.setState({ flag: 1})
+            }
+            
+            
 
-    } catch (error) {
-      // Catch any errors for any of the above operations.
-      alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`,
-      );
-      console.error(error);
+            
+
+        } catch (error) {
+            // Catch any errors for any of the above operations.
+            alert(
+                `Failed to load web3, accounts, or contract. Check console for details.`,
+            );
+            console.error(error);
+        }
+    };
+
+    componentDidUpdate = async() => {
+        const { web3, accounts, contract, flag } = this.state;
+        if(flag == 1){
+            console.log('in getUserID')
+            const a = await contract.methods.getUserID()
+                            .send({ from: accounts[0] }, function(error, result){
+                                if(!error){
+                                    console.log("claim success")
+                                    console.log(result)
+                                    console.log(web3.utils.toBigNumber(result))
+                                }else{
+                                    // console.error(error);
+                                    console.log("claim error");
+                                    console.log(error);
+                                }
+                            }.bind(this));
+
+            this.setState({flag: 2})
+            console.log(`aaa is =`)
+        }
+        
     }
-  };
 
-  setContract = async (content1, content2, content3, content4) => {
-    const { accounts, contract } = this.state;
+    setContract = async (content1, content2, content3, content4) => {
+        const { accounts, contract } = this.state;
 
-    // Stores a given value, 5 by default.
-    // const output = await contract.methods.getDocument(content1, content2, content3, content4, function(error, result){
-    //                                                                                             if(error)
-    //                                                                                               console.error(error);
-    //                                                                                           })
-    //                                      .send({ from: accounts[0] });
+        await contract.methods.getDocument(content1, content2, content3, content4)
+                            .send({ from: accounts[0] }, function(error, result){
+                                if(!error){
+                                    console.log("claim success")
+                                    console.log(result)
+                                    this.setState({if_claim: 1})
+                                }else{
+                                    // console.error(error);
+                                    console.log("claim error");
+                                    console.log(error);
+                                    this.setState({if_claim: 0})
+                                }
+                            }.bind(this));
 
-    // const output;
-    await contract.methods.getDocument(content1, content2, content3, content4)
-                          .send({ from: accounts[0] }, function(error, result){
-                            if(!error){
-                              console.log("claim success")
-                              console.log(result)
-                              this.setState({if_claim: 1})
-                            }else{
-                              // console.error(error);
-                              console.log("claim error");
-                              console.log(error);
-                              this.setState({if_claim: 0})
-                            }
-                          }.bind(this));
+        // Get the value from the contract to prove it worked.
+        // const response = await contract.methods.get().call();
 
-    // Get the value from the contract to prove it worked.
-    // const response = await contract.methods.get().call();
-
-    // Update state with the result.
-    // this.setState({ storageValue: output });
-  }
-
-  render() {
-    if (!this.state.web3) {
-          return <div>Loading Web3, accounts, and contract...</div>;
+        // Update state with the result.
+        // this.setState({ storageValue: output });
     }
-    return (
-        <div><NavBar/>
-            <Container>
-                    <ToList setContract={this.setContract}/>
-                    
-                    <h2> if_claim</h2>
-                    <h2>{this.state.if_claim == 1 ? 'you got 5 dollars' : 'fail to claim'}</h2>
-                    
-            </Container>
-        </div>
+
+    getUserId = async () => {
+        // const { accounts, contract } = this.state;
+
+        // const _idd = await contract.methods.getUserId()
+        //                     .send({ from: accounts[0] }, function(error, result){
+        //                         if(!error){
+        //                             console.log("claim success")
+        //                             console.log(result)
+        //                             this.setState({if_claim: 1})
+        //                         }else{
+        //                             // console.error(error);
+        //                             console.log("claim error");
+        //                             console.log(error);
+        //                             this.setState({if_claim: 0})
+        //                         }
+        //                     }.bind(this));
+        
+        // console.log(`end of getUserId ${_idd}`)
+    }
+
+    render() {
+        if (!this.state.web3) {
+            return <div>Loading Web3, accounts, and contract...</div>;
+        }
+        return (
+            <div><NavBar/>
+                <Container>
+                        <ToList setContract={this.setContract}/>
+                        
+                        <h2> if_claim</h2>
+                        <h2>{this.state.if_claim == 1 ? 'you got 5 dollars' : 'fail to claim'}</h2>
+                </Container>
+            </div>
         );
     } 
 }
