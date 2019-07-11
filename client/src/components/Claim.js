@@ -15,11 +15,12 @@ class Claim extends Component {
             web3: null,
             accounts: null,
             contract: null,
-            if_claim: 0,
-            flag: 0
+            if_claim: 0,//set output
+            flag: 0,    //goto getUserId for one time
+            uid: ''
         }
         this.setContract = this.setContract.bind(this)
-        this.getUserId = this.getUserId.bind(this)
+
     }
 
     componentDidMount = async () => {
@@ -43,14 +44,10 @@ class Claim extends Component {
             // example of interacting with the contract's methods.
             // this.setState({ web3, accounts, contract: instance }, this.runExample);
             {
-                this.setState({ web3, accounts, contract: instance });
+                this.setState({ web3, accounts, contract: instance});
                 this.setState({ flag: 1})
             }
             
-            
-
-            
-
         } catch (error) {
             // Catch any errors for any of the above operations.
             alert(
@@ -69,7 +66,7 @@ class Claim extends Component {
                                 if(!error){
                                     console.log("claim success")
                                     console.log(result)
-                                    console.log(web3.utils.toBigNumber(result))
+                                    // console.log(web3.utils.toBigNumber(result))
                                 }else{
                                     // console.error(error);
                                     console.log("claim error");
@@ -77,8 +74,10 @@ class Claim extends Component {
                                 }
                             }.bind(this));
 
-            this.setState({flag: 2})
-            console.log(`aaa is =`)
+            this.setState({flag: 2, uid: a.events.UID.returnValues.uid})
+            // console.log(`aaa is =`)
+            // console.log(a.events.UID.returnValues.uid)
+            console.log(this.state.uid)
         }
         
     }
@@ -105,26 +104,6 @@ class Claim extends Component {
 
         // Update state with the result.
         // this.setState({ storageValue: output });
-    }
-
-    getUserId = async () => {
-        // const { accounts, contract } = this.state;
-
-        // const _idd = await contract.methods.getUserId()
-        //                     .send({ from: accounts[0] }, function(error, result){
-        //                         if(!error){
-        //                             console.log("claim success")
-        //                             console.log(result)
-        //                             this.setState({if_claim: 1})
-        //                         }else{
-        //                             // console.error(error);
-        //                             console.log("claim error");
-        //                             console.log(error);
-        //                             this.setState({if_claim: 0})
-        //                         }
-        //                     }.bind(this));
-        
-        // console.log(`end of getUserId ${_idd}`)
     }
 
     render() {

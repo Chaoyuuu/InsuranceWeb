@@ -69,12 +69,12 @@ class App extends Component {
   };  
   */
 
-    setContract = async (content1, content2, content3, content4) => {
+    setContract = async (content1, content2, content3, content4, content5) => {
         const { accounts, contract } = this.state;
 
         // Stores a given value, 5 by default.
         // const output = await contract.methods.setUserInfo(content1, content2, content3, content4, content5).send({ from: accounts[0] });
-        const output = await contract.methods.SetDetail(content1, content2, content3, content4).send({ from: accounts[0] });
+        const output = await contract.methods.SetDetail(content1, content2, content3, content4, content5).send({ from: accounts[0] });
         console.log("output")
         console.log(output)
         // Get the value from the contract to prove it worked.
@@ -183,7 +183,7 @@ class ToList extends Component {
 
         // this.props.setContract(this.task_x.value, this.task_y.value)
         // this.props.setContract(this.state.name, this.state.birth, this.state.ID, this.state.sDate, this.state.eDate)
-        this.props.setContract(this.state.startM, this.state.startD, this.state.endM, this.state.endD)
+        this.props.setContract(this.state.startM, this.state.startD, this.state.endM, this.state.endD, this.state.ID)
         this.props.postRequest(this.state.startM, this.state.startD, this.state.endM, this.state.endD)
     }
 
