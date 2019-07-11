@@ -164,6 +164,7 @@ class Claim extends Component {
                 <p>waitting ...
                 <Spinner animation="border" variant="info" />
                 </p>
+                {/* <col sm={6}>
                 <Toast>
                     <Toast.Header>
                     <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
@@ -172,7 +173,7 @@ class Claim extends Component {
                     </Toast.Header>
                     <Toast.Body>See? Just like this.</Toast.Body>
                 </Toast>
-                
+                </col> */}
                 </div>
                 
             );
