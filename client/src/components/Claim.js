@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Link} from "react-router-dom";
 import SimpleStorageContract from "../contracts/Insurance.json";
 import getWeb3 from "../utils/getWeb3";
 import NavBar from "./NavBar.js"
+import axios from "axios"
 import { Container } from "react-bootstrap";
 
 
@@ -47,7 +48,10 @@ class Claim extends Component {
                 this.setState({ web3, accounts, contract: instance});
                 this.setState({ flag: 1})
             }
+
+
             
+
         } catch (error) {
             // Catch any errors for any of the above operations.
             alert(
@@ -78,6 +82,26 @@ class Claim extends Component {
             // console.log(`aaa is =`)
             // console.log(a.events.UID.returnValues.uid)
             console.log(this.state.uid)
+        }else if(flag == 2){
+            console.log("in axiox get")
+            axios.get('http://localhost:5000/api/hospitals/'+this.state.uid)
+                .then(function(response) {
+                    console.log('Successfully connected to db in get didmount')
+                    console.log(response.data)
+
+                    // let tmp = response.data.map((topbarLinks, key) => {
+                    //     console.log(`in map ${topbarLinks._id}`)
+                        // return (
+                        //     <td> _id = {topbarLinks._id}/</td>                            
+                        // )
+                    // })
+                    
+                })
+                .catch((err, res) => {
+                    console.log(`Not connected to db in put${err}`)
+                });
+
+            this.setState({flag: 3})
         }
         
     }

@@ -24,9 +24,9 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:addr', (req, res) => {
-    console.log(`in get ${req.params.addr}`)
-    Host.find({_addr: req.params.addr}, function (err, docs) {
+router.get('/:uid', (req, res) => {
+    console.log(`in get ${req.params.uid}`)
+    Host.find({_userid: req.params.uid}, function (err, docs) {
         // Host.find({_addr: '0xC7a8E02ab30B57e438e407fe0eDBa82E9117068F'}, function (err, docs) {
 
         if (err){
