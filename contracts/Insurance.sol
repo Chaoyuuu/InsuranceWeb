@@ -43,7 +43,7 @@ contract Insurance{
         bool A,
         bool B,
         bool C,
-        int num
+        bool if_accident
     );
 
     event UID(
@@ -106,7 +106,7 @@ contract Insurance{
         document[user].B = false;
         document[user].C = false;
 
-        emit e_Document(user, document[user].A, document[user].B, document[user].C, 0);
+        emit e_Document(user, document[user].A, document[user].B, document[user].C, detail[user].if_accident);
 
         return ("set detail");
     }
@@ -114,7 +114,7 @@ contract Insurance{
     function getDocument(string memory _A, string memory  _B, uint _M, uint _D) public inState(State.SetDetail) returns (string memory){
         user = msg.sender;
 
-        if(keccak256(bytes(_A))==keccak256(bytes("bed")) && keccak256(bytes(_B))==keccak256(bytes("hostipal"))){
+        if(keccak256(bytes(_A))==keccak256(bytes("emergency1")) && keccak256(bytes(_B))==keccak256(bytes("surgency2"))){
             document[user].A = true;
             document[user].B = true;
             document[user].C = true;
@@ -136,7 +136,7 @@ contract Insurance{
             transfer();
         }
 
-        emit e_Document(user, document[user].A, document[user].B, document[user].C, 23);
+        emit e_Document(user, document[user].A, document[user].B, document[user].C, detail[user].if_accident);
 
         return ("in getDocument");
     }
