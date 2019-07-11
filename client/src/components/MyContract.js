@@ -58,12 +58,13 @@ class MyContract extends Component{
                     let tmp = response.data.map((topbarLinks, key) => {
                         console.log(`in map ${topbarLinks._id}`)
                         return (
-                            
+
                             <tr key={topbarLinks._id}>
-                            <td> _id = {topbarLinks._id}/</td>
-                            <td> _start = {topbarLinks._start}</td>
-                            <td> _due = {topbarLinks._due}</td>
-                            <td>_link = {topbarLinks._contract}</td>
+                            <td> {topbarLinks._contract}</td>
+                            <td> {topbarLinks._start}</td>
+                            <td> {topbarLinks._due}</td>
+                            <td> {topbarLinks._action == 0 ? 
+                                <Button variant="info" href="/Claim">click me to claim</Button> : "already claimed"}</td>
                             </tr>
                             
                         )

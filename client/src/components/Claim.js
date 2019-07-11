@@ -4,7 +4,7 @@ import SimpleStorageContract from "../contracts/Insurance.json";
 import getWeb3 from "../utils/getWeb3";
 import NavBar from "./NavBar.js"
 import axios from "axios"
-import { Container } from "react-bootstrap";
+import { Container, Spinner, Toast } from "react-bootstrap";
 
 
 class Claim extends Component {
@@ -27,6 +27,8 @@ class Claim extends Component {
                 _DDate:''
             }
         }
+
+        this.setTitle = this.setTitle.bind(this);
     }
 
     componentDidMount = async () => {
@@ -135,7 +137,7 @@ class Claim extends Component {
                                     // console.error(error);
                                     console.log("claim error");
                                     console.log(error);
-                                    this.setState({if_claim: 0})
+                                    this.setState({if_claim: 2})
                                 }
                             }.bind(this));
             console.log(`is a`)
@@ -146,6 +148,37 @@ class Claim extends Component {
         }
     }
 
+    setTitle(){
+        if(this.state.if_claim == 1){
+            return(
+                <p>you got 5 dollars, please check your accounts</p>
+                //more details ..
+            );
+        }else if(this.state.if_claim == 2){
+            return(
+                <p>wrong to claim the insurnace, check console.log</p>
+            );
+        }else if(this.state.if_claim == 0){
+            return(
+                <div>
+                <p>waitting ...
+                <Spinner animation="border" variant="info" />
+                </p>
+                <Toast>
+                    <Toast.Header>
+                    <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+                    <strong className="mr-auto">Bootstrap</strong>
+                    <small>just now</small>
+                    </Toast.Header>
+                    <Toast.Body>See? Just like this.</Toast.Body>
+                </Toast>
+                
+                </div>
+                
+            );
+        } 
+    }
+
     render() {
         if (!this.state.web3) {
             return <div>Loading Web3, accounts, and contract...</div>;
@@ -154,8 +187,9 @@ class Claim extends Component {
             <div>
                 <NavBar/>
                 <Container>                        
-                        <h2> if_claim</h2>
-                        <h2>{this.state.if_claim == 1 ? 'you got 5 dollars' : 'fail to claim'}</h2>
+                        {/* <h2> if_claim</h2> */}
+                        {this.setTitle()}
+
                 </Container>
             </div>
         );
