@@ -1,6 +1,12 @@
 /*-------------------------
         Intro-carousel
 -------------------------*/
+body {
+    font-family: '微軟正黑體';
+}
+/* #test_h3 {
+    font: 1em 微軟正黑體 ;
+} */
 
 #Intro .carousel-content {
     /* text-align: center; */
@@ -28,7 +34,7 @@
 
 #Intro h2 {
     color: #fff;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     font-size: 48px;
     font-weight: 700;
 }

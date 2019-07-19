@@ -25,7 +25,7 @@ class Main extends Component {
             <Route path="/" component={Home} exact />
             <Route path="/App" component={App} />
             <Route path="/MyContract" component={MyContract} />
-            <Route path="/Claim" component={Claim} />
+            <Route path="/Claim/:id" component={Claim} />
             <Route path="/about" component={About}  /> 
             <Route path="/connect" component={Connect}  /> 
             <Route path="/contact" component={Contact}  />

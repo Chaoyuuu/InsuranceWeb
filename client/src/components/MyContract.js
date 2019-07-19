@@ -64,7 +64,7 @@ class MyContract extends Component{
                             <td> {topbarLinks._start}</td>
                             <td> {topbarLinks._due}</td>
                             <td> {topbarLinks._action == 0 ? 
-                                <Button variant="info" href="/Claim">click me to claim</Button> : "already claimed"}</td>
+                                <Button variant="info" href={'/Claim/'+topbarLinks._id} >click me to claim</Button> : "already claimed"}</td>
                             </tr>
                             
                         )

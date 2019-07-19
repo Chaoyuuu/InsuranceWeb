@@ -101,7 +101,7 @@ class App extends Component {
         };
 
 
-        axios.post('http://localhost:5000/api/items', user)
+        axios.post('http://localhost:5000/api/items/add', user)
             .then((req, res) => {
                 console.log('Successfully connected to db')
                 console.log(`Successfully connected to db ${req.data}`)

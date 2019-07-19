@@ -20,26 +20,30 @@ class Home extends Component {
             
             <div>               
                 <NavBar/>
-               
+                
                 {/* Intro */}
                 <Carousel id="Intro">
                     <Carousel.Item>
                         <img
                         className="d-block w-100"
-                        src="https://i.imgur.com/WBtrdgk.jpg"
-                        alt="First slide"
+                        src="https://i.imgur.com/xvBTSFM.jpg"
+                        alt="First slide11111"
+                        height={700}
                         />
                         <Carousel.Caption className="carousel-content">
-                            <Row><h3>First slide label</h3></Row>
-                            <Row><p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p></Row>
+                        
+                            <h3>快速交易</h3><br/>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            
                         </Carousel.Caption>
                     </Carousel.Item>
 
                     <Carousel.Item>
                         <img
                         className="d-block w-100"
-                        src="https://i.imgur.com/WBtrdgk.jpg"
+                        src="https://i.imgur.com/jpbhpjJ.jpg"
                         alt="Third slide"
+                        height={700}
                         />
                         <Carousel.Caption className="carousel-content">
                         <h3>Second slide label</h3>
@@ -50,8 +54,10 @@ class Home extends Component {
                     <Carousel.Item>
                         <img
                         className="d-block w-100"
-                        src="https://i.imgur.com/WBtrdgk.jpg"
+                        src="https://i.imgur.com/M4azuBG.jpg"
                         alt="Third slide"
+                        // width={1600}
+                        height={700}
                         />
                         <Carousel.Caption className="carousel-content">
                         <h3>Third slide label</h3>

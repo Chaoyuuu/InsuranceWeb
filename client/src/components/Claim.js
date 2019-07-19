@@ -4,7 +4,7 @@ import SimpleStorageContract from "../contracts/Insurance.json";
 import getWeb3 from "../utils/getWeb3";
 import NavBar from "./NavBar.js"
 import axios from "axios"
-import { Container, Spinner, Toast } from "react-bootstrap";
+import { Container, Spinner, Toast, Button } from "react-bootstrap";
 
 
 class Claim extends Component {
@@ -53,7 +53,9 @@ class Claim extends Component {
             // this.setState({ web3, accounts, contract: instance }, this.runExample);
             {
                 this.setState({ web3, accounts, contract: instance});
-                this.setState({ flag: 1})
+                // this.setState({ flag: 1})
+                this.setState({ flag: 4})
+
             }
 
 
@@ -143,6 +145,22 @@ class Claim extends Component {
             console.log(`is a`)
             console.log(a)
             
+        }else if(flag == 4){
+            //set is_accident = 1 in items DB
+            console.log('in flag = 4') 
+            console.log(this.props.match.params.id)
+            axios.post('http://localhost:5000/api/items/update/'+ this.props.match.params.id)
+                .then((req, res) => {
+                    console.log('Successfully connected to db')
+                    // console.log(`Successfully connected to db ${req.data}`)
+                    console.log(res)
+                    // res.status(200).send(res)
+                
+                })
+                .catch((err, res) => {
+                    console.log(`Not connected to db ${err}`)
+                });   
+            
         }else{
             console.log("issss else")
         }
@@ -151,7 +169,11 @@ class Claim extends Component {
     setTitle(){
         if(this.state.if_claim == 1){
             return(
-                <p>you got 5 dollars, please check your accounts</p>
+                
+                    <p>you got 5 dollars, please check your accounts
+                    {/* <Button variant="success" href="/MyContract"> Back to MyContract </Button> */}
+                    </p>
+                
                 //more details ..
             );
         }else if(this.state.if_claim == 2){
@@ -164,6 +186,7 @@ class Claim extends Component {
                 <p>waitting ...
                 <Spinner animation="border" variant="info" />
                 </p>
+
                 {/* <col sm={6}>
                 <Toast>
                     <Toast.Header>
@@ -190,7 +213,7 @@ class Claim extends Component {
                 <Container>                        
                         {/* <h2> if_claim</h2> */}
                         {this.setTitle()}
-
+                        <Button variant="success" href="/MyContract"> Back to MyContract </Button>
                 </Container>
             </div>
         );

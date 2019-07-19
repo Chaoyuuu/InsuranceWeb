@@ -42,7 +42,7 @@ router.get('/:addr', (req, res) => {
 // @route   POST api/items
 // @desc    crerate a post
 // @access  Public
-router.post('/', (req, res) => {
+router.post('/add', (req, res) => {
     // res.header("Access-Control-Allow-Origin", "http://localhost:3000/connect");
     // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     // schema : _contract, _start, _due, _action
@@ -59,6 +59,26 @@ router.post('/', (req, res) => {
 
     newItem.save().then(item => res.json(item));
 });
+
+
+router.post('/update/:id', (req, res) => {
+    // schema : _contract, _start, _due, _action
+
+    console.log("in update")
+    console.log(req.params.id)
+    // console.log(req)
+    // const newItem = new Item({
+    //     _addr: req.body._addr,
+    //     _contract: req.body._contract,
+    //     _start: req.body._start,
+    //     _due: req.body._due,
+    //     _action: req.body._action,
+    // });
+
+    // newItem.save().then(item => res.json(item));
+});
+
+
 
 router.put('/', (req, res) => {
 

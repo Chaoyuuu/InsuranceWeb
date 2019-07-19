@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import NavBar from "./NavBar.js"
-import { , Container, Button } from "react-bootstrap";
+import {  Container, Button } from "react-bootstrap";
 
 class MyContract extends Component{
 
