@@ -16,7 +16,7 @@ class NavBar extends Component {
                     {/* <Nav.Link href="/Claim">Claim</Nav.Link> */}
                     {/* <Nav.Link href="/About">About</Nav.Link> */}
                     <Nav.Link href="/Connect">HospitalDB</Nav.Link>
-                    {/* <Nav.Link href="/Contact">Contact</Nav.Link> */}
+                    <Nav.Link href="/Contracts">Contract</Nav.Link>
                     <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

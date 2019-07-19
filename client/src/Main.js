@@ -9,6 +9,7 @@ import Connect from "./components/Connect.js";
 import App from './App'
 import Claim from "./components/Claim.js";
 import MyContract from "./components/MyContract.js";
+import Contracts from "./components/Contracts.js";
 
 
 // import Navigation from "./components/Navigation.js"
@@ -28,7 +29,7 @@ class Main extends Component {
             <Route path="/Claim/:id" component={Claim} />
             <Route path="/about" component={About}  /> 
             <Route path="/connect" component={Connect}  /> 
-            <Route path="/contact" component={Contact}  />
+            <Route path="/Contracts" component={Contracts}  />
             <Route component={Error} />
           </Switch>
         </div>

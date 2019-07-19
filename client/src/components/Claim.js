@@ -53,9 +53,7 @@ class Claim extends Component {
             // this.setState({ web3, accounts, contract: instance }, this.runExample);
             {
                 this.setState({ web3, accounts, contract: instance});
-                // this.setState({ flag: 1})
-                this.setState({ flag: 4})
-
+                this.setState({ flag: 1})
             }
 
 
@@ -160,6 +158,8 @@ class Claim extends Component {
                 .catch((err, res) => {
                     console.log(`Not connected to db ${err}`)
                 });   
+
+            // this.setState({flag: 5})
             
         }else{
             console.log("issss else")
@@ -170,9 +170,7 @@ class Claim extends Component {
         if(this.state.if_claim == 1){
             return(
                 
-                    <p>you got 5 dollars, please check your accounts
-                    {/* <Button variant="success" href="/MyContract"> Back to MyContract </Button> */}
-                    </p>
+                    <p>you got 5 dollars, please check your accounts </p>
                 
                 //more details ..
             );
