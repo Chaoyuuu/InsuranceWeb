@@ -66,6 +66,16 @@ router.post('/update/:id', (req, res) => {
 
     console.log("in update")
     console.log(req.params.id)
+
+    Item.update({_id: req.params.id}, { _action: '1'}, function(err, docs){
+            if (err){
+                console.log(`error: ${err}`)
+            }else{
+                console.log('no error!!!')
+                return res.json(docs);
+            }
+        });
+        
     // console.log(req)
     // const newItem = new Item({
     //     _addr: req.body._addr,
