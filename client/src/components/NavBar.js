@@ -5,8 +5,8 @@ class NavBar extends Component {
     render() {
         return (
             <div>               
-                <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="https://github.com/Chaoyuuu/InsuranceWeb">Insurance Dapp</Navbar.Brand>
+                <Navbar bg="light" expand="lg" id="meun" className="fixed-top">
+                <Navbar.Brand href="https://github.com/Chaoyuuu/InsuranceWeb">區快保</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto mt-2 mt-lg-0">

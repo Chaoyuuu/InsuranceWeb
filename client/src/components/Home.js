@@ -23,17 +23,18 @@ class Home extends Component {
                 
                 {/* Intro */}
                 <Carousel id="Intro">
-                    <Carousel.Item>
+                    <Carousel.Item className="carousel-content1">
                         <img
                         className="d-block w-100"
-                        src="https://i.imgur.com/xvBTSFM.jpg"
+                        src="https://i.imgur.com/5P4tuC0.jpg"
                         alt="First slide11111"
-                        height={700}
+                        height={870}
                         />
-                        <Carousel.Caption className="carousel-content">
-                        
-                            <h3>快速交易</h3><br/>
+                        <Carousel.Caption >
+
+                            <h3>快速交易</h3>
                             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            
                             
                         </Carousel.Caption>
                     </Carousel.Item>
@@ -41,9 +42,9 @@ class Home extends Component {
                     <Carousel.Item>
                         <img
                         className="d-block w-100"
-                        src="https://i.imgur.com/jpbhpjJ.jpg"
-                        alt="Third slide"
-                        height={700}
+                        src="https://i.imgur.com/KqwmAg8.jpg"
+                        alt="Second slide"
+                        height={870}
                         />
                         <Carousel.Caption className="carousel-content">
                         <h3>Second slide label</h3>
@@ -54,10 +55,10 @@ class Home extends Component {
                     <Carousel.Item>
                         <img
                         className="d-block w-100"
-                        src="https://i.imgur.com/M4azuBG.jpg"
+                        src="https://i.imgur.com/5MgPquE.jpg"
                         alt="Third slide"
                         // width={1600}
-                        height={700}
+                        height={870}
                         />
                         <Carousel.Caption className="carousel-content">
                         <h3>Third slide label</h3>
@@ -68,7 +69,7 @@ class Home extends Component {
 
           
                 {/* About */}
-                <Jumbotron fluid id="about">
+                <Jumbotron fluid id="about" >
                     <Container className="about-container">
                         <Row> 
                             <Col className="col-md-offset-12 col-md-12 titlee">
@@ -102,7 +103,7 @@ class Home extends Component {
                 <Image id="pall-img" src="https://i.imgur.com/HQQFUTX.jpg" fluid />             
 
                 {/* tool */}
-                <Container id="tool">
+                <Container id="tool" background-color="beige">
                     <Row> 
                         <Col className="col-md-offset-12 col-md-12 tilte">
                             <h2> Tools </h2>
@@ -112,43 +113,43 @@ class Home extends Component {
 
                     <Row>
                         <Col xs={12} sm={3} md={3} lg={3} className="card_1">
-                            <a href="https://github.com/Chaoyuuu/InsuranceWeb">
+                            <a href="https://www.trufflesuite.com/ganache">
                             <Image
-                                width={250}
-                                height={250} 
-                                src="https://i.imgur.com/wzIfRRo.jpg/" roundedCircle/>
+                                width={230}
+                                height={230} 
+                                src="https://i.imgur.com/sr1NsjK.png" roundedCircle/>
                             </a>
-                            <h3>ethereum</h3>
+                            <h3>Ganache</h3>
                             <p>the text </p>
                         </Col>
                         <Col xs={12} sm={3} md={3} lg={3} className="card_2">
-                            <a href="https://github.com/Chaoyuuu/InsuranceWeb">
+                            <a href="https://www.ethereum.org/">
                             <Image 
                                 width={250}
-                                height={250} 
-                                src="https://i.imgur.com/wzIfRRo.jpg/" roundedCircle />
+                                height={230} 
+                                src="https://i.imgur.com/IozD8Fx.png" roundedCircle />
                             </a>
-                            <h3>ethereum</h3>
+                            <h3>Ethereum</h3>
                             <p>the text </p>
                         </Col>
                         <Col xs={12} sm={3} md={3} lg={3} className="card_3">
-                            <a href="https://github.com/Chaoyuuu/InsuranceWeb">
+                            <a href="https://reactjs.org/">
                             <Image 
-                                width={250}
-                                height={250} 
-                                src="https://i.imgur.com/wzIfRRo.jpg/" roundedCircle/>
+                                width={240}
+                                height={230} 
+                                src="https://i.imgur.com/VCYrVXr.png" roundedCircle/>
                             </a>
-                            <h3>ethereum</h3>
+                            <h3>React</h3>
                             <p>the text </p>
                         </Col>
                         <Col xs={12} sm={3} md={3} lg={3} className="card_4">
-                            <a href="https://github.com/Chaoyuuu/InsuranceWeb">
+                            <a href="https://metamask.io/">
                             <Image 
                                 width={250}
-                                height={250} 
-                                src="https://i.imgur.com/wzIfRRo.jpg/" roundedCircle/>
+                                height={230} 
+                                src="https://i.imgur.com/l1xsDOH.jpg" roundedCircle/>
                             </a>
-                            <h3>ethereum</h3>
+                            <h3>Metamask</h3>
                             <p>the text </p>
                         </Col>
                     </Row>

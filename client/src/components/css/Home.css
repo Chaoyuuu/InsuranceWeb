@@ -8,6 +8,14 @@ body {
     font: 1em 微軟正黑體 ;
 } */
 
+#Intro .carousel-content1 {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+}
+
 #Intro .carousel-content {
     /* text-align: center; */
 
@@ -46,7 +54,9 @@ body {
 #about {
     background-color: gold;
     width: 100%;
-    height: auto;
+    /* height: auto; */
+    /* padding: 1000em inherit; */
+    min-height: 300px;
 }
 
 #about .about-container{
@@ -119,6 +129,7 @@ body {
     margin-bottom: 20px;
     align-items: center;
     text-align: center;
+    background-color: beige;
 }
 
 #tool .tilte h2 {
@@ -153,21 +164,27 @@ body {
     margin-bottom: 5px;
 }
 
-/* #tool .card_1 {
-    background-color: aqua;
+#tool .card_1 image{
+    width: auto;
+    height: auto;
 }
 
-#tool .card_2 {
-    background-color: red;
+#tool .card_2 image{
+    width: 40;
+    height: 40;
 }
 
-#tool .card_3 {
-    background-color: burlywood;
+#tool .card_3 image{
+    width: 50%;
+    height: 50%;
 }
 
-#tool .card_4 {
-    background-color: greenyellow;
-} */
+#tool .card_4 image{
+    width: 20%;
+    height: 20%;
+}
+
+
 
 /*-------------------------
         me-jumbotron
