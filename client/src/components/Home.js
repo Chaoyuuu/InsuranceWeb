@@ -23,45 +23,43 @@ class Home extends Component {
                 
                 {/* Intro */}
                 <Carousel id="Intro">
-                    <Carousel.Item className="carousel-content1">
+                    <Carousel.Item >
                         <img
-                        className="d-block w-100"
+                        className="w-100"
                         src="https://i.imgur.com/5P4tuC0.jpg"
-                        alt="First slide11111"
-                        height={870}
+                        alt="First slide-blockchain"
+                        // height={870}
                         />
-                        <Carousel.Caption >
+                        <Carousel.Caption className="carousel-content">
 
-                            <h3>快速交易</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                            
-                            
+                            <h3>Blockchain Application</h3>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>  
                         </Carousel.Caption>
                     </Carousel.Item>
 
                     <Carousel.Item>
                         <img
-                        className="d-block w-100"
+                        className="w-100"
                         src="https://i.imgur.com/KqwmAg8.jpg"
-                        alt="Second slide"
-                        height={870}
+                        alt="Second slide-computer"
+                        // height={870}
                         />
                         <Carousel.Caption className="carousel-content">
-                        <h3>Second slide label</h3>
+                        <h3>Insurance</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                     
                     <Carousel.Item>
                         <img
-                        className="d-block w-100"
+                        className="w-100"
                         src="https://i.imgur.com/5MgPquE.jpg"
-                        alt="Third slide"
+                        alt="Third slide-clock"
                         // width={1600}
-                        height={870}
+                        // height={870}
                         />
                         <Carousel.Caption className="carousel-content">
-                        <h3>Third slide label</h3>
+                        <h3>快速交易</h3>
                         <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
@@ -79,15 +77,15 @@ class Home extends Component {
                             </Col>
                         </Row>
 
-                        <Media as="li">
+                        <Media as="li" className="body">
                             <img
-                            width={512}
-                            height={300}
-                            className="mr-4 img"
-                            src="https://i.imgur.com/yFd5QDg.jpg"
-                            alt="Generic placeholder"
+                                width={512}
+                                height={350}
+                                className="mr-4 img"
+                                src="https://i.imgur.com/RD9oQQs.jpg"
+                                alt="Generic placeholder"
                             />
-                            <Media.Body className="body">
+                            <Media.Body >
                             <h5>List-based media object</h5>
                             <p>
                                 Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
@@ -100,7 +98,7 @@ class Home extends Component {
                     </Container>
                 </Jumbotron>
 
-                <Image id="pall-img" src="https://i.imgur.com/HQQFUTX.jpg" fluid />             
+                <Image id="pall-img" src="https://i.imgur.com/aU2nkXT.jpg" fluid />             
 
                 {/* tool */}
                 <Container id="tool" background-color="beige">

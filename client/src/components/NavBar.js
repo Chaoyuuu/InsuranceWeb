@@ -2,11 +2,27 @@ import React, { Component } from "react";
 import { Navbar, Nav, NavDropdown} from "react-bootstrap";
 
 class NavBar extends Component {
+
+    style = {
+        backgroundColor: "#F4D03F",
+        color: "red"
+    };
+
     render() {
         return (
-            <div>               
-                <Navbar bg="light" expand="lg" id="meun" className="fixed-top">
-                <Navbar.Brand href="https://github.com/Chaoyuuu/InsuranceWeb">區快保</Navbar.Brand>
+            <div>      
+                <style >
+                    {`
+                    nav-flat{
+                        color: red;
+                      }
+
+        
+                    `}
+                </style>
+         
+                <Navbar expand="lg" id="menu" className="fixed-top" style={this.style}>
+                <Navbar.Brand href="https://github.com/Chaoyuuu/InsuranceWeb" variant="flat">INSURANCE DAPP</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto mt-2 mt-lg-0">

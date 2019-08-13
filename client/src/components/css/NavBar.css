@@ -1,3 +1,10 @@
-#menu {
-   
-  }
+.Brand{
+	color: red;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 2em;
+}
+
+#basic-navbar-nav{
+  color: red;
+}
