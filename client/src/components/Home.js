@@ -4,8 +4,8 @@ import NavBar from "./NavBar.js"
 import { ParallaxProvider } from 'react-skrollr'
 import { Parallax, Background } from 'react-parallax';
 
-import { Form, FormControl, Button, Container, Carousel} from "react-bootstrap";
-import { Card, Row, Col, Media, Jumbotron, Image} from "react-bootstrap";
+import { Tab, Tabs, Button, Container, Carousel} from "react-bootstrap";
+import { Card, Row, Col, Media, Jumbotron, Image, Tooltip, OverlayTrigger, ButtonToolbar} from "react-bootstrap";
 
 const styles = {
     fontFamily: "sans-serif",
@@ -132,7 +132,7 @@ class Home extends Component {
                         </div>
                 </Parallax>
                 
-                <Parallax
+                {/* <Parallax
                     // data={{
                     // 'data-center-center': 'opacity: 1;',
                     // 'data-bottom-top': 'opacity: 0;'
@@ -142,13 +142,54 @@ class Home extends Component {
                         'data-bottom-top': 'background-color:rgb(255,0,0);'
                         }}
                 >
-                    {/* <Image id="pall-img" src="https://i.imgur.com/aU2nkXT.jpg" fluid />              */}
                     <div>hiii</div>
-                    
-                </Parallax>
+                </Parallax> */}
             
-          
-                {/* <Image id="pall-img" src="https://i.imgur.com/aU2nkXT.jpg" fluid />              */}
+            {/* how to use */}
+            <Carousel id="manual">
+                    <Carousel.Item >
+                        <img
+                        className="w-100"
+                        src="https://i.imgur.com/d0TLPFM.png"
+                        alt="Third slide-clock"
+                        // width={1600}
+                        // height={870}
+                        />
+                        <Carousel.Caption className="carousel-content">
+
+                            <h3>Blockchain Application</h3>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>  
+                        </Carousel.Caption>
+                    </Carousel.Item>
+
+                    <Carousel.Item>
+                        <img
+                        className="w-100"
+                        src="https://i.imgur.com/d0TLPFM.png"
+                        alt="Third slide-clock"
+                        // width={1600}
+                        // height={870}
+                        />
+                        <Carousel.Caption className="carousel-content">
+                        <h3>Insurance</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    
+                    <Carousel.Item>
+                        <img
+                        className="w-100"
+                        src="https://i.imgur.com/d0TLPFM.png"
+                        alt="Third slide-clock"
+                        // width={1600}
+                        // height={870}
+                        />
+                        <Carousel.Caption className="carousel-content">
+                        <h3>快速交易</h3>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                </Carousel>
 
                 {/* tool */}
                 <Container id="tool" background-color="beige">
@@ -203,6 +244,13 @@ class Home extends Component {
                     </Row>
                 </Container>
 
+
+                <Parallax bgImage="https://i.imgur.com/aU2nkXT.jpg" strength={300}>
+                    <div style={{ height: 300 }}>
+                        <div style={insideStyles}>Dynamic Blur</div>
+                        </div>
+                </Parallax>
+
                 {/* about_me */}
                 <Jumbotron fluid id="about_me">
                     <Container className="about-container">
@@ -235,12 +283,58 @@ class Home extends Component {
                     </Container>
                 </Jumbotron>
 
+                <Jumbotron fluid id="end">
+                    <OverlayTrigger
+                        overlay={
+                            <Tooltip>
+                            C.Y LEE in <strong>facebook</strong>.
+                            </Tooltip>
+                        }>
+                        <Image 
+                            width={40}
+                            height={40}
+                            className="mr-4 img"
+                            src="https://i.imgur.com/BdWdkzx.png"
+                            alt="facebook"/>
+                    </OverlayTrigger>
 
-             
+                    <OverlayTrigger
+                        overlay={
+                            <Tooltip>
+                            Insurance Dapp in <strong>github</strong>.
+                            </Tooltip>
+                        }>
+                        <Image
+                            width={40}
+                            height={40}
+                            className="mr-4 img"
+                            src="https://i.imgur.com/vOVE10Z.png"
+                            alt="github"/>
+                    </OverlayTrigger>
+
+
+                    <OverlayTrigger
+                        overlay={
+                            <Tooltip className="tooltips">
+                            connect with auther, 
+                            gmail: <strong>a0935292660@gmail.com</strong>
+                            </Tooltip>   
+                        }>
+
+                        <Image 
+                            width={40}
+                            height={40}
+                            className="mr-4 img"
+                            src="https://i.imgur.com/P12PjVr.png"
+                            alt="email"/>
+                    </OverlayTrigger>
+
+                    <h2>All rights reserved by C.Y.LEE NCKU</h2>  
+                </Jumbotron>
+           
+
     </div>
-    </ParallaxProvider>
-
-        
+    </ParallaxProvider>     
         );
     }
 };

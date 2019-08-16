@@ -61,7 +61,7 @@ body {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
-    margin-top: 4%;
+    margin-top: 5%;
 }
 
 #about .titlee h2 {
@@ -126,6 +126,53 @@ body {
     width: 100%;
     margin-top: -35px;
 }
+
+/*-------------------------
+        manual-carousel
+-------------------------*/
+
+
+#manual img{
+    height: 100vh;
+}
+
+#manual .carousel-content {
+    /* text-align: center; */
+
+    /* display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: absolute; */
+    height: 55%;
+    background-image: none;
+   
+}
+
+#manual p {
+    color: #34495E;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#manual h3 {
+    color: #34495E;
+    align-items: center;
+    position: relative;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+
+
 
 /*-------------------------
         tool-cards
@@ -255,3 +302,37 @@ body {
   #about_me .body p:last-child {
     margin-bottom: 0;
   }
+
+/*-------------------------
+        end-section
+-------------------------*/
+
+#end {
+    background-color:red;
+    height: 100px;
+    text-align: center;
+    align-content: center;
+    margin-top: -40px;
+    margin-bottom: -20px;
+}
+
+#end h2 {
+    color:white;
+    font-weight: 300;
+    font-size: 15px;
+
+}
+
+#end img{
+    /* display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox; */
+    margin-top: -50px
+}
+
+#end .tooltips{
+    background-color: rebeccapurple;
+    padding: '2px 10px';
+    color: 'white';
+    border: 3px;
+}
