@@ -1,9 +1,27 @@
 import React, { Component } from "react";
 import "./css/Home.css";
 import NavBar from "./NavBar.js"
+import { ParallaxProvider } from 'react-skrollr'
+import { Parallax, Background } from 'react-parallax';
+
 import { Form, FormControl, Button, Container, Carousel} from "react-bootstrap";
 import { Card, Row, Col, Media, Jumbotron, Image} from "react-bootstrap";
 
+const styles = {
+    fontFamily: "sans-serif",
+    textAlign: "center"
+  };
+  const insideStyles = {
+    background: "white",
+    padding: 20,
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%,-50%)"
+  };
+  const image1 =
+  "https://i.imgur.com/aU2nkXT.jpg";
+    
 class Home extends Component {
     constructor(props){
         super(props);
@@ -15,9 +33,17 @@ class Home extends Component {
         
     }
 
+    
+
     render() {
         return (
-            
+            <ParallaxProvider
+                init={{
+                smoothScrollingDuration: 500,
+                smoothScrolling: true,
+                forceHeight: false
+                }}
+            >
             <div>               
                 <NavBar/>
                 
@@ -65,7 +91,8 @@ class Home extends Component {
                     </Carousel.Item>
                 </Carousel>
 
-          
+
+                
                 {/* About */}
                 <Jumbotron fluid id="about" >
                     <Container className="about-container">
@@ -98,7 +125,30 @@ class Home extends Component {
                     </Container>
                 </Jumbotron>
 
-                <Image id="pall-img" src="https://i.imgur.com/aU2nkXT.jpg" fluid />             
+
+                <Parallax bgImage="https://i.imgur.com/aU2nkXT.jpg" strength={300}>
+                    <div style={{ height: 300 }}>
+                        <div style={insideStyles}>Dynamic Blur</div>
+                        </div>
+                </Parallax>
+                
+                <Parallax
+                    // data={{
+                    // 'data-center-center': 'opacity: 1;',
+                    // 'data-bottom-top': 'opacity: 0;'
+                    // }}
+                    data={{
+                        'data-top': 'background-color:rgb(0,0,255);  ',
+                        'data-bottom-top': 'background-color:rgb(255,0,0);'
+                        }}
+                >
+                    {/* <Image id="pall-img" src="https://i.imgur.com/aU2nkXT.jpg" fluid />              */}
+                    <div>hiii</div>
+                    
+                </Parallax>
+            
+          
+                {/* <Image id="pall-img" src="https://i.imgur.com/aU2nkXT.jpg" fluid />              */}
 
                 {/* tool */}
                 <Container id="tool" background-color="beige">
@@ -133,9 +183,9 @@ class Home extends Component {
                         <Col xs={12} sm={3} md={3} lg={3} className="card_3">
                             <a href="https://reactjs.org/">
                             <Image 
-                                width={240}
+                                width={230}
                                 height={230} 
-                                src="https://i.imgur.com/VCYrVXr.png" roundedCircle/>
+                                src="https://i.imgur.com/lHbSR6v.png" roundedCircle/>
                             </a>
                             <h3>React</h3>
                             <p>the text </p>
@@ -188,6 +238,7 @@ class Home extends Component {
 
              
     </div>
+    </ParallaxProvider>
 
         
         );
