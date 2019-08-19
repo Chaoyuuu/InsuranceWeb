@@ -5,7 +5,7 @@ class NavBar extends Component {
 
     style = {
         backgroundColor: "#F4D03F",
-        'font-size': '18px',
+        'fontSize': '18px',
         
     };
 

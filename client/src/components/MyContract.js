@@ -2,84 +2,55 @@ import React, { Component } from "react";
 import axios from 'axios';
 import NavBar from "./NavBar.js"
 import getWeb3 from "../utils/getWeb3";
-import {  Container, Button } from "react-bootstrap";
-import { Empty} from 'antd';
-import {  Table, Divider, Tag } from 'antd';
+import { Container, Button } from "react-bootstrap";
+import { Table, Tag } from 'antd';
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: text => <a>{text}</a>,
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: tags => (
-      <span>
-        {tags.map(tag => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </span>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-        <a>Invite {record.name}</a>
-        <Divider type="vertical" />
-        <a>Delete</a>
-      </span>
-    ),
-  },
+var arr = [];
+const columns_t = [
+    {
+        title: 'Index',
+        dataIndex: '_index',
+        key: '_index',
+    },
+    {
+        title: 'Contract',
+        dataIndex: '_contract',
+        key: '_contract',
+        render: text => <a>{text}</a>,
+    },
+    {
+        title: 'Start Date',
+        dataIndex: '_start',
+        key: '_start',
+    },
+    {
+        title: 'Due Date',
+        dataIndex: '_end',
+        key: '_end',
+    },
+    {
+        title: 'State',
+        dataIndex: '_state',
+        key: '_state',
+        render: _state => (
+            <span>
+            { _state == 0 ? 
+                <Tag color="geekblue" key={_state}>還沒理賠 </Tag> : <Tag color="green" key={_state}>已經理賠 </Tag>
+            }</span>
+          ),
+    },
+    {
+        title: 'Action',
+        dataIndex: '_action',
+        key: '_action',
+        render: _action => (
+            <span>
+            { _action[0] == 0 ? 
+                <Button variant="info" href={'/Claim/'+_action[1]} >點我理賠</Button> : <p></p>
+            }</span>
+          ),
+    },
 ];
-
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
-
 
 class MyContract extends Component{
 
@@ -90,14 +61,7 @@ class MyContract extends Component{
           web3: null,
           accounts: null,
           my_Constract:[],
-          // data: {
-          //       d_contract:'',
-          //       d_start:'',
-          //       d_due:'',
-          //       d_action:'',
-          // },
-          // data_t:[]
-        }
+        }    
     }
     
     componentDidMount = async() => {
@@ -139,42 +103,42 @@ class MyContract extends Component{
                     console.log(`test is ${test["_id"]}`)
                     */
 
+                    /* use react-bootstrap
                     let tmp = response.data.map((topbarLinks, key) => {
                         console.log(`in map ${topbarLinks._id}`)
                         return (
 
+                          console.log(topbarLinks)
+                            data.push(topbarLinks._contract)
                             <tr key={topbarLinks._id}>
                             <td> {topbarLinks._contract}</td>
                             <td> {topbarLinks._start}</td>
                             <td> {topbarLinks._due}</td>
                             <td> {topbarLinks._action == 0 ? 
                                 <Button variant="info" href={'/Claim/'+topbarLinks._id} >點我理賠</Button> : <Tag color="cyan">完成理賠</Tag> }</td>
-                            </tr>
-                            
+                            </tr> 
                         )
                     })
+                    */  
 
+                    let tmp = response.data.map((topbarLinks, key) => {
+                        console.log(`in map ${topbarLinks._id}, ${key}`)
+                        console.log(topbarLinks);
 
+                        const k_tmp = key;
+                        const tmp ={
+                            key : k_tmp,
+                            _index: k_tmp,
+                            _contract : topbarLinks._contract,
+                            _start : topbarLinks._start,
+                            _end : topbarLinks._due,
+                            _state : topbarLinks._action,
+                            _action : [topbarLinks._action, topbarLinks._id]
+                        }
 
-
-                    // let tmp = response.data.map((topbarLinks, key) => {
-                    //     console.log(`in map ${topbarLinks._id}`)
-                    //     return (
-
-                    //       console.log(topbarLinks)
-                    //         // data.push(topbarLinks._contract)
-                    //         // <tr key={topbarLinks._id}>
-                    //         // <td> {topbarLinks._contract}</td>
-                    //         // <td> {topbarLinks._start}</td>
-                    //         // <td> {topbarLinks._due}</td>
-                    //         // <td> {topbarLinks._action == 0 ? 
-                    //         //     <Button variant="info" href={'/Claim/'+topbarLinks._id} >點我理賠</Button> : <Tag color="cyan">完成理賠</Tag> }</td>
-                    //         // </tr>
-                            
-                    //     )
-                    // })
-
-
+                        arr.push(tmp);
+                        console.log(`arr = ${JSON.stringify(arr)}`)
+                    })
                     self.setState({my_Constract: tmp});
                     
                 })
@@ -207,11 +171,7 @@ class MyContract extends Component{
                 <Container id="table">               
 
                 <h2 className="tmp"> MyContract addr = {this.state.accounts} </h2>
-                
-
-                <Table columns={columns} dataSource={data} />
-
-                {/* <h2> code : {this.state.my_Constract}</h2> */}
+                <Table columns={columns_t} dataSource={arr} />
             
                     {/* <Table striped bordered hover className="table_contract" thStyle={{ 'background-color': 'red' }} height='120px'>
                         <thead>
@@ -227,12 +187,7 @@ class MyContract extends Component{
                             {this.state.my_Constract}
                         </tbody>
                     </Table> */}
-
-
-
-                
               </Container>
-
             </div>
         );
     }
