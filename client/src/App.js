@@ -4,9 +4,15 @@ import React, { Component } from "react";
 import SimpleStorageContract from "./contracts/Insurance.json";
 import getWeb3 from "./utils/getWeb3";
 import axios from 'axios';
-import NavBar from "./components/NavBar.js"
+
 import "./App.css";
+import NavBar from "./components/NavBar.js";
 import { Container } from "react-bootstrap";
+import { DatePicker, Radio } from 'antd';
+import moment from "moment";
+import 'antd/dist/antd.css';
+
+const { RangePicker } = DatePicker;
 
 
 class App extends Component {
@@ -160,10 +166,11 @@ class ToList extends Component {
             startM:'', 
             startD:'', 
             endM:'', 
-            endD:'' 
+            endD:'',
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     handleChange(e) {
@@ -180,6 +187,11 @@ class ToList extends Component {
             return;
         }
         console.log("is in handle")
+        console.log(this.state.startM)
+        console.log(this.state.startD)
+        console.log(this.state.endM)
+        console.log(this.state.endD)
+
 
         // this.props.setContract(this.task_x.value, this.task_y.value)
         // this.props.setContract(this.state.name, this.state.birth, this.state.ID, this.state.sDate, this.state.eDate)
@@ -187,69 +199,53 @@ class ToList extends Component {
         this.props.postRequest(this.state.startM, this.state.startD, this.state.endM, this.state.endD)
     }
 
+    onChange = (value, dateString) => {
+        this.setState({startM: dateString[0].substring(5,7)})
+        this.setState({startD: dateString[0].substring(8,10)})
+        this.setState({endM: dateString[1].substring(5,7)})
+        this.setState({endD: dateString[1].substring(8,10)})
+    }
+
     render() {
         return (
-        <div>
+        <div className="form-horizontal">
             <br/>
             <br/>
             <br/>
-            <h2 htmlFor="new-todo">
-                Please Input User Information
+            <h2 htmlFor="new-todo" className="text-center">
+                請輸入基本資料
             </h2>
-            <form className="form-horizontal" role="form">
+            <form  role="form">
                 <FormStyle 
-                label={"Name"}
-                placeholder={"Your name"} 
-                name={"name"}
-                onChange={this.handleChange}
-                value={this.state.name}
+                    label={"Name"}
+                    placeholder={"Your name"} 
+                    name={"name"}
+                    onChange={this.handleChange}
+                    value={this.state.name}
                 />
                 <FormStyle
-                label={"Birth"}
-                name = {"birth"}
-                placeholder={"Your birth (MM/DD)"}
-                onChange={this.handleChange}
-                value={this.state.birth}
+                    label={"Birth"}
+                    name = {"birth"}
+                    placeholder={"Your birth (MM/DD)"}
+                    onChange={this.handleChange}
+                    value={this.state.birth}
                 />
                 <FormStyle
-                label={"ID"}
-                name ={"ID"}
-                placeholder={"Your ID"}
-                onChange={this.handleChange}
-                value={this.state.ID}
+                    label={"ID"}
+                    name ={"ID"}
+                    placeholder={"Your ID"}
+                    onChange={this.handleChange}
+                    value={this.state.ID}
                 />
-                <FormStyle
-                label={"StartDate_M"}
-                name = {"startM"}
-                placeholder={"Contract StartDate_M"}
-                onChange={this.handleChange}
-                value={this.state.startM}
-                />
-                <FormStyle
-                label={"StartDate_D"}
-                name = {"startD"}
-                placeholder={"Contract StartDate_D"}
-                onChange={this.handleChange}
-                value={this.state.startD}
-                />
-                <FormStyle
-                label={"EndDate_M"}
-                name = {"endM"}
-                placeholder={"Contract EndDate_M"}
-                onChange={this.handleChange}
-                value={this.state.endM}
-                />
-                <FormStyle
-                label={"EndDate_D"}
-                name = {"endD"}
-                placeholder={"Contract EndDate_D"}
-                onChange={this.handleChange}
-                value={this.state.endD}
-                />
-                <button type="button" className="btn btn-primary" onClick={this.handleSubmit }> Submit </button>
             </form>
+
+            <h2>請選擇日期</h2>
+            <RangePicker size="large" onChange={this.onChange} />
             
-            <SetValue a={this.state}/>
+            <br/>
+            <button type="button" className="btn btn-primary" onClick={this.handleSubmit }> Submit </button>
+
+            {/* <SetValue a={this.state}/> */}
         </div>
         );
     }
