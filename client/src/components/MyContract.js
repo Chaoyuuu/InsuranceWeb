@@ -46,7 +46,7 @@ const columns_t = [
         render: _action => (
             <span>
             { _action[0] == 0 ? 
-                <Button variant="info" href={'/Claim/'+_action[1]} >點我理賠</Button> : <p></p>
+                <Button variant="danger" href={'/Claim/'+_action[1]} >點我理賠</Button> : <p></p>
             }</span>
           ),
     },
@@ -122,8 +122,8 @@ class MyContract extends Component{
                     */  
 
                     let tmp = response.data.map((topbarLinks, key) => {
-                        console.log(`in map ${topbarLinks._id}, ${key}`)
-                        console.log(topbarLinks);
+                        // console.log(`in map ${topbarLinks._id}, ${key}`)
+                        // console.log(topbarLinks);
 
                         const k_tmp = key;
                         const tmp ={
@@ -171,7 +171,7 @@ class MyContract extends Component{
                 <Container id="table">               
 
                 <h2 className="tmp"> MyContract addr = {this.state.accounts} </h2>
-                <Table columns={columns_t} dataSource={arr} />
+                <Table className="table_contract align:center fontSize:'50px' " columns={columns_t} dataSource={arr} />
             
                     {/* <Table striped bordered hover className="table_contract" thStyle={{ 'background-color': 'red' }} height='120px'>
                         <thead>
