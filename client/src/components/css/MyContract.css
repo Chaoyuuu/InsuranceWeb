@@ -1,0 +1,21 @@
+body {
+    font-family: '微軟正黑體';
+}
+
+.ant-tag {
+    margin-bottom: 8px;
+  }
+
+.table {
+    align-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.table_contract {
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    font-size: 24px;
+    background-color: black;
+}

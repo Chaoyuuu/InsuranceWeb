@@ -5,28 +5,20 @@ class NavBar extends Component {
 
     style = {
         backgroundColor: "#F4D03F",
-        color: "red"
+        'font-size': '18px',
+        
     };
 
     render() {
         return (
             <div>      
-                <style >
-                    {`
-                    nav-flat{
-                        color: red;
-                      }
-
-        
-                    `}
-                </style>
          
                 <Navbar expand="lg" id="menu" className="fixed-top" style={this.style}>
                 <Navbar.Brand href="https://github.com/Chaoyuuu/InsuranceWeb" variant="flat">INSURANCE DAPP</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto mt-2 mt-lg-0">
-                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link className="navlink" href="/">Home</Nav.Link>
                     <Nav.Link href="/App">SetUserInfo</Nav.Link>
                     <Nav.Link href="/MyContract">MyContract</Nav.Link>
                     {/* <Nav.Link href="/Claim">Claim</Nav.Link> */}

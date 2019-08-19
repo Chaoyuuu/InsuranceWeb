@@ -2,7 +2,84 @@ import React, { Component } from "react";
 import axios from 'axios';
 import NavBar from "./NavBar.js"
 import getWeb3 from "../utils/getWeb3";
-import { Table, Container, Button } from "react-bootstrap";
+import {  Container, Button } from "react-bootstrap";
+import { Empty} from 'antd';
+import {  Table, Divider, Tag } from 'antd';
+
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+    render: text => <a>{text}</a>,
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
+    title: 'Tags',
+    key: 'tags',
+    dataIndex: 'tags',
+    render: tags => (
+      <span>
+        {tags.map(tag => {
+          let color = tag.length > 5 ? 'geekblue' : 'green';
+          if (tag === 'loser') {
+            color = 'volcano';
+          }
+          return (
+            <Tag color={color} key={tag}>
+              {tag.toUpperCase()}
+            </Tag>
+          );
+        })}
+      </span>
+    ),
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (text, record) => (
+      <span>
+        <a>Invite {record.name}</a>
+        <Divider type="vertical" />
+        <a>Delete</a>
+      </span>
+    ),
+  },
+];
+
+const data = [
+  {
+    key: '1',
+    name: 'John Brown',
+    age: 32,
+    address: 'New York No. 1 Lake Park',
+    tags: ['nice', 'developer'],
+  },
+  {
+    key: '2',
+    name: 'Jim Green',
+    age: 42,
+    address: 'London No. 1 Lake Park',
+    tags: ['loser'],
+  },
+  {
+    key: '3',
+    name: 'Joe Black',
+    age: 32,
+    address: 'Sidney No. 1 Lake Park',
+    tags: ['cool', 'teacher'],
+  },
+];
+
 
 class MyContract extends Component{
 
@@ -12,7 +89,14 @@ class MyContract extends Component{
           storageValue: null,
           web3: null,
           accounts: null,
-          my_Constract:[]
+          my_Constract:[],
+          // data: {
+          //       d_contract:'',
+          //       d_start:'',
+          //       d_due:'',
+          //       d_action:'',
+          // },
+          // data_t:[]
         }
     }
     
@@ -64,11 +148,32 @@ class MyContract extends Component{
                             <td> {topbarLinks._start}</td>
                             <td> {topbarLinks._due}</td>
                             <td> {topbarLinks._action == 0 ? 
-                                <Button variant="info" href={'/Claim/'+topbarLinks._id} >click me to claim</Button> : "already claimed"}</td>
+                                <Button variant="info" href={'/Claim/'+topbarLinks._id} >點我理賠</Button> : <Tag color="cyan">完成理賠</Tag> }</td>
                             </tr>
                             
                         )
                     })
+
+
+
+
+                    // let tmp = response.data.map((topbarLinks, key) => {
+                    //     console.log(`in map ${topbarLinks._id}`)
+                    //     return (
+
+                    //       console.log(topbarLinks)
+                    //         // data.push(topbarLinks._contract)
+                    //         // <tr key={topbarLinks._id}>
+                    //         // <td> {topbarLinks._contract}</td>
+                    //         // <td> {topbarLinks._start}</td>
+                    //         // <td> {topbarLinks._due}</td>
+                    //         // <td> {topbarLinks._action == 0 ? 
+                    //         //     <Button variant="info" href={'/Claim/'+topbarLinks._id} >點我理賠</Button> : <Tag color="cyan">完成理賠</Tag> }</td>
+                    //         // </tr>
+                            
+                    //     )
+                    // })
+
 
                     self.setState({my_Constract: tmp});
                     
@@ -89,20 +194,29 @@ class MyContract extends Component{
 
     render(){
         console.log(`hii ${this.state.my_Constract}`)
-        const numbers = [1, 2, 3, 4, 5];
-        const num = numbers.map((number) => <li key={number}>{number}</li> );
+        // const numbers = [1, 2, 3, 4, 5];
+        // const num = numbers.map((number) => <li key={number}>{number}</li> );
         return (
             <div>
                 <NavBar/>
-                <h2> MyContract addr = {this.state.accounts} </h2>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <Container id="table">               
+
+                <h2 className="tmp"> MyContract addr = {this.state.accounts} </h2>
                 
+
+                <Table columns={columns} dataSource={data} />
+
                 {/* <h2> code : {this.state.my_Constract}</h2> */}
             
-                <Container>
-                    <Table striped bordered hover>
+                    {/* <Table striped bordered hover className="table_contract" thStyle={{ 'background-color': 'red' }} height='120px'>
                         <thead>
                             <tr>
-                                {/* <th>#</th> */}
+                                <th>#</th>
                                 <th>My Contract</th>
                                 <th>Start Date</th>
                                 <th>Due Date</th>
@@ -112,8 +226,12 @@ class MyContract extends Component{
                         <tbody>
                             {this.state.my_Constract}
                         </tbody>
-                    </Table>
-                </Container>
+                    </Table> */}
+
+
+
+                
+              </Container>
 
             </div>
         );
