@@ -30,7 +30,7 @@ body {
 .form-horizontal {
   align-content: center;
   text-align: center;
-  margin-left: 20%;
+  margin-left: 10%;
   margin-bottom: 10%;
   width: 60%;
   /* background-color: red; */
@@ -39,7 +39,7 @@ body {
 .btn {
   width: 100px;
   height: 40px;
-  margin-top: 5%;
+  margin-top: 10%;
 }
 
 @keyframes App-logo-spin {

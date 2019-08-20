@@ -8,12 +8,12 @@ import axios from 'axios';
 import "./App.css";
 import NavBar from "./components/NavBar.js";
 import { Container } from "react-bootstrap";
-import { DatePicker, Radio } from 'antd';
-import moment from "moment";
+import { DatePicker, Col, Steps} from 'antd';
+
 import 'antd/dist/antd.css';
 
 const { RangePicker } = DatePicker;
-
+const { Step } = Steps;
 
 class App extends Component {
 
@@ -127,9 +127,21 @@ class App extends Component {
         return (
             <div>
                 <NavBar/>
-                <h3> my account = {this.state.accounts[0]}</h3>
+                <br/>
+                <br/>
+                <br/>
+                {/* <h3> my account = {this.state.accounts[0]}</h3> */}
                 <Container>
-                <ToList setContract={this.setContract} postRequest={this.postRequest}/>
+                    <Col span={6}>
+                        <Steps direction="vertical" current={1} className="steps">
+                            <Step title={<strong>選擇方案</strong>} description="選擇適合的方案" />
+                            <Step title="填寫基本資料" description="請填寫相關內容" />
+                            <Step title="購買完成" description="感謝支持" />
+                        </Steps>
+                    </Col>
+                    <Col span={18}>
+                        <ToList setContract={this.setContract} postRequest={this.postRequest}/>
+                    </Col>
                 </Container>
             {/* <div className="container">
                 <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
@@ -242,6 +254,7 @@ class ToList extends Component {
             <h2>請選擇日期</h2>
             <RangePicker size="large" onChange={this.onChange} />
             
+            <br/>
             <br/>
             <button type="button" className="btn btn-primary" onClick={this.handleSubmit }> Submit </button>
 

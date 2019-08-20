@@ -5,8 +5,11 @@ import getWeb3 from "../utils/getWeb3";
 import NavBar from "./NavBar.js"
 import axios from "axios"
 import { Container, Spinner, Toast, Button } from "react-bootstrap";
+import { Spin, Steps } from 'antd';
+
 import "./css/Claim.css";
 
+const { Step } = Steps;
 
 class Claim extends Component {
 
@@ -26,7 +29,8 @@ class Claim extends Component {
                 _admission:'',
                 _MMonth:'',
                 _DDate:''
-            }
+            },
+            ui_string:[]
         }
 
         this.setTitle = this.setTitle.bind(this);
@@ -88,6 +92,23 @@ class Claim extends Component {
             // console.log(`aaa is =`)
             // console.log(a.events.UID.returnValues.uid)
             console.log(this.state.uid)
+
+            //set UI
+            const ui = (
+                
+                    <div>
+                    <br/>
+                    <br/>
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h2>hiiiiiii</h2>
+                    </div>
+            )
+
+            this.setState({ui_string: ui})
         }else if(flag == 2){
             //get data from hospitals db
             console.log("in axiox get")
@@ -112,6 +133,19 @@ class Claim extends Component {
                     console.log(self.state._admission)
                     console.log(self.state._MMonth)
                     console.log(self.state._DDate)
+
+                    return(
+                        <div>
+                        <br/>
+                        <br/>
+
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h2>hiiiiiii</h2>
+                        </div>
+                    );
                     
                 })
                 .catch((err, res) => {
@@ -131,11 +165,38 @@ class Claim extends Component {
                                     console.log(result)
                                     this.setState({flag: 4})
                                     this.setState({if_claim: 1})
+
+                                    return(
+                                        <div>
+                                        <br/>
+                                        <br/>
+
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <h2>hiiiiiii</h2>
+                                        </div>
+                                    );
+
                                 }else{
                                     // console.error(error);
                                     console.log("claim error");
                                     console.log(error);
                                     this.setState({if_claim: 2})
+
+                                    return(
+                                        <div>
+                                        <br/>
+                                        <br/>
+
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <h2>hiiiiiii</h2>
+                                        </div>
+                                    );
                                 }
                             }.bind(this));
             console.log(`is a`)
@@ -151,6 +212,20 @@ class Claim extends Component {
                     // console.log(`Successfully connected to db ${req.data}`)
                     console.log(res)
                     // res.status(200).send(res)
+
+
+                    return(
+                        <div>
+                        <br/>
+                        <br/>
+
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h2>hiiiiiii</h2>
+                        </div>
+                    );
                 
                 })
                 .catch((err, res) => {
@@ -167,21 +242,32 @@ class Claim extends Component {
     setTitle(){
         if(this.state.if_claim == 1){
             return(
-                
+                <div>
                     <p>you got 5 dollars, please check your accounts </p>
+                    <Button variant="success" href="/MyContract"> Back to MyContract </Button>
+                </div>
                 
                 //more details ..
             );
         }else if(this.state.if_claim == 2){
             return(
+                <div>
                 <p>wrong to claim the insurnace, check console.log</p>
+                <Button variant="success" href="/MyContract"> Back to MyContract </Button>
+
+                </div>
             );
         }else if(this.state.if_claim == 0){
             return(
                 <div>
-                <p>waitting ...
-                <Spinner animation="border" variant="info" />
-                </p>
+                    <Steps current={0}>
+                        <Step title="Finished" description="This is a description." />
+                        <Step title="In Progress" subTitle="Left 00:00:08" description="This is a description." />
+                        <Step title="Waiting" description="This is a description." />
+                    </Steps>
+                <h3>努力計算中...請稍等...
+                <Spin />
+                </h3>
 
                 {/* <col sm={6}>
                 <Toast>
@@ -206,10 +292,13 @@ class Claim extends Component {
         return (
             <div>
                 <NavBar/>
-                <Container>                        
+                <br/>
+                <br/>
+                <br/>
+                <Container className="container">                        
                         {/* <h2> if_claim</h2> */}
                         {this.setTitle()}
-                        <Button variant="success" href="/MyContract"> Back to MyContract </Button>
+                        {this.state.ui_string}
                 </Container>
             </div>
         );

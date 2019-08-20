@@ -30,14 +30,14 @@ class MyContract extends Component{
                 <br/>
                 <br/>
                 <Container >
-                    <Col span={5}>
+                    <Col span={6}>
                         <Steps direction="vertical" current={0} className="steps">
                             <Step title={<strong>選擇方案</strong>} description="選擇適合的方案" />
                             <Step title="填寫基本資料" description="請填寫相關內容" />
                             <Step title="購買完成" description="感謝支持" />
                         </Steps>
                     </Col>
-                    <Col span={19}>
+                    <Col span={18}>
                         <h2>健康醫療保險方案說明如下 : </h2>
                         <Collapse defaultActiveKey={['1']} onChange={callback} accordion>
                             <Panel header="方案1" key="1">
@@ -82,47 +82,6 @@ class MyContract extends Component{
                         </Collapse>
                     </Col>
                 </Container>
-
-                
-                {/* <Container>
-                    <h2> welcome to Insurance DAPP </h2>
-                    <p> check the Button on the left, and choose ypu favorate contract</p>
-                    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                        <Row>
-                            <Col sm={3}>
-                            <Nav variant="pills" className="flex-column">
-                                <Nav.Item>
-                                    <Nav.Link eventKey="first">Contract 1</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="second">Contract 2</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="third">Contract 3</Nav.Link>
-                                </Nav.Item>
-                            </Nav>
-                            </Col>
-                            <Col sm={9}>
-                            <Tab.Content align="central">
-                                <Tab.Pane eventKey="first">
-                                    <h2> this is Contract 1 ... </h2>
-                                    <Button  href="\App" variant="outline-danger">Choose me</Button>
-                                </Tab.Pane>
-
-                                <Tab.Pane eventKey="second">                            
-                                    <h2> this is Contract 2 ... </h2>
-                                    <Button variant="outline-danger" disabled>Choose me</Button>
-                                </Tab.Pane>
-
-                                <Tab.Pane eventKey="third">                           
-                                    <h2> this is Contract 3 ... </h2>
-                                    <Button variant="outline-danger" disabled>Choose me</Button>
-                                </Tab.Pane>
-                            </Tab.Content>
-                            </Col>
-                        </Row>
-                    </Tab.Container>
-                </Container> */}
             </div>
         );
     }
