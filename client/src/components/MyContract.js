@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import axios from 'axios';
 import NavBar from "./NavBar.js"
 import getWeb3 from "../utils/getWeb3";
-import { Container, Button } from "react-bootstrap";
-import { Table, Tag } from 'antd';
+import { Container } from "react-bootstrap";
+import { Table, Tag, Button } from 'antd';
+import "./css/MyContract.css";
 
 var arr = [];
 const columns_t = [
@@ -35,7 +36,7 @@ const columns_t = [
         render: _state => (
             <span>
             { _state == 0 ? 
-                <Tag color="geekblue" key={_state}>還沒理賠 </Tag> : <Tag color="green" key={_state}>已經理賠 </Tag>
+                <Tag className="tag" color="geekblue" key={_state}>還沒理賠 </Tag> : <Tag  className="tag" color="green" key={_state}>已經理賠 </Tag>
             }</span>
           ),
     },
@@ -46,7 +47,7 @@ const columns_t = [
         render: _action => (
             <span>
             { _action[0] == 0 ? 
-                <Button variant="danger" href={'/Claim/'+_action[1]} >點我理賠</Button> : <p></p>
+                <Button className="btn" size="small" type="danger" href={'/Claim/'+_action[1]} >點我理賠</Button> : <p></p>
             }</span>
           ),
     },
@@ -157,7 +158,6 @@ class MyContract extends Component{
 
 
     render(){
-        console.log(`hii ${this.state.my_Constract}`)
         // const numbers = [1, 2, 3, 4, 5];
         // const num = numbers.map((number) => <li key={number}>{number}</li> );
         return (
@@ -170,7 +170,7 @@ class MyContract extends Component{
                 <br/>
                 <Container id="table">               
 
-                <h2 className="tmp"> MyContract addr = {this.state.accounts} </h2>
+                <h3> MyContract addr = {this.state.accounts} </h3>
                 <Table className="table_contract align:center fontSize:'50px' " columns={columns_t} dataSource={arr} />
             
                     {/* <Table striped bordered hover className="table_contract" thStyle={{ 'background-color': 'red' }} height='120px'>

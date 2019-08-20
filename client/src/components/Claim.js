@@ -5,6 +5,7 @@ import getWeb3 from "../utils/getWeb3";
 import NavBar from "./NavBar.js"
 import axios from "axios"
 import { Container, Spinner, Toast, Button } from "react-bootstrap";
+import "./css/Claim.css";
 
 
 class Claim extends Component {
@@ -55,9 +56,6 @@ class Claim extends Component {
                 this.setState({ web3, accounts, contract: instance});
                 this.setState({ flag: 1})
             }
-
-
-            
 
         } catch (error) {
             // Catch any errors for any of the above operations.
