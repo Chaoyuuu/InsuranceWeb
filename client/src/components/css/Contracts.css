@@ -8,9 +8,9 @@ p {
 }
 
 h3 {
-    font-weight: 400;
-    text-align: left；
-    /* margin-bottom: -0.1%; */
+    font-weight: 550;
+    text-align: left;
+    margin-top: 2%;
     /* color: blue; */
 }
 
@@ -25,5 +25,5 @@ h3 {
 }
 
 .collapse {
-    text-align: center;
+    width: 80%;
 }

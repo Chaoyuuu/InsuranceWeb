@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NavBar from "./NavBar.js"
 import { Container, Button} from "react-bootstrap";
-import { Collapse, Steps, Col} from 'antd';
+import { Collapse, Steps, Col, Icon} from 'antd';
 import "./css/Contracts.css";
 
 const { Step } = Steps;
@@ -41,7 +41,7 @@ class MyContract extends Component{
                         <h2>健康醫療保險方案說明如下 : </h2>
                         <Collapse defaultActiveKey={['1']} onChange={callback} accordion>
                             <Panel header="方案1" key="1">
-                                <h3>承保年齡</h3>
+                            <h3>承保年齡</h3>
                                 <p>0歲至繳費期滿不超過70歲</p>
 
                                 <h3>商品特色</h3>
