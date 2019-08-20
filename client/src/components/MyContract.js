@@ -36,7 +36,7 @@ const columns_t = [
         render: _state => (
             <span>
             { _state == 0 ? 
-                <Tag className="tag" color="geekblue" key={_state}>還沒理賠 </Tag> : <Tag  className="tag" color="green" key={_state}>已經理賠 </Tag>
+                <Tag className="tag" color="geekblue" key={_state}>還未理賠 </Tag> : <Tag  className="tag" color="green" key={_state}>完成理賠 </Tag>
             }</span>
           ),
     },

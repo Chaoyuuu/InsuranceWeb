@@ -11,4 +11,36 @@ body {
 
 h3 {
     text-align: center;
+    margin-top: 100px;
+}
+
+.btn_M {
+    font-size: 17px;
+    background-color: #48C9B0;
+    border-color:#18A488;
+}
+
+.btn_M:hover {
+    font-size: 17px;
+    background-color: #18A488;
+    border-color: #18A488;
+    /* color:#117864  ; */
+}
+
+.btn_C {
+    
+    font-size: 17px;
+    background-color:#F5B041;
+    border-color: #F99027;
+}
+
+.btn_C:hover  {
+    
+    font-size: 17px;
+    background-color:#F99027 ;
+    border-color: #F99027;
+}
+
+.result {
+    margin-top: 100px;
 }

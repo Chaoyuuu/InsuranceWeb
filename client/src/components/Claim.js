@@ -4,12 +4,14 @@ import SimpleStorageContract from "../contracts/Insurance.json";
 import getWeb3 from "../utils/getWeb3";
 import NavBar from "./NavBar.js"
 import axios from "axios"
-import { Container, Spinner, Toast, Button } from "react-bootstrap";
-import { Spin, Steps } from 'antd';
+import { Container, Button } from "react-bootstrap";
+import { Spin, Steps, Result, Icon } from 'antd';
 
 import "./css/Claim.css";
 
 const { Step } = Steps;
+
+
 
 class Claim extends Component {
 
@@ -30,7 +32,7 @@ class Claim extends Component {
                 _MMonth:'',
                 _DDate:''
             },
-            ui_string:[]
+            step_state:'0'
         }
 
         this.setTitle = this.setTitle.bind(this);
@@ -88,30 +90,15 @@ class Claim extends Component {
                                 }
                             }.bind(this));
 
-            this.setState({flag: 2, uid: a.events.UID.returnValues.uid})
+            this.setState({flag: 2, uid: a.events.UID.returnValues.uid, step_state: 1})
             // console.log(`aaa is =`)
             // console.log(a.events.UID.returnValues.uid)
             console.log(this.state.uid)
 
-            //set UI
-            const ui = (
-                
-                    <div>
-                    <br/>
-                    <br/>
-
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <h2>hiiiiiii</h2>
-                    </div>
-            )
-
-            this.setState({ui_string: ui})
         }else if(flag == 2){
             //get data from hospitals db
             console.log("in axiox get")
+            
             var self = this
             axios.get('http://localhost:5000/api/hospitals/'+this.state.uid)
                 .then(function(response) {
@@ -125,28 +112,15 @@ class Claim extends Component {
                         _admission: output._admission,
                         _MMonth: output._date.substring(0,2),
                         _DDate: output._date.substring(3,5),
-                        flag: 3
+                        flag: 3,
+                        step_state: 2
                     })
 
                     console.log(self.state._emergency)
                     console.log(self.state._surgery)
                     console.log(self.state._admission)
                     console.log(self.state._MMonth)
-                    console.log(self.state._DDate)
-
-                    return(
-                        <div>
-                        <br/>
-                        <br/>
-
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <h2>hiiiiiii</h2>
-                        </div>
-                    );
-                    
+                    console.log(self.state._DDate)                    
                 })
                 .catch((err, res) => {
                     console.log(`Not connected to db in put${err}`)
@@ -154,6 +128,7 @@ class Claim extends Component {
         }else if(flag == 3){
             //claim contract in blockchain
             console.log("in claim in block chain")
+            
             const a = await contract.methods.getDocument(
                                                 this.state._emergency, 
                                                 this.state._surgery, 
@@ -163,40 +138,15 @@ class Claim extends Component {
                                 if(!error){
                                     console.log("claim success")
                                     console.log(result)
-                                    this.setState({flag: 4})
-                                    this.setState({if_claim: 1})
-
-                                    return(
-                                        <div>
-                                        <br/>
-                                        <br/>
-
-                                        <br/>
-                                        <br/>
-                                        <br/>
-                                        <br/>
-                                        <h2>hiiiiiii</h2>
-                                        </div>
-                                    );
-
+                                    this.setState({flag: 4,
+                                        if_claim: 1,
+                                        step_state: 3
+                                     })
                                 }else{
                                     // console.error(error);
                                     console.log("claim error");
                                     console.log(error);
                                     this.setState({if_claim: 2})
-
-                                    return(
-                                        <div>
-                                        <br/>
-                                        <br/>
-
-                                        <br/>
-                                        <br/>
-                                        <br/>
-                                        <br/>
-                                        <h2>hiiiiiii</h2>
-                                        </div>
-                                    );
                                 }
                             }.bind(this));
             console.log(`is a`)
@@ -213,19 +163,6 @@ class Claim extends Component {
                     console.log(res)
                     // res.status(200).send(res)
 
-
-                    return(
-                        <div>
-                        <br/>
-                        <br/>
-
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <h2>hiiiiiii</h2>
-                        </div>
-                    );
                 
                 })
                 .catch((err, res) => {
@@ -243,8 +180,15 @@ class Claim extends Component {
         if(this.state.if_claim == 1){
             return(
                 <div>
-                    <p>you got 5 dollars, please check your accounts </p>
-                    <Button variant="success" href="/MyContract"> Back to MyContract </Button>
+                    <Result className="result"
+                        icon={<Icon type="smile" theme="twoTone" twoToneColor="#F4D03F"/>}
+                        title="交易完成!"
+                        subTitle="理賠成功，請至帳戶查看金額."
+                        extra={[
+                        <Button key="1" className="btn_M" variant="success" href="/MyContract"> 查看合約 </Button>,
+                        <Button key="2" className="btn_C" variant="success" href="/Contracts">購買保險</Button>
+                        ]}
+                    />
                 </div>
                 
                 //more details ..
@@ -252,33 +196,22 @@ class Claim extends Component {
         }else if(this.state.if_claim == 2){
             return(
                 <div>
-                <p>wrong to claim the insurnace, check console.log</p>
-                <Button variant="success" href="/MyContract"> Back to MyContract </Button>
-
+                 <Result className="result"
+                    status="warning"
+                    title="很抱歉，理賠申請失敗"
+                    subTitle="正在尋找失敗原因..."
+                    extra={
+                    <Button key="1" variant="danger" href="/MyContract"> 查看合約 </Button>
+                    }
+                />
                 </div>
             );
         }else if(this.state.if_claim == 0){
             return(
                 <div>
-                    <Steps current={0}>
-                        <Step title="Finished" description="This is a description." />
-                        <Step title="In Progress" subTitle="Left 00:00:08" description="This is a description." />
-                        <Step title="Waiting" description="This is a description." />
-                    </Steps>
-                <h3>努力計算中...請稍等...
-                <Spin />
-                </h3>
-
-                {/* <col sm={6}>
-                <Toast>
-                    <Toast.Header>
-                    <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-                    <strong className="mr-auto">Bootstrap</strong>
-                    <small>just now</small>
-                    </Toast.Header>
-                    <Toast.Body>See? Just like this.</Toast.Body>
-                </Toast>
-                </col> */}
+                    <h3>努力計算中...請稍等...   
+                    <Spin />
+                    </h3>
                 </div>
                 
             );
@@ -296,9 +229,15 @@ class Claim extends Component {
                 <br/>
                 <br/>
                 <Container className="container">                        
-                        {/* <h2> if_claim</h2> */}
-                        {this.setTitle()}
-                        {this.state.ui_string}
+                    {/* <h2> if_claim</h2> */}
+                    <Steps current={parseInt(this.state.step_state)}>
+                        <Step title="準備中" description="資料連線" />
+                        <Step title="載入第三方資料庫" description="取得醫院資料" />
+                        <Step title="計算理賠" description="智能合約進行計算" />
+                        <Step title="理賠成功" description="請至帳戶查看金額" />
+                    </Steps> 
+                    {this.setTitle()}
+
                 </Container>
             </div>
         );
