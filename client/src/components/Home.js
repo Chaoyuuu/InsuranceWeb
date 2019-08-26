@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import "./css/Home.css";
 import NavBar from "./NavBar.js"
+import HowToUse from "./HowToUse.js"
 import { ParallaxProvider } from 'react-skrollr'
 import { Parallax, Background } from 'react-parallax';
 
-import { Tab, Tabs, Button, Container, Carousel} from "react-bootstrap";
+import { Tab, Tabs, Button, Container, Carousel } from "react-bootstrap";
 import { Card, Row, Col, Media, Jumbotron, Image, Tooltip, OverlayTrigger, ButtonToolbar} from "react-bootstrap";
+
 
 const styles = {
     fontFamily: "sans-serif",
@@ -92,10 +94,14 @@ class Home extends Component {
                 </Carousel>
 
 
+                {/* <HowToUse/> */}
+
                 
                 {/* About */}
                 <Jumbotron fluid id="about" >
                     <Container className="about-container">
+                        
+                    <div>Icons made by <a href="https://www.flaticon.com/authors/monkik" title="monkik">monkik</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
                         <Row> 
                             <Col className="col-md-offset-12 col-md-12 titlee">
                                 <h2> What is Insurance Dapp </h2>
@@ -146,50 +152,82 @@ class Home extends Component {
                 </Parallax> */}
             
             {/* how to use */}
-            <Carousel id="manual">
-                    <Carousel.Item >
-                        <img
-                        className="w-100"
-                        src="https://i.imgur.com/d0TLPFM.png"
-                        alt="Third slide-clock"
-                        // width={1600}
-                        // height={870}
-                        />
-                        <Carousel.Caption className="carousel-content">
+            <Container id="manual">
+                <Row> 
+                    <Col className="col-md-offset-12 col-md-12 tilte">
+                        <h2> Before </h2>
+                        <div className="heading-line"></div>
+                    </Col>
+                </Row>
 
-                            <h3>Blockchain Application</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>  
-                        </Carousel.Caption>
-                    </Carousel.Item>
+                <Row className="row">
+                    <Col xs={6}>
+                        <Image className="manual-img"
+                                src="https://i.imgur.com/VEHkUj9.png/" 
+                                height={300} 
+                                weight={300} 
+                                rounded />
+                    </Col >
+                    <Col xs={6} className="col-w">
+                        <h3>問題一</h3>
+                        <p>有中間經理人<br/>
+                            1. 投保人不會接觸保險公司與真實的合約<br/>
+                            2. 有任何狀況都與經紀人溝通<br/>
+                            3. 不對稱的資訊<br/>
+                        </p>
+                    </Col>
+                </Row>
 
-                    <Carousel.Item>
-                        <img
-                        className="w-100"
-                        src="https://i.imgur.com/d0TLPFM.png"
-                        alt="Third slide-clock"
-                        // width={1600}
-                        // height={870}
-                        />
-                        <Carousel.Caption className="carousel-content">
-                        <h3>Insurance</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    
-                    <Carousel.Item>
-                        <img
-                        className="w-100"
-                        src="https://i.imgur.com/d0TLPFM.png"
-                        alt="Third slide-clock"
-                        // width={1600}
-                        // height={870}
-                        />
-                        <Carousel.Caption className="carousel-content">
-                        <h3>快速交易</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                </Carousel>
+                <Row className="row">
+                    <Col xs={6}>
+                        <Image className="manual-img" 
+                                src="https://i.imgur.com/VW7xBfw.png" 
+                                height={300} 
+                                weight={300} 
+                                rounded />
+                    </Col >
+                    <Col xs={6} className="col-w">
+                        <h3>問題二</h3>
+                        <p>繁複的理賠程序<br/>
+                            1. 投保人需自行準理賠相關文件<br/>
+                            2. 等待保險公司漫長的理賠程序<br/>
+                            3. 有心人士有機可乘<br/>
+                        </p>
+                    </Col>
+                </Row>
+
+                <Row> 
+                    <Col className="col-md-offset-12 col-md-12 tilte">
+                        <h2> After </h2>
+                        <div className="heading-line"></div>
+                    </Col>
+                </Row>
+
+                <Row className="row justify-content-md-center">    
+                    <Image className="manual-img"
+                            src="https://i.imgur.com/MoraZPo.png" 
+                            height={400} 
+                            weight={400} 
+                            rounded />
+                </Row>
+
+                <Row className="row justify-content-md-center" >
+                    <p>搭建區塊鏈與智能合約<br/>
+                        1. 由智能合約計算理賠結果<br/>
+                        2. 區塊鏈保存交易紀錄<br/>
+                        3. 縮短流程、節省時間<br/>
+                        4. 過程透明
+                    </p>
+                </Row>
+            </Container>
+
+
+            <Parallax bgImage="https://i.imgur.com/aU2nkXT.jpg" strength={300}>
+                <div style={{ height: 300 }}>
+                <div style={insideStyles}>Dynamic Blur</div>
+                </div>
+            </Parallax>
+            
 
                 {/* tool */}
                 <Container id="tool" background-color="beige">
@@ -245,11 +283,7 @@ class Home extends Component {
                 </Container>
 
 
-                <Parallax bgImage="https://i.imgur.com/aU2nkXT.jpg" strength={300}>
-                    <div style={{ height: 300 }}>
-                        <div style={insideStyles}>Dynamic Blur</div>
-                        </div>
-                </Parallax>
+               
 
                 {/* about_me */}
                 <Jumbotron fluid id="about_me">
