@@ -27,8 +27,6 @@ class MyContract extends Component{
                 <br/>
                 <br/>
                 <br/>
-                <br/>
-                <br/>
                 <Container >
                     <Col span={6}>
                         <Steps direction="vertical" current={0} className="steps">
@@ -39,7 +37,7 @@ class MyContract extends Component{
                     </Col>
                     <Col span={18}>
                         <h2>健康醫療保險方案說明如下 : </h2>
-                        <Collapse className="collapse" defaultActiveKey={['1']} onChange={callback} accordion>
+                        <Collapse justify-content-md-center defaultActiveKey={['1']} onChange={callback} accordion>
                             <Panel header="方案1" key="1">
                             <h3>承保年齡</h3>
                                 <p>0歲至繳費期滿不超過70歲</p>

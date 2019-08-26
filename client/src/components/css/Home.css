@@ -132,14 +132,14 @@ body {
 }
 
 /*-------------------------
-        manual-carousel
+        Before-carousel
 -------------------------*/
 
-#manual {
+#Before {
     margin-bottom: 100px;
 }
 
-#manual .tilte h2 {
+#Before .tilte h2 {
     color: #333;
     font-weight: bolder;
     font-size: 36px;
@@ -149,7 +149,7 @@ body {
     /* background-color: aqua; */
 }
 
-#manual .heading-line {
+#Before .heading-line {
 	margin:0 auto;
 	display: block;
 	height: 1px;
@@ -159,36 +159,96 @@ body {
 	margin-bottom: 20px;
 }
 
-#manual p {
+#Before p {
     color: #34495E;
     font-size: 20px;
     font-weight: 700;
 }
 
-#manual h3 {
+#Before h3 {
     color: #34495E;
-    align-items: center;
-    position: relative;
+    /* align-items: center; */
+    /* position: relative; */
     font-size: 20px;
     font-weight: 100;
 }
 
-#manual .row{
+#Before .row{
     margin-bottom: 20px;
-    /* text-align: center; */
 }
 
-#manual .manual-img{
+#Before .manual-img{
     text-align: center;
 }
 
-#manual .col-w{
+#Before .col-w{
     margin-top: 50px;
 }
 
+/*-------------------------
+        After-container
+-------------------------*/
 
+#After {
+    margin-bottom: 100px;
+    background-color:#F2F3F4;
+}
 
+#After .tilte h2 {
+    color: #333;
+    font-weight: bolder;
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 5%;
+    /* background-color: aqua; */
+}
 
+#After .heading-line {
+	margin:0 auto;
+	display: block;
+	height: 1px;
+	width: 200px;
+	background: #333;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+#After .row-0 {
+    margin-top: 100px;
+}
+
+#After .img-1 {
+    margin-top: -230px;
+    margin-left: 15px;
+}
+
+#After .img-2 {
+    margin-top: -770px;
+}
+
+#After .img-3 {
+    margin-top: -230px;
+    margin-right: 80px;
+}
+
+#After p {
+    color: #34495E;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#After h3 {
+    color: #34495E;
+    /* align-items: center; */
+    /* position: relative; */
+    font-size: 20px;
+    font-weight: 100;
+}
+
+#After .row{
+    margin-bottom: 20px;
+}
 
 
 /*-------------------------

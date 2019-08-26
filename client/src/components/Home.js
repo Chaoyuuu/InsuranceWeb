@@ -1,28 +1,15 @@
 import React, { Component } from "react";
 import "./css/Home.css";
 import NavBar from "./NavBar.js"
-import HowToUse from "./HowToUse.js"
-import { ParallaxProvider } from 'react-skrollr'
-import { Parallax, Background } from 'react-parallax';
+import ParallaxBar from "./ParallaxBar.js"
+import { ParallaxProvider, Parallax } from 'react-skrollr'
+// import { Parallax, Background } from 'react-parallax';
 
 import { Tab, Tabs, Button, Container, Carousel } from "react-bootstrap";
 import { Card, Row, Col, Media, Jumbotron, Image, Tooltip, OverlayTrigger, ButtonToolbar} from "react-bootstrap";
 
 
-const styles = {
-    fontFamily: "sans-serif",
-    textAlign: "center"
-  };
-  const insideStyles = {
-    background: "white",
-    padding: 20,
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%,-50%)"
-  };
-  const image1 =
-  "https://i.imgur.com/aU2nkXT.jpg";
+
     
 class Home extends Component {
     constructor(props){
@@ -132,27 +119,27 @@ class Home extends Component {
                 </Jumbotron>
 
 
-                <Parallax bgImage="https://i.imgur.com/aU2nkXT.jpg" strength={300}>
-                    <div style={{ height: 300 }}>
-                        <div style={insideStyles}>Dynamic Blur</div>
-                        </div>
-                </Parallax>
+                <ParallaxBar/>
                 
                 {/* <Parallax
-                    // data={{
-                    // 'data-center-center': 'opacity: 1;',
-                    // 'data-bottom-top': 'opacity: 0;'
-                    // }}
                     data={{
-                        'data-top': 'background-color:rgb(0,0,255);  ',
-                        'data-bottom-top': 'background-color:rgb(255,0,0);'
-                        }}
+                    'data-center-center': 'opacity: 1; transform:translateX(500px)',
+                    'data-bottom-top': 'opacity: 0; transform:translateX(-200px)',
+                    // 'data-top': 'color:rgb(0,0,255);  ',
+                    // 'data-_foobar':"left:0%;"
+                    'transform': 'translateX(-100px)', 'margin': '10px auto'
+                    // 'data-top': 'opacity: 0;'
+                    }}
+                    // data={{
+                    //     'data-top': 'background-color:rgb(0,0,255);  ',
+                    //     'data-bottom-top': 'background-color:rgb(255,0,0);'
+                    //     }}
                 >
                     <div>hiii</div>
                 </Parallax> */}
             
             {/* how to use */}
-            <Container id="manual">
+            <Container id="Before">
                 <Row> 
                     <Col className="col-md-offset-12 col-md-12 tilte">
                         <h2> Before </h2>
@@ -162,40 +149,55 @@ class Home extends Component {
 
                 <Row className="row">
                     <Col xs={6}>
-                        <Image className="manual-img"
-                                src="https://i.imgur.com/VEHkUj9.png/" 
-                                height={300} 
-                                weight={300} 
-                                rounded />
+                        <Parallax
+                            data={{
+                            'data-center-center': 'opacity: 1; transform:translateX(0px); margin: 10px auto;',
+                            'data-bottom-top': 'opacity: 0; transform:translateX(-200px)',                        
+                            }}>
+                            <Image className="manual-img"
+                                        src="https://i.imgur.com/VEHkUj9.png/" 
+                                        height={300} 
+                                        weight={300} 
+                                        rounded />
+                            <Image className="manual-img" 
+                                    src="https://i.imgur.com/VW7xBfw.png" 
+                                    height={300} 
+                                    weight={300} 
+                                    rounded />
+                    </Parallax>
                     </Col >
                     <Col xs={6} className="col-w">
-                        <h3>問題一</h3>
-                        <p>有中間經理人<br/>
-                            1. 投保人不會接觸保險公司與真實的合約<br/>
-                            2. 有任何狀況都與經紀人溝通<br/>
-                            3. 不對稱的資訊<br/>
-                        </p>
+                        <Parallax
+                                data={{
+                                'data-center-center': 'opacity: 1;',
+                                'data-bottom-top': 'opacity: 0;',                        
+                                }}>
+                       
+                            <h3>問題一</h3>
+                            <p>有中間經理人<br/>
+                                1. 投保人不會接觸保險公司與真實的合約<br/>
+                                2. 有任何狀況都與經紀人溝通<br/>
+                                3. 不對稱的資訊<br/>
+                            </p>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <h3>問題二</h3>
+                            <p>繁複的理賠程序<br/>
+                                1. 投保人需自行準理賠相關文件<br/>
+                                2. 等待保險公司漫長的理賠程序<br/>
+                                3. 有心人士有機可乘<br/>
+                            </p>
+                        </Parallax>
                     </Col>
                 </Row>
+            </Container>
 
-                <Row className="row">
-                    <Col xs={6}>
-                        <Image className="manual-img" 
-                                src="https://i.imgur.com/VW7xBfw.png" 
-                                height={300} 
-                                weight={300} 
-                                rounded />
-                    </Col >
-                    <Col xs={6} className="col-w">
-                        <h3>問題二</h3>
-                        <p>繁複的理賠程序<br/>
-                            1. 投保人需自行準理賠相關文件<br/>
-                            2. 等待保險公司漫長的理賠程序<br/>
-                            3. 有心人士有機可乘<br/>
-                        </p>
-                    </Col>
-                </Row>
-
+            <Jumbotron fluid id="After">
+            <Container >
                 <Row> 
                     <Col className="col-md-offset-12 col-md-12 tilte">
                         <h2> After </h2>
@@ -203,12 +205,63 @@ class Home extends Component {
                     </Col>
                 </Row>
 
-                <Row className="row justify-content-md-center">    
-                    <Image className="manual-img"
-                            src="https://i.imgur.com/MoraZPo.png" 
-                            height={400} 
-                            weight={400} 
-                            rounded />
+                <Row className="row-0 justify-content-md-center">    
+                <Parallax
+                    data={{
+                    'data-center-center': 'opacity: 1; transform:rotate(0deg); ',
+                    'data-bottom-top': 'opacity: 0; transform:rotate(180deg); ',                        
+                    }}>
+                    <Image 
+                        src="https://i.imgur.com/9vXK5rz.png" 
+                        height={350} 
+                        weight={350} 
+                        rounded />
+                </Parallax>
+                </Row>
+
+                <Row className="row justify-content-md-center">
+                   <Col md={{ span: 2, offset: 0 }}>
+                        <Parallax
+                        data={{
+                        'data--100-bottom': 'opacity: 1; transform:scale(1);',
+                        'data-bottom-top': 'opacity: 0; transform:scale(0);',                        
+                        }}>
+                            <Image
+                                className="img-1"
+                                src="https://i.imgur.com/Ia24HDD.png" 
+                                height={170} 
+                                weight={170} 
+                                roundedCircle />
+                        </Parallax>
+                    </Col>
+                    <Col md={2}>
+                        <Parallax
+                        data={{
+                        'data--100-bottom': 'opacity: 1; transform:scale(1); ',
+                        'data-bottom-top': 'opacity: 0; transform:scale(0);',                        
+                        }}>
+                            <Image
+                                className="img-2"
+                                src="https://i.imgur.com/3chzft8.png" 
+                                height={170} 
+                                weight={170} 
+                                roundedCircle />
+                        </Parallax>
+                    </Col>
+                    <Col md={2}>
+                        <Parallax
+                        data={{
+                        'data--100-bottom': 'opacity: 1; transform:scale(1);',
+                        'data-bottom-top': 'opacity: 0; transform:scale(0); ',                        
+                        }}>
+                            <Image
+                                className="img-3"
+                                src="https://i.imgur.com/UJLeI89.png" 
+                                height={170} 
+                                weight={170} 
+                                roundedCircle />
+                        </Parallax>
+                    </Col>
                 </Row>
 
                 <Row className="row justify-content-md-center" >
@@ -220,14 +273,10 @@ class Home extends Component {
                     </p>
                 </Row>
             </Container>
+            </Jumbotron>
 
 
-            <Parallax bgImage="https://i.imgur.com/aU2nkXT.jpg" strength={300}>
-                <div style={{ height: 300 }}>
-                <div style={insideStyles}>Dynamic Blur</div>
-                </div>
-            </Parallax>
-            
+            <ParallaxBar/>
 
                 {/* tool */}
                 <Container id="tool" background-color="beige">
