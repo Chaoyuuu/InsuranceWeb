@@ -181,6 +181,10 @@ body {
     text-align: center;
 }
 
+#Before .img-2{
+    margin-left: 30px;
+}
+
 #Before .col-w{
     margin-top: 50px;
 }
@@ -219,7 +223,7 @@ body {
 }
 
 #After .img-1 {
-    margin-top: -230px;
+    margin-top: -250px;
     margin-left: 15px;
 }
 
@@ -228,7 +232,7 @@ body {
 }
 
 #After .img-3 {
-    margin-top: -230px;
+    margin-top: -250px;
     margin-right: 80px;
 }
 

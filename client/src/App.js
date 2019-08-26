@@ -8,7 +8,7 @@ import axios from 'axios';
 import "./App.css";
 import NavBar from "./components/NavBar.js";
 import { Container } from "react-bootstrap";
-import { DatePicker, Col, Steps} from 'antd';
+import { DatePicker, Col, notification, Steps} from 'antd';
 
 import 'antd/dist/antd.css';
 
@@ -23,7 +23,8 @@ class App extends Component {
             storageValue: null,
             web3: null,
             accounts: null,
-            contract: null
+            contract: null,
+            if_true: false,
         }
         this.setContract = this.setContract.bind(this)
         this.postRequest = this.postRequest.bind(this)
@@ -83,6 +84,15 @@ class App extends Component {
         const output = await contract.methods.SetDetail(content1, content2, content3, content4, content5).send({ from: accounts[0] });
         console.log("output")
         console.log(output)
+        console.log(output.blockHash)
+        console.log(output.transactionHash)
+        console.log(output.blockNumber)
+        console.log(output.status)
+
+        this.setState({if_true: output.status})
+        if(this.state.if_true){
+            console.log("niceee")
+        }
         // Get the value from the contract to prove it worked.
         // const response = await contract.methods.get().call();
 
@@ -167,6 +177,14 @@ class App extends Component {
     } 
 }
 
+// const openNotificationWithIcon = type => {
+//     notification['waring']({
+//       message: 'Notification Title',
+//       description:
+//         'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+//     });
+//   };
+
 class ToList extends Component {
     constructor(props) {
         super(props);    
@@ -179,12 +197,24 @@ class ToList extends Component {
             startD:'', 
             endM:'', 
             endD:'',
+
+            notify_flag: 1,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.openNotification = this.openNotification.bind(this);
     }
 
+    openNotification = ()=> {
+        notification.open({
+          message: 'Notification Title',
+          description:
+            'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+        });
+      };
+
+      
     handleChange(e) {
         let changeName = e.target.name
         console.log(changeName)
@@ -204,11 +234,10 @@ class ToList extends Component {
         console.log(this.state.endM)
         console.log(this.state.endD)
 
-
-        // this.props.setContract(this.task_x.value, this.task_y.value)
-        // this.props.setContract(this.state.name, this.state.birth, this.state.ID, this.state.sDate, this.state.eDate)
         this.props.setContract(this.state.startM, this.state.startD, this.state.endM, this.state.endD, this.state.ID)
         this.props.postRequest(this.state.startM, this.state.startD, this.state.endM, this.state.endD)
+
+        this.openNotification();
     }
 
     onChange = (value, dateString) => {
@@ -256,7 +285,8 @@ class ToList extends Component {
             
             <br/>
             <br/>
-            <button type="button" className="btn btn-primary" onClick={this.handleSubmit }> Submit </button>
+            <button type="button" className="btn btn-primary" 
+                    onClick={this.handleSubmit}> Submit </button>
 
             {/* <SetValue a={this.state}/> */}
         </div>

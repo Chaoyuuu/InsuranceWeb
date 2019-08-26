@@ -151,7 +151,7 @@ class Home extends Component {
                     <Col xs={6}>
                         <Parallax
                             data={{
-                            'data-center-center': 'opacity: 1; transform:translateX(0px); margin: 10px auto;',
+                            'data--100-bottom': 'opacity: 1; transform:translateX(0px); margin: 10px auto;',
                             'data-bottom-top': 'opacity: 0; transform:translateX(-200px)',                        
                             }}>
                             <Image className="manual-img"
@@ -159,7 +159,7 @@ class Home extends Component {
                                         height={300} 
                                         weight={300} 
                                         rounded />
-                            <Image className="manual-img" 
+                            <Image className="manual-img img-2" 
                                     src="https://i.imgur.com/VW7xBfw.png" 
                                     height={300} 
                                     weight={300} 
@@ -223,42 +223,42 @@ class Home extends Component {
                    <Col md={{ span: 2, offset: 0 }}>
                         <Parallax
                         data={{
-                        'data--100-bottom': 'opacity: 1; transform:scale(1);',
-                        'data-bottom-top': 'opacity: 0; transform:scale(0);',                        
+                        'data--100-bottom': 'opacity: 1; transform:rotate(0deg);',
+                        'data-bottom': 'opacity: 0; transform:rotate(90deg);',                        
                         }}>
                             <Image
                                 className="img-1"
-                                src="https://i.imgur.com/Ia24HDD.png" 
-                                height={170} 
-                                weight={170} 
+                                src="https://i.imgur.com/3chzft8.png"
+                                height={160} 
+                                weight={160} 
                                 roundedCircle />
                         </Parallax>
                     </Col>
                     <Col md={2}>
                         <Parallax
                         data={{
-                        'data--100-bottom': 'opacity: 1; transform:scale(1); ',
-                        'data-bottom-top': 'opacity: 0; transform:scale(0);',                        
+                        'data--100-bottom': 'opacity: 1; transform:rotate(0deg); ',
+                        'data-bottom': 'opacity: 0; transform:rotate(90deg);',                        
                         }}>
                             <Image
                                 className="img-2"
-                                src="https://i.imgur.com/3chzft8.png" 
-                                height={170} 
-                                weight={170} 
+                                src="https://i.imgur.com/Ia24HDD.png" 
+                                height={160} 
+                                weight={160} 
                                 roundedCircle />
                         </Parallax>
                     </Col>
                     <Col md={2}>
                         <Parallax
                         data={{
-                        'data--100-bottom': 'opacity: 1; transform:scale(1);',
-                        'data-bottom-top': 'opacity: 0; transform:scale(0); ',                        
+                        'data--100-bottom': 'opacity: 1; transform:rotate(0deg);',
+                        'data-bottom': 'opacity: 0; transform:rotate(90deg); ',                        
                         }}>
                             <Image
                                 className="img-3"
                                 src="https://i.imgur.com/UJLeI89.png" 
-                                height={170} 
-                                weight={170} 
+                                height={160} 
+                                weight={160} 
                                 roundedCircle />
                         </Parallax>
                     </Col>
