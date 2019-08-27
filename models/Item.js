@@ -29,6 +29,18 @@ const ItemSchema = new Schema({
         type: String,
     },
 
+    _blockhash: {
+        type: String,
+    },
+
+    _blocknum: {
+        type: String,
+    },
+
+    _txhash: {
+        type: String,
+    },
+
     date: {
         type: Date,
         default: Date.now

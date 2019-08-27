@@ -55,6 +55,9 @@ router.post('/add', (req, res) => {
         _start: req.body._start,
         _due: req.body._due,
         _action: req.body._action,
+        _blockhash: req.body._blockhash,
+        _blocknum: req.body._blocknum,
+        _txhash: req.body._txhash,
     });
 
     newItem.save().then(item => res.json(item));

@@ -4,8 +4,10 @@ import { Navbar, Nav, NavDropdown} from "react-bootstrap";
 class NavBar extends Component {
 
     style = {
-        backgroundColor: "#F4D03F",
+        backgroundColor: "#AED6F1",
         'fontSize': '18px',
+        // "#F4D03F"
+        // #3498DB
         
     };
 

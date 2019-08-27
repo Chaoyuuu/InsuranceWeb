@@ -8,7 +8,7 @@ import axios from 'axios';
 import "./App.css";
 import NavBar from "./components/NavBar.js";
 import { Container } from "react-bootstrap";
-import { DatePicker, Col, notification, Steps} from 'antd';
+import { DatePicker, Col, notification, Steps, Icon} from 'antd';
 
 import 'antd/dist/antd.css';
 
@@ -92,6 +92,13 @@ class App extends Component {
         this.setState({if_true: output.status})
         if(this.state.if_true){
             console.log("niceee")
+
+            let s = content1 + '/' + content2
+            let e = content3 + '/' + content4
+
+            console.log(`s:${s}, e:${e}`)
+
+            this.postRequest(s, e, output.blockHash, output.blockNumber, output.transactionHash);
         }
         // Get the value from the contract to prove it worked.
         // const response = await contract.methods.get().call();
@@ -100,22 +107,18 @@ class App extends Component {
         // this.setState({ storageValue: output });
     }
 
-    postRequest = async (content1, content2, content3, content4) =>{
-
-        let s = content1 + '/' + content2
-        let e = content3 + '/' + content4
-
-        console.log(`s:${s}, e:${e}`)
-
+    postRequest = async (start, end, blockHash, blockNumber, transactionHash) =>{
         const user = {
             // name: this.state.input,
             _addr: this.state.accounts[0],
             _contract: 'contract1',
-            _start: s,
-            _due: e,
-            _action: '0'
+            _start: start,
+            _due: end,
+            _action: '0',
+            _blockhash: blockHash,
+            _blocknum: blockNumber,
+            _txhash: transactionHash,
         };
-
 
         axios.post('http://localhost:5000/api/items/add', user)
             .then((req, res) => {
@@ -177,14 +180,6 @@ class App extends Component {
     } 
 }
 
-// const openNotificationWithIcon = type => {
-//     notification['waring']({
-//       message: 'Notification Title',
-//       description:
-//         'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-//     });
-//   };
-
 class ToList extends Component {
     constructor(props) {
         super(props);    
@@ -208,9 +203,13 @@ class ToList extends Component {
 
     openNotification = ()=> {
         notification.open({
-          message: 'Notification Title',
-          description:
-            'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+            message: '注意',
+            description:
+                '如果頁面沒有跳轉，請確認Metamask的訊息 !',
+            duration: 0,
+            placement: 'bottomRight',
+            icon: <Icon type="exclamation-circle" style={{ color: '#F5B041' }}/>,
+
         });
       };
 
@@ -235,7 +234,7 @@ class ToList extends Component {
         console.log(this.state.endD)
 
         this.props.setContract(this.state.startM, this.state.startD, this.state.endM, this.state.endD, this.state.ID)
-        this.props.postRequest(this.state.startM, this.state.startD, this.state.endM, this.state.endD)
+        // this.props.postRequest(this.state.startM, this.state.startD, this.state.endM, this.state.endD)
 
         this.openNotification();
     }
@@ -286,7 +285,8 @@ class ToList extends Component {
             <br/>
             <br/>
             <button type="button" className="btn btn-primary" 
-                    onClick={this.handleSubmit}> Submit </button>
+            //  onClick={this.openNotification}> Submit </button>
+                 onClick={this.handleSubmit}> Submit </button> 
 
             {/* <SetValue a={this.state}/> */}
         </div>
