@@ -4,11 +4,11 @@ import React, { Component } from "react";
 import SimpleStorageContract from "./contracts/Insurance.json";
 import getWeb3 from "./utils/getWeb3";
 import axios from 'axios';
-
+import moment from 'moment';
 import "./App.css";
 import NavBar from "./components/NavBar.js";
-import { Container } from "react-bootstrap";
-import { DatePicker, Col, notification, Steps, Icon} from 'antd';
+import { Container, Button } from "react-bootstrap";
+import { DatePicker, Col, notification, Steps, Icon, Descriptions} from 'antd';
 
 import 'antd/dist/antd.css';
 
@@ -25,6 +25,13 @@ class App extends Component {
             accounts: null,
             contract: null,
             if_true: false,
+            if_success: false,
+
+            blockHash:'0x123123',
+            blockNumber:'123',
+            txHash:'0x123123',
+            start: '123',
+            end: '123',
         }
         this.setContract = this.setContract.bind(this)
         this.postRequest = this.postRequest.bind(this)
@@ -90,15 +97,17 @@ class App extends Component {
         console.log(output.status)
 
         this.setState({if_true: output.status})
+
         if(this.state.if_true){
             console.log("niceee")
 
             let s = content1 + '/' + content2
             let e = content3 + '/' + content4
-
             console.log(`s:${s}, e:${e}`)
 
             this.postRequest(s, e, output.blockHash, output.blockNumber, output.transactionHash);
+        }else{
+            console.log("error in setContract()")
         }
         // Get the value from the contract to prove it worked.
         // const response = await contract.methods.get().call();
@@ -122,10 +131,9 @@ class App extends Component {
 
         axios.post('http://localhost:5000/api/items/add', user)
             .then((req, res) => {
-                console.log('Successfully connected to db')
                 console.log(`Successfully connected to db ${req.data}`)
-                console.log(res)
-                // res.status(200).send(res)
+                this.setState({if_success: true, blockHash: blockHash, blockNumber: blockNumber, txHash: transactionHash,
+                                start: start, end: end})
               
             })
             .catch((err, res) => {
@@ -144,18 +152,49 @@ class App extends Component {
                 <br/>
                 <br/>
                 {/* <h3> my account = {this.state.accounts[0]}</h3> */}
-                <Container>
-                    <Col span={6}>
-                        <Steps direction="vertical" current={1} className="steps">
-                            <Step title={<strong>選擇方案</strong>} description="選擇適合的方案" />
-                            <Step title="填寫基本資料" description="請填寫相關內容" />
-                            <Step title="購買完成" description="感謝支持" />
-                        </Steps>
-                    </Col>
-                    <Col span={18}>
-                        <ToList setContract={this.setContract} postRequest={this.postRequest}/>
-                    </Col>
-                </Container>
+
+                {this.state.if_success? 
+                    <Container>
+                        <Col span={6}>
+                            <Steps direction="vertical" current={2} className="steps">
+                                <Step title={<strong>選擇方案</strong>} description="選擇適合的方案" />
+                                <Step title="填寫基本資料" description="請填寫相關內容" />
+                                <Step title="購買完成" description="感謝支持" />
+                            </Steps>
+                        </Col>
+                        <Col span={18}>
+                            <h3>交易完成 !</h3>
+                            <Descriptions title="詳細內容如下:" bordered>
+                                <Descriptions.Item label="Account" span={3}>{this.state.accounts}</Descriptions.Item>
+                                <Descriptions.Item label="Usage Time" span={3}>{moment().format('YYYY-MM-DD HH:mm:ss')}</Descriptions.Item>
+                                <Descriptions.Item label="Start Date" >{this.state.start}</Descriptions.Item>
+                                <Descriptions.Item label="Due Date" >{this.state.end}</Descriptions.Item>
+                                <Descriptions.Item label="blockNumber" >{this.state.blockNumber}</Descriptions.Item>
+                                <Descriptions.Item label="blockHash" span={3}>{this.state.blockHash}</Descriptions.Item>
+                                <Descriptions.Item label="txHash"span={3}>{this.state.txHash}</Descriptions.Item>
+                            </Descriptions>
+                            <br/>
+                            <br/>
+                            <Button className="btn_M" variant="success" href="/MyContract"> 查看合約 </Button>
+                            <Button className="btn_C" variant="success" href="/Contracts">購買保險</Button>
+                        </Col>
+                    </Container>
+                    :
+                    <Container>
+                        <Col span={6}>
+                            <Steps direction="vertical" current={1} className="steps">
+                                <Step title={<strong>選擇方案</strong>} description="選擇適合的方案" />
+                                <Step title="填寫基本資料" description="請填寫相關內容" />
+                                <Step title="購買完成" description="感謝支持" />
+                            </Steps>
+                        </Col>
+                        <Col span={18}>
+                            <ToList setContract={this.setContract} postRequest={this.postRequest}/>
+                        </Col>
+
+                        
+                    </Container>
+                }
             {/* <div className="container">
                 <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
                 <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="https://github.com/Chaoyuuu/InsuranceWeb" target="_blank">BlockChain Dapp | Insurance Web</a>
@@ -206,7 +245,7 @@ class ToList extends Component {
             message: '注意',
             description:
                 '如果頁面沒有跳轉，請確認Metamask的訊息 !',
-            duration: 0,
+            duration: 5,
             placement: 'bottomRight',
             icon: <Icon type="exclamation-circle" style={{ color: '#F5B041' }}/>,
 
