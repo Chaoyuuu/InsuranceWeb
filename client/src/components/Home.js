@@ -8,8 +8,9 @@ import useTypewriter from "react-typewriter-hook"
 import { useState, useEffect, useRef } from "react";
 
 
-import { Tab, Tabs, Button, Container, Carousel } from "react-bootstrap";
-import { Card, Row, Col, Media, Jumbotron, Image, Tooltip, OverlayTrigger, ButtonToolbar} from "react-bootstrap";
+import {  Container, Carousel } from "react-bootstrap";
+import {  Row, Col, Media, Jumbotron, Image, Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Button } from 'antd';
 
 
 const MagicOcean = [
@@ -120,7 +121,8 @@ class Home extends Component {
 
                 {/* header */}
                 <Jumbotron id="header" >
-                    <Typist_loop/>                   
+                    <Typist_loop/>            
+                    <Button className="btn" shape="round" ghost><a href="#Before">Get Start</a></Button>   
                 </Jumbotron>
 
                 

@@ -54,22 +54,60 @@ body {
     background-image: url("https://i.imgur.com/voH5r4S.jpg");
     background-size: cover;
     height: 100vh;
+    text-align: center;
+}
+
+#header .btn {
+    font-size: 17px;
+    color:  #2E86C1;   
+    border-color: #2E86C1;
+   
+    margin-top: 0%;
+    opacity: 0.7;
+    width: 9%;
+    height: 6%; 
+}
+
+#header .btn:hover {
+    font-size: 18px;
+    /* background-color: #2E86C1; */
+    border-color: #2E86C1;
+    opacity: 1;
+    width: 10%;
+    height: 7%;
+}
+
+#header .right {
+    /* margin-left: 8px; */
+    
+}
+
+#header .left {
+    margin-right: 8px;
+    width: 9%;
+    height: 6%; 
+}
+
+#header p {
+    font-size: 18px;
+    font-weight: 500;
+    color: #5D6D7E;
 }
 
 .App {
     /* font-family: sans-serif;  */
     text-align: center;
     margin-top: 200px;
-    
-
 }
+
 .cursor {
     display: inline-block;
     position: relative;
-    font-weight: 500;
+    font-weight: 550;
     font-size: 40px;
     color: #154360;
 }
+
 .cursor::after {
     content: "";
     margin: auto;
