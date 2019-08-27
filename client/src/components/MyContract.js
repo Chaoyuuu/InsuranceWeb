@@ -3,55 +3,10 @@ import axios from 'axios';
 import NavBar from "./NavBar.js"
 import getWeb3 from "../utils/getWeb3";
 import { Container } from "react-bootstrap";
-import { Table, Tag, Button } from 'antd';
+import { Table, Tag, Button, Modal, Icon } from 'antd';
 import "./css/MyContract.css";
 
 var arr = [];
-const columns_t = [
-    {
-        title: 'Index',
-        dataIndex: '_index',
-        key: '_index',
-    },
-    {
-        title: 'Contract',
-        dataIndex: '_contract',
-        key: '_contract',
-        render: text => <a>{text}</a>,
-    },
-    {
-        title: 'Start Date',
-        dataIndex: '_start',
-        key: '_start',
-    },
-    {
-        title: 'Due Date',
-        dataIndex: '_end',
-        key: '_end',
-    },
-    {
-        title: 'State',
-        dataIndex: '_state',
-        key: '_state',
-        render: _state => (
-            <span>
-            { _state == 0 ? 
-                <Tag className="tag" color="geekblue" key={_state}>還未理賠 </Tag> : <Tag  className="tag" color="green" key={_state}>完成理賠 </Tag>
-            }</span>
-          ),
-    },
-    {
-        title: 'Action',
-        dataIndex: '_action',
-        key: '_action',
-        render: _action => (
-            <span>
-            { _action[0] == 0 ? 
-                <Button className="btn" size="small" type="danger" href={'/Claim/'+_action[1]} >點我理賠</Button> : <p></p>
-            }</span>
-          ),
-    },
-];
 
 class MyContract extends Component{
 
@@ -62,7 +17,14 @@ class MyContract extends Component{
           web3: null,
           accounts: null,
           my_Constract:[],
+          modal2Visible: false,
+
+          blockhash: '',
+          blocknum: '',
+          txhash: '',
         }    
+
+        this.setModal2Visible = this.setModal2Visible.bind(this);
     }
     
     componentDidMount = async() => {
@@ -76,6 +38,7 @@ class MyContract extends Component{
             console.log(`account ${accounts}`)
             
             this.setState({ web3, accounts: accounts });
+
 
 
             const self = this
@@ -133,6 +96,7 @@ class MyContract extends Component{
                             _contract : topbarLinks._contract,
                             _start : topbarLinks._start,
                             _end : topbarLinks._due,
+                            _detail : [topbarLinks._blocknum, topbarLinks._blockhash, topbarLinks._txhash],
                             _state : topbarLinks._action,
                             _action : [topbarLinks._action, topbarLinks._id]
                         }
@@ -156,10 +120,74 @@ class MyContract extends Component{
         }
     };
 
+    setModal2Visible(flag, blocknum, blockhash, txhash) {
+        this.setState({ modal2Visible: flag, blocknum: blocknum, blockhash: blockhash, txhash: txhash});
+      }
+
 
     render(){
-        // const numbers = [1, 2, 3, 4, 5];
-        // const num = numbers.map((number) => <li key={number}>{number}</li> );
+        const columns_t = [
+            {
+                title: 'Index',
+                dataIndex: '_index',
+                key: '_index',
+            },
+            {
+                title: 'Contract',
+                dataIndex: '_contract',
+                key: '_contract',
+                render: text => <a>{text}</a>,
+            },
+            {
+                title: 'Start Date',
+                dataIndex: '_start',
+                key: '_start',
+            },
+            {
+                title: 'Due Date',
+                dataIndex: '_end',
+                key: '_end',
+            },
+            {
+                title: 'Detail',
+                dataIndex: '_detail',
+                key: '_detail',
+                render: _detail => (
+                    <span>
+                        <Button type="link" onClick={() => this.setModal2Visible(true, _detail[0], _detail[1], _detail[2])}>
+                            <Icon type="info-circle" 
+                                  style={{ fontSize: '18px', color: '#A6ACAF' }}
+                                  />
+                        </Button>
+                    </span>
+                  ),
+            },
+            {
+                title: 'State',
+                dataIndex: '_state',
+                key: '_state',
+                render: _state => (
+                    <span>
+                    { _state == 0 ? 
+                        <Tag className="tag" color="geekblue" key={_state}>還未理賠 </Tag> : <Tag  className="tag" color="green" key={_state}>完成理賠 </Tag>
+                    }</span>
+                  ),
+            },
+            {
+                title: 'Action',
+                dataIndex: '_action',
+                key: '_action',
+                render: _action => (
+                    <span>
+                        
+                    { _action[0] == 0 ? 
+                        <Button className="btn" size="small" type="danger" href={'/Claim/'+_action[1]}>點我理賠 </Button> :<p>--</p>
+                    }</span>
+                  ),
+            },
+        ];
+        
+
         return (
             <div>
                 <NavBar/>
@@ -170,9 +198,22 @@ class MyContract extends Component{
                 <br/>
                 <Container id="table">               
 
-                <h3> MyContract addr = {this.state.accounts} </h3>
-                <Table className="table_contract align:center fontSize:'50px' " columns={columns_t} dataSource={arr} />
-            
+                    <h3> MyContract addr = {this.state.accounts} </h3>
+                    <Table className="table_contract align:center fontSize:'50px' " columns={columns_t} dataSource={arr} />
+
+                    <Modal
+                        title="More details"
+                        centered
+                        visible={this.state.modal2Visible}
+                        onCancel={() => this.setModal2Visible(false)}
+                        footer={null}
+                        width={750}
+                    >
+                        <p><strong>blocknum:</strong>{this.state.blocknum}</p>
+                        <p><strong>blockhash:</strong> <br/>{this.state.blockhash}</p>
+                        <p><strong>txhash:</strong> <br/>{this.state.txhash}</p>
+                    </Modal>
+                </Container>
                     {/* <Table striped bordered hover className="table_contract" thStyle={{ 'background-color': 'red' }} height='120px'>
                         <thead>
                             <tr>
@@ -187,7 +228,7 @@ class MyContract extends Component{
                             {this.state.my_Constract}
                         </tbody>
                     </Table> */}
-              </Container>
+             
             </div>
         );
     }
