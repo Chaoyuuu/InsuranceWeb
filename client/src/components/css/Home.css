@@ -47,6 +47,51 @@ body {
     text-align: center;
 }
 
+/*-------------------------
+        Header-Jumbotron
+-------------------------*/
+#header {
+    background-image: url("https://i.imgur.com/voH5r4S.jpg");
+    background-size: cover;
+    height: 100vh;
+}
+
+.App {
+    /* font-family: sans-serif;  */
+    text-align: center;
+    margin-top: 200px;
+    
+
+}
+.cursor {
+    display: inline-block;
+    position: relative;
+    font-weight: 500;
+    font-size: 40px;
+    color: #154360;
+}
+.cursor::after {
+    content: "";
+    margin: auto;
+    position: absolute;
+    right: -4px;
+    top: -2px;
+    width: 3px;
+    height: 100%;
+    background-color:  #154360;
+    animation: cursor-animation 2.5s step-end infinite;
+}
+@keyframes cursor-animation {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 
 /*-------------------------
         About-Jumbotron
@@ -390,7 +435,7 @@ body {
 -------------------------*/
 
 #end {
-    background-color:red;
+    background-color:#2E86C1;
     height: 100px;
     text-align: center;
     align-content: center;

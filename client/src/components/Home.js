@@ -3,17 +3,54 @@ import "./css/Home.css";
 import NavBar from "./NavBar.js"
 import ParallaxBar from "./ParallaxBar.js"
 import { ParallaxProvider, Parallax } from 'react-skrollr'
-// import { Parallax, Background } from 'react-parallax';
+
+import useTypewriter from "react-typewriter-hook"
+import { useState, useEffect, useRef } from "react";
+
 
 import { Tab, Tabs, Button, Container, Carousel } from "react-bootstrap";
 import { Card, Row, Col, Media, Jumbotron, Image, Tooltip, OverlayTrigger, ButtonToolbar} from "react-bootstrap";
 
 
+const MagicOcean = [
+    "Insurance Dapp ?",
+    "BlockChain ?",
+    "Decentralized Application ?"
+];
+
+let index = 0;
+function Typist_loop() {
+    const [magicName, setMagicName] = useState("magic is going to happen");
+    const intervalRef = useRef({});
+    const name = useTypewriter(magicName);
+    useEffect(
+        () => {
+            intervalRef.current = setInterval(() => {
+                // index = index + 1 > 2 ? 0 : ++index + 1;
+                index = index > 2 ? 0 : ++index;
+                setMagicName(MagicOcean[index]);
+            }, 6000);
+            return function clear() {
+                clearInterval(intervalRef.current);
+            };
+        },
+        [magicName]
+    );
+    return (
+        <div className="App">
+            <h2 className="cursor">What is {name}</h2>
+            <p>區塊鏈網頁保險服務系統</p>
+        </div>
+    );
+  }
 
     
 class Home extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            
+        }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -22,7 +59,7 @@ class Home extends Component {
         
     }
 
-    
+
 
     render() {
         return (
@@ -37,7 +74,7 @@ class Home extends Component {
                 <NavBar/>
                 
                 {/* Intro */}
-                <Carousel id="Intro">
+                {/* <Carousel id="Intro">
                     <Carousel.Item >
                         <img
                         className="w-100"
@@ -78,17 +115,18 @@ class Home extends Component {
                         <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
-                </Carousel>
+                </Carousel> */}
 
 
-                {/* <HowToUse/> */}
+                {/* header */}
+                <Jumbotron id="header" >
+                    <Typist_loop/>                   
+                </Jumbotron>
 
                 
                 {/* About */}
                 <Jumbotron fluid id="about" >
                     <Container className="about-container">
-                        
-                    <div>Icons made by <a href="https://www.flaticon.com/authors/monkik" title="monkik">monkik</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
                         <Row> 
                             <Col className="col-md-offset-12 col-md-12 titlee">
                                 <h2> What is Insurance Dapp </h2>
@@ -413,9 +451,10 @@ class Home extends Component {
                     </OverlayTrigger>
 
                     <h2>All rights reserved by C.Y.LEE NCKU</h2>  
-                </Jumbotron>
-           
+                    <div>Icons made by <a href="https://www.flaticon.com/authors/monkik" title="monkik">monkik</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
+                </Jumbotron>
+        
     </div>
     </ParallaxProvider>     
         );
