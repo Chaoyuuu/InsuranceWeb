@@ -5,6 +5,7 @@ import { Parallax } from 'react-parallax';
 const styles = {
     fontFamily: "sans-serif",
     textAlign: "center"
+    
   };
 
 const insideStyles = {
@@ -21,7 +22,7 @@ class ParallaxBar extends Component {
     render() {
         return (
 
-            <Parallax bgImage="https://i.imgur.com/5C4gO62.jpg" strength={300}>
+            <Parallax bgImage="https://i.imgur.com/5C4gO62.jpg" strength={450}>
                 <div style={{ height: 300 }}>
                     {/* <div style={insideStyles}>Dynamic Blur</div> */}
                     </div>
