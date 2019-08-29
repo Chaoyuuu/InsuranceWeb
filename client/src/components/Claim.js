@@ -5,7 +5,9 @@ import getWeb3 from "../utils/getWeb3";
 import NavBar from "./NavBar.js"
 import axios from "axios"
 import { Container, Button } from "react-bootstrap";
-import { Spin, Steps, Result, Icon } from 'antd';
+import { Spin, Steps, Result, Icon, notification } from 'antd';
+
+// import { DatePicker, Col, notification, Steps, Icon, Descriptions} from 'antd';
 
 import "./css/Claim.css";
 
@@ -32,11 +34,25 @@ class Claim extends Component {
                 _MMonth:'',
                 _DDate:''
             },
-            step_state:'0'
+            step_state:'0',
+            error_msg: ''
         }
-
         this.setTitle = this.setTitle.bind(this);
+        this.openNotification = this.openNotification.bind(this);
     }
+
+    openNotification = ()=> {
+        notification.open({
+            message: '注意',
+            description:
+                '如果頁面沒有跳轉，請確認Metamask的訊息 !',
+            duration: 5,
+            placement: 'bottomRight',
+            icon: <Icon type="exclamation-circle" style={{ color: '#F5B041' }}/>,
+
+        });
+      };
+
 
     componentDidMount = async () => {
         try {
@@ -77,6 +93,8 @@ class Claim extends Component {
         if(flag == 1){
             //get userid in blockchain
             console.log('in getUserID')
+            this.openNotification();
+
             const a = await contract.methods.getUserID()
                             .send({ from: accounts[0] }, function(error, result){
                                 if(!error){
@@ -109,7 +127,6 @@ class Claim extends Component {
                     self.setState({
                         _emergency: output._emergency,
                         _surgery: output._surgery,
-                        _admission: output._admission,
                         _MMonth: output._date.substring(0,2),
                         _DDate: output._date.substring(3,5),
                         flag: 3,
@@ -118,7 +135,6 @@ class Claim extends Component {
 
                     console.log(self.state._emergency)
                     console.log(self.state._surgery)
-                    console.log(self.state._admission)
                     console.log(self.state._MMonth)
                     console.log(self.state._DDate)                    
                 })
@@ -128,6 +144,7 @@ class Claim extends Component {
         }else if(flag == 3){
             //claim contract in blockchain
             console.log("in claim in block chain")
+            this.openNotification();
             
             const a = await contract.methods.getDocument(
                                                 this.state._emergency, 
@@ -143,10 +160,21 @@ class Claim extends Component {
                                         step_state: 3
                                      })
                                 }else{
-                                    // console.error(error);
-                                    console.log("claim error");
-                                    console.log(error);
-                                    this.setState({if_claim: 2})
+                                    // console.log("claim error");
+                                    // console.log(error);
+                                    var error_msg = 'the error';
+                                   
+                                    if(error.message.includes('wrong date')){
+                                        console.log("the wrong date")
+                                        error_msg = "the wrong date"
+                                    }else if (error.message.includes('wrong document')){
+                                        console.log("the wrong document")
+                                        error_msg = "the wrong document"
+                                    }else{
+                                        error_msg = error;
+                                    }
+                                   
+                                    this.setState({if_claim: 2, error_msg: error_msg})
                                 }
                             }.bind(this));
             console.log(`is a`)
@@ -156,18 +184,14 @@ class Claim extends Component {
             //set is_accident = 1 in items DB
             console.log('in flag = 4') 
             console.log(this.props.match.params.id)
-            axios.post('http://localhost:5000/api/items/update/'+ this.props.match.params.id)
-                .then((req, res) => {
-                    console.log('Successfully connected to db')
-                    // console.log(`Successfully connected to db ${req.data}`)
-                    console.log(res)
-                    // res.status(200).send(res)
-
-                
-                })
-                .catch((err, res) => {
-                    console.log(`Not connected to db ${err}`)
-                });   
+            // axios.post('http://localhost:5000/api/items/update/'+ this.props.match.params.id)
+            //     .then((req, res) => {
+            //         console.log('Successfully connected to db')
+            //         console.log(res)
+            //     })
+            //     .catch((err, res) => {
+            //         console.log(`Not connected to db ${err}`)
+            //     });   
 
             // this.setState({flag: 5})
             
@@ -199,7 +223,8 @@ class Claim extends Component {
                  <Result className="result"
                     status="warning"
                     title="很抱歉，理賠申請失敗"
-                    subTitle="正在尋找失敗原因..."
+                    // subTitle="正在尋找失敗原因... "
+                    subTitle={"正在尋找失敗原因... " + this.state.error_msg}  
                     extra={
                     <Button key="1" variant="danger" href="/MyContract"> 查看合約 </Button>
                     }
