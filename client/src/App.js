@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import { BrowserRouter, Route, Switch, Link} from "react-router-dom";
-// import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import SimpleStorageContract from "./contracts/Insurance.json";
 import getWeb3 from "./utils/getWeb3";
 import axios from 'axios';
@@ -191,26 +189,8 @@ class App extends Component {
                         <Col span={18}>
                             <ToList setContract={this.setContract} postRequest={this.postRequest}/>
                         </Col>
-
-                        
                     </Container>
                 }
-            {/* <div className="container">
-                <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-                <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="https://github.com/Chaoyuuu/InsuranceWeb" target="_blank">BlockChain Dapp | Insurance Web</a>
-                <ul className="navbar-nav px-3">
-                    <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
-                    <small><a className="nav-link" href="#"><span id="account">{this.state.accounts[0]}</span></a></small>
-                    </li>
-                </ul>
-                </nav>
-                <div className="container-fluid">
-                <div className="row">
-                    <main role="main" className="col-lg-12 d-flex justify-content-center">
-                    <ToList setContract={this.setContract}/>
-                    </main>
-                </div>
-                </div> */}
 
                 {/* <p>the output = {this.state.storageValue}</p> */}
             
@@ -273,8 +253,7 @@ class ToList extends Component {
         console.log(this.state.endD)
 
         this.props.setContract(this.state.startM, this.state.startD, this.state.endM, this.state.endD, this.state.ID)
-        // this.props.postRequest(this.state.startM, this.state.startD, this.state.endM, this.state.endD)
-
+        // this.props.postRequest(this.state.startM, this.state.startD, this.state.endM, this.state.endD);
         this.openNotification();
     }
 
@@ -294,7 +273,7 @@ class ToList extends Component {
             <h2 htmlFor="new-todo" className="text-center">
                 請輸入基本資料
             </h2>
-            <form  role="form">
+            <form>
                 <FormStyle 
                     label={"Name"}
                     placeholder={"Your name"} 
@@ -339,11 +318,6 @@ class SetValue extends Component {
         <div className="App">
             <br/>
             <h3>Good to Go!</h3>
-            {/* <div>The stored value is: 
-            {this.props.items.map(item => (
-                <div key={item.id}> {item.text} </div>
-            ))}
-            </div> */}
             <li>Name = {this.props.a.name}</li>
             <li>Birth = {this.props.a.birth}</li>
             <li>ID = {this.props.a.ID}</li>

@@ -8,8 +8,8 @@ import useTypewriter from "react-typewriter-hook"
 import { useState, useEffect, useRef } from "react";
 
 
-import {  Container, Carousel } from "react-bootstrap";
-import {  Row, Col, Media, Jumbotron, Image, Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import { Row, Col, Media, Jumbotron, Image, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { Button } from 'antd';
 
 
@@ -20,8 +20,8 @@ const MagicOcean = [
 ];
 
 let index = 0;
-function Typist_loop() {
-    const [magicName, setMagicName] = useState("magic is going to happen");
+function Typistloop() {
+    const [magicName, setMagicName] = useState("this ?");
     const intervalRef = useRef({});
     const name = useTypewriter(magicName);
     useEffect(
@@ -121,7 +121,7 @@ class Home extends Component {
 
                 {/* header */}
                 <Jumbotron id="header" >
-                    <Typist_loop/>            
+                    <Typistloop/>            
                     <Button className="btn" shape="round" ghost><a href="#Before">Get Start</a></Button>   
                 </Jumbotron>
 
@@ -453,7 +453,11 @@ class Home extends Component {
                     </OverlayTrigger>
 
                     <h2>All rights reserved by C.Y.LEE NCKU</h2>  
-                    <div>Icons made by <a href="https://www.flaticon.com/authors/monkik" title="monkik">monkik</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+                    <div>
+                        Icons made by <a href="https://www.flaticon.com/authors/monkik" title="monkik">monkik</a> 
+                        from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> 
+                        is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC 3.0 BY</a>
+                        </div>
 
                 </Jumbotron>
         
@@ -462,12 +466,5 @@ class Home extends Component {
         );
     }
 };
-// const Home = () =>{
-//     return (
-//         <div>
-//             Home
-//         </div>
-//     );
-// };
 
 export default Home;

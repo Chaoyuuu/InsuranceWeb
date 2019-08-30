@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NavBar from "./NavBar.js"
 import { Container, Button} from "react-bootstrap";
-import { Collapse, Steps, Col, Icon} from 'antd';
+import { Collapse, Steps, Col} from 'antd';
 import "./css/Contracts.css";
 
 const { Step } = Steps;

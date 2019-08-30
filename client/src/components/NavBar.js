@@ -33,24 +33,22 @@ class NavBar extends Component {
                 
          
                 <Navbar expand="lg" id="menu" className="fixed-top" style={this.style} variant="dark">
-                    <img src="https://i.imgur.com/1ipiz7L.png" width="50px" height="50px"/>
+                    <img src="https://i.imgur.com/1ipiz7L.png" width="50px" height="50px" alt="logo"/>
                 <Navbar.Brand href="https://github.com/Chaoyuuu/InsuranceWeb" variant="dark">INSURANCE DAPP</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto mt-2 mt-lg-0">
                     <Nav.Link className="navlink" href="/">Home</Nav.Link>
-                    <Nav.Link href="/App">SetUserInfo</Nav.Link>
+                    {/* <Nav.Link href="/App">SetUserInfo</Nav.Link> */}
                     <Nav.Link href="/MyContract">MyContract</Nav.Link>
                     {/* <Nav.Link href="/Claim">Claim</Nav.Link> */}
                     {/* <Nav.Link href="/About">About</Nav.Link> */}
-                    <Nav.Link href="/Connect">HospitalDB</Nav.Link>
-                    <Nav.Link href="/Contracts">Contract</Nav.Link>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                    {/* <Nav.Link href="/Connect">HospitalDB</Nav.Link> */}
+                    <Nav.Link href="/Contracts">Select Inurance</Nav.Link>
+                    <NavDropdown title="About Dapp" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.1">Smart Contract</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">Data Query</NavDropdown.Item>
                     </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

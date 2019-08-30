@@ -1,19 +1,13 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch, Link} from "react-router-dom";
 import SimpleStorageContract from "../contracts/Insurance.json";
 import getWeb3 from "../utils/getWeb3";
 import NavBar from "./NavBar.js"
 import axios from "axios"
 import { Container, Button } from "react-bootstrap";
 import { Spin, Steps, Result, Icon, notification } from 'antd';
-
-// import { DatePicker, Col, notification, Steps, Icon, Descriptions} from 'antd';
-
 import "./css/Claim.css";
 
 const { Step } = Steps;
-
-
 
 class Claim extends Component {
 
@@ -74,10 +68,10 @@ class Claim extends Component {
             // Set web3, accounts, and contract to the state, and then proceed with an
             // example of interacting with the contract's methods.
             // this.setState({ web3, accounts, contract: instance }, this.runExample);
-            {
+            
                 this.setState({ web3, accounts, contract: instance});
                 this.setState({ flag: 1})
-            }
+            
 
         } catch (error) {
             // Catch any errors for any of the above operations.
@@ -89,8 +83,8 @@ class Claim extends Component {
     };
 
     componentDidUpdate = async() => {
-        const { web3, accounts, contract, flag } = this.state;
-        if(flag == 1){
+        const { accounts, contract, flag } = this.state;
+        if(flag === 1){
             //get userid in blockchain
             console.log('in getUserID')
             this.openNotification();
@@ -100,20 +94,16 @@ class Claim extends Component {
                                 if(!error){
                                     console.log("claim success")
                                     console.log(result)
-                                    // console.log(web3.utils.toBigNumber(result))
                                 }else{
-                                    // console.error(error);
                                     console.log("claim error");
                                     console.log(error);
                                 }
-                            }.bind(this));
+                            });
 
             this.setState({flag: 2, uid: a.events.UID.returnValues.uid, step_state: 1})
-            // console.log(`aaa is =`)
-            // console.log(a.events.UID.returnValues.uid)
             console.log(this.state.uid)
 
-        }else if(flag == 2){
+        }else if(flag === 2){
             //get data from hospitals db
             console.log("in axiox get")
             
@@ -141,7 +131,7 @@ class Claim extends Component {
                 .catch((err, res) => {
                     console.log(`Not connected to db in put${err}`)
                 });
-        }else if(flag == 3){
+        }else if(flag === 3){
             //claim contract in blockchain
             console.log("in claim in block chain")
             this.openNotification();
@@ -166,10 +156,10 @@ class Claim extends Component {
                                    
                                     if(error.message.includes('wrong date')){
                                         console.log("the wrong date")
-                                        error_msg = "the wrong date"
+                                        error_msg = "日期不屬於合約範圍"
                                     }else if (error.message.includes('wrong document')){
                                         console.log("the wrong document")
-                                        error_msg = "the wrong document"
+                                        error_msg = "不滿足理賠條件"
                                     }else{
                                         error_msg = error;
                                     }
@@ -180,18 +170,18 @@ class Claim extends Component {
             console.log(`is a`)
             console.log(a)
             
-        }else if(flag == 4){
+        }else if(flag === 4){
             //set is_accident = 1 in items DB
             console.log('in flag = 4') 
             console.log(this.props.match.params.id)
-            // axios.post('http://localhost:5000/api/items/update/'+ this.props.match.params.id)
-            //     .then((req, res) => {
-            //         console.log('Successfully connected to db')
-            //         console.log(res)
-            //     })
-            //     .catch((err, res) => {
-            //         console.log(`Not connected to db ${err}`)
-            //     });   
+            axios.post('http://localhost:5000/api/items/update/'+ this.props.match.params.id)
+                .then((req, res) => {
+                    console.log('Successfully connected to db')
+                    console.log(res)
+                })
+                .catch((err, res) => {
+                    console.log(`Not connected to db ${err}`)
+                });   
 
             // this.setState({flag: 5})
             
@@ -201,7 +191,7 @@ class Claim extends Component {
     }
 
     setTitle(){
-        if(this.state.if_claim == 1){
+        if(this.state.if_claim === 1){
             return(
                 <div>
                     <Result className="result"
@@ -217,13 +207,12 @@ class Claim extends Component {
                 
                 //more details ..
             );
-        }else if(this.state.if_claim == 2){
+        }else if(this.state.if_claim === 2){
             return(
                 <div>
                  <Result className="result"
                     status="warning"
                     title="很抱歉，理賠申請失敗"
-                    // subTitle="正在尋找失敗原因... "
                     subTitle={"正在尋找失敗原因... " + this.state.error_msg}  
                     extra={
                     <Button key="1" variant="danger" href="/MyContract"> 查看合約 </Button>
@@ -231,7 +220,7 @@ class Claim extends Component {
                 />
                 </div>
             );
-        }else if(this.state.if_claim == 0){
+        }else if(this.state.if_claim === 0){
             return(
                 <div>
                     <h3>努力計算中...請稍等...   
@@ -254,7 +243,6 @@ class Claim extends Component {
                 <br/>
                 <br/>
                 <Container className="container">                        
-                    {/* <h2> if_claim</h2> */}
                     <Steps current={parseInt(this.state.step_state)}>
                         <Step title="準備中" description="資料連線" />
                         <Step title="載入第三方資料庫" description="取得醫院資料" />

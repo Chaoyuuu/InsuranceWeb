@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Home from "./components/Home.js";
 import About from "./components/About.js";
-import Contact from "./components/Contact";
+// import Contact from "./components/Contact";
 import Error from "./components/Error.js";
 import Connect from "./components/Connect.js";
 import App from './App'
@@ -11,16 +11,12 @@ import Claim from "./components/Claim.js";
 import MyContract from "./components/MyContract.js";
 import Contracts from "./components/Contracts.js";
 
-
-// import Navigation from "./components/Navigation.js"
-
 class Main extends Component {
   render() {
     return(
       <div>
         <BrowserRouter>
         <div>
-          {/* <Navigation /> */}
           <Switch>
 
             <Route path="/" component={Home} exact />

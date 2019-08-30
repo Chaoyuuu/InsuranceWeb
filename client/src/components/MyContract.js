@@ -90,7 +90,7 @@ class MyContract extends Component{
                         // console.log(topbarLinks);
 
                         const k_tmp = key;
-                        const tmp ={
+                        const t ={
                             key : k_tmp,
                             _index: k_tmp,
                             _contract : topbarLinks._contract,
@@ -101,7 +101,7 @@ class MyContract extends Component{
                             _action : [topbarLinks._action, topbarLinks._id]
                         }
 
-                        arr.push(tmp);
+                        arr.push(t);
                         console.log(`arr = ${JSON.stringify(arr)}`)
                     })
                     self.setState({my_Constract: tmp});
@@ -169,7 +169,7 @@ class MyContract extends Component{
                 render: _state => (
                     <span>
                     { _state == 0 ? 
-                        <Tag className="tag" color="geekblue" key={_state}>還未理賠 </Tag> : <Tag  className="tag" color="green" key={_state}>完成理賠 </Tag>
+                        <Tag className="tag" color="geekblue" key={_state}>尚未理賠 </Tag> : <Tag  className="tag" color="green" key={_state}>完成理賠 </Tag>
                     }</span>
                   ),
             },
