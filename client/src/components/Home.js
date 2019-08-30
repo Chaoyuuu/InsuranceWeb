@@ -6,8 +6,6 @@ import { ParallaxProvider, Parallax } from 'react-skrollr'
 
 import useTypewriter from "react-typewriter-hook"
 import { useState, useEffect, useRef } from "react";
-
-
 import { Container } from "react-bootstrap";
 import { Row, Col, Media, Jumbotron, Image, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { Button } from 'antd';
@@ -59,8 +57,6 @@ class Home extends Component {
         e.preventDefault()
         
     }
-
-
 
     render() {
         return (

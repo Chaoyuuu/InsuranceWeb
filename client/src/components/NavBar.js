@@ -1,14 +1,41 @@
 import React, { Component } from "react";
 import { Navbar, Nav, NavDropdown} from "react-bootstrap";
 import { ParallaxProvider, Parallax } from 'react-skrollr'
-
+import getWeb3 from "../utils/getWeb3";
+import "./css/NavBar.css";
 
 class NavBar extends Component {
 
     style = {
         backgroundColor: "#1D5A82",
-        'fontSize': '18px',
+        'fontSize': '19px',
         'color':'white',
+    };
+
+    constructor(props) {
+        super(props)
+        this.state = {
+          web3: null,
+          accounts: null,
+        }    
+    }
+    
+    componentDidMount = async() => {
+        try {
+            // Get network provider and web3 instance.
+            const web3 = await getWeb3();
+        
+            // Use web3 to get the user's accounts.
+            const accounts = await web3.eth.getAccounts();
+            this.setState({ web3, accounts: accounts });
+
+        }catch (error) {
+            // Catch any errors for any of the above operations.
+            alert(
+                `Failed to load web3, accounts. Check console for details. in MyContract`,
+            );
+            console.error(error);
+        }
     };
 
     render() {
@@ -46,12 +73,14 @@ class NavBar extends Component {
                     {/* <Nav.Link href="/Connect">HospitalDB</Nav.Link> */}
                     <Nav.Link href="/Contracts">Select Inurance</Nav.Link>
                     <NavDropdown title="About Dapp" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Smart Contract</NavDropdown.Item>
+                        <NavDropdown.Item href="/About">Smart Contract</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.2">Data Query</NavDropdown.Item>
+                        <NavDropdown.Item href="/Connect">Data Query</NavDropdown.Item>
                     </NavDropdown>
                     </Nav>
+                    
                 </Navbar.Collapse>
+                {/* <h5>My Account: {this.state.accounts}</h5> */}
                 </Navbar>
 
                 </Parallax> 

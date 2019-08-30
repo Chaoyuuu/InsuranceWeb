@@ -198,7 +198,7 @@ class MyContract extends Component{
                 <br/>
                 <Container id="table">               
 
-                    <h3> MyContract addr = {this.state.accounts} </h3>
+                    <h3> <Icon type="tag" /> MyContract addr : {this.state.accounts} </h3>
                     <Table className="table_contract align:center fontSize:'50px' " columns={columns_t} dataSource={arr} />
 
                     <Modal
