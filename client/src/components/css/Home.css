@@ -30,13 +30,13 @@ body {
 }
 
 #Intro h2 {
-    color: #fff;
+    color: white;
     font-size: 48px;
     font-weight: 700;
 }
 
 #Intro h3 {
-    color: #fff;
+    color: white;
     align-items: center;
     position: relative;
     font-size: 48px;
@@ -329,6 +329,49 @@ body {
 
 
 /*-------------------------
+        How-to-use
+-------------------------*/
+#How {
+    margin-top: -100px;
+}
+#How .carousel-content {
+    text-align: center;
+    align-items: center;
+    height: 65%;
+}
+
+#How h2 {
+    color: black;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+#How h3 {
+    color: black;
+    align-items: center;
+    position: relative;
+    font-size: 48px;
+    font-weight: 700;
+    text-align: center;
+}
+#How p {
+    color: black;
+    align-items: center;
+    position: relative;
+    text-align: center;
+}
+
+#How .h-2{
+    margin-top: -50px;
+}
+
+#How .h-bg{
+    height:600px;
+   
+}
+
+
+/*-------------------------
         tool-cards
 -------------------------*/
 #tool {
@@ -401,7 +444,7 @@ body {
 -------------------------*/
 
 #about_me {
-    background-color: gold;
+    background-color: white;
     width: 100%;
     height: auto;
 }

@@ -6,7 +6,7 @@ import { ParallaxProvider, Parallax } from 'react-skrollr'
 
 import useTypewriter from "react-typewriter-hook"
 import { useState, useEffect, useRef } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Carousel } from "react-bootstrap";
 import { Row, Col, Media, Jumbotron, Image, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { Button } from 'antd';
 
@@ -129,7 +129,7 @@ class Home extends Component {
                             <Col className="col-md-offset-12 col-md-12 titlee">
                                 <h2> What is Insurance Dapp </h2>
                                 <div className="heading-line"></div>
-                                <p> a website with blockchain </p>
+                                <p> Insurance X BlockChain </p>
                             </Col>
                         </Row>
 
@@ -142,12 +142,12 @@ class Home extends Component {
                                 alt="Generic placeholder"
                             />
                             <Media.Body >
-                            <h5>List-based media object</h5>
+                            <h5>Introduction</h5>
                             <p>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                                ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-                                tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
-                                fringilla. Donec lacinia congue felis in faucibus.
+                            本專題以區塊鏈與智能合約為基礎架構，開發去中心化應用程式，
+                            改善傳統保險理賠的流程，增加理賠的效率與安全。
+                            並將所有交易紀錄與相關訊息保存於區塊鏈上，以其高可靠信度、去中心化的優點，
+                            使交易過程與相關資訊透 明化，也讓使用者能更安心的使用。
                             </p>
                             </Media.Body>
                         </Media>
@@ -311,8 +311,67 @@ class Home extends Component {
             </Container>
             </Jumbotron>
 
+            <Carousel id="How">
+                    <Carousel.Item >
+                        <img
+                        className="h-bg"
+                        src="https://i.imgur.com/NO5YDtS.png"
+                        alt="First slide-blockchain"
+                        // height={870}
+                        />
+                        <Carousel.Caption className="carousel-content">
+                            <Row>
+                                <Col lg={6}>
+                                    <img
+                                        className="h-2"
+                                        src="https://i.imgur.com/gY0OJql.png"
+                                        alt="Second slide-computer"
+                                        height={300}
+                                        width={400}
+                                        />
+                                </Col>
+                                <Col lg={6}>
+                                    <h3>理賠程序</h3>
+                                    <p>過去客戶必須自行提供保險理賠申請的相關文件，證明意外事件的發生。
+                                        現在由保險公司與醫院機關主動提供相關資料，而客戶只需要提出理賠請求，
+                                        由智能合約立即分析索賠，並且自動獲得支付。
+                                    </p>
+                                </Col>
+                            </Row>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                        className="h-bg"
+                        src="https://i.imgur.com/NO5YDtS.png"
+                        alt="Second slide-computer"
+                        // height={870}
+                        />
+                        <Carousel.Caption className="carousel-content">
+                            <Row>
+                                <Col lg={6}>
+                                    <img
+                                        className="h-2"
+                                        src="https://i.imgur.com/flah7Yu.png"
+                                        alt="Second slide-computer"
+                                        height={300}
+                                        width={400}
+                                        />
+                                        
+                                </Col>
+                                <Col lg={6}>
+                                    <h3>簽訂合約</h3>
+                                    <p>使用者以虛擬帳戶跟合約互動，
+                                        輸入基本資料並支付小額手續費後，
+                                        用戶資料與交易紀錄將被記錄在區塊鏈上。
+                                        並由系統回傳交易紀錄與區塊鏈的位址，方便日後使用者查詢。
+                                    </p>
+                                </Col>
+                            </Row>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                </Carousel>
 
-            <ParallaxBar/>
 
                 {/* tool */}
                 <Container id="tool" background-color="beige">
@@ -332,7 +391,7 @@ class Home extends Component {
                                 src="https://i.imgur.com/sr1NsjK.png" roundedCircle/>
                             </a>
                             <h3>Ganache</h3>
-                            <p>the text </p>
+                            
                         </Col>
                         <Col xs={12} sm={3} md={3} lg={3} className="card_2">
                             <a href="https://www.ethereum.org/">
@@ -342,7 +401,7 @@ class Home extends Component {
                                 src="https://i.imgur.com/IozD8Fx.png" roundedCircle />
                             </a>
                             <h3>Ethereum</h3>
-                            <p>the text </p>
+                           
                         </Col>
                         <Col xs={12} sm={3} md={3} lg={3} className="card_3">
                             <a href="https://reactjs.org/">
@@ -352,7 +411,7 @@ class Home extends Component {
                                 src="https://i.imgur.com/lHbSR6v.png" roundedCircle/>
                             </a>
                             <h3>React</h3>
-                            <p>the text </p>
+                           
                         </Col>
                         <Col xs={12} sm={3} md={3} lg={3} className="card_4">
                             <a href="https://metamask.io/">
@@ -362,13 +421,12 @@ class Home extends Component {
                                 src="https://i.imgur.com/l1xsDOH.jpg" roundedCircle/>
                             </a>
                             <h3>Metamask</h3>
-                            <p>the text </p>
+                            
                         </Col>
                     </Row>
                 </Container>
 
-
-               
+                <ParallaxBar/>
 
                 {/* about_me */}
                 <Jumbotron fluid id="about_me">
