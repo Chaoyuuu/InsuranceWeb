@@ -9,10 +9,6 @@ class NavBar extends Component {
         backgroundColor: "#1D5A82",
         'fontSize': '18px',
         'color':'white',
-        // "#F4D03F"
-        // #3498DB
-        // #1D5A82
-        
     };
 
     render() {

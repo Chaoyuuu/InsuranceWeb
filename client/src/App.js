@@ -88,7 +88,7 @@ class App extends Component {
 
         // Stores a given value, 5 by default.
         // const output = await contract.methods.setUserInfo(content1, content2, content3, content4, content5).send({ from: accounts[0] });
-        const output = await contract.methods.SetDetail(content1, content2, content3, content4, content5).send({ from: accounts[0] });
+        const output = await contract.methods.SetDetail(content1, content2, content3, content4, content5).send({ from: accounts[0], value: 20000000000000000000});
         console.log("output")
         console.log(output)
         console.log(output.blockHash)
