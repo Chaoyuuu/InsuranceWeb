@@ -240,17 +240,17 @@ body {
 }
 
 #Before h3 {
-    color: #5D6D7E;
+    color: #21618C;
     /* align-items: center; */
     /* position: relative; */
     font-size: 25px;
-    font-weight: 700;
+    font-weight: 500;
     text-align: left;
     /* font-style: italic; */
 }
 
 #Before h4 {
-    color: #34495E;
+    color: #2980B9;
     /* align-items: center; */
     /* position: relative; */
     font-size: 22px;
@@ -522,17 +522,29 @@ body {
 
 #end {
     background-color:#2E86C1;
-    height: 100px;
+    height: 150px;
     text-align: center;
     align-content: center;
     margin-top: -40px;
     margin-bottom: -20px;
 }
 
+#end .r-1{
+    text-align: center;
+    margin-top: -20px;
+    margin-bottom: 10px;
+}
+
+#end Button:hover{
+    background-color: #F7DC6F;
+    color:#F7DC6F;
+}
+
 #end h2 {
     color:white;
     font-weight: 300;
     font-size: 15px;
+    margin-top: 10px;
 
 }
 

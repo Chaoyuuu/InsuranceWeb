@@ -3,8 +3,8 @@ pragma solidity ^0.5.0;
 contract Insurance{
     uint public total_usr = 0;
      uint claim_usr = 0;
-    uint public pay_money = 10 ether;
-    uint public buy_money = 10 ether;
+    uint public pay_money = 20 ether;
+    uint public buy_money = 20 ether;
     address payable public user;
     address payable public insurer;
     enum State {Start, SetDetail, EndContract}

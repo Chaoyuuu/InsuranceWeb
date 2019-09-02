@@ -8,7 +8,7 @@ import useTypewriter from "react-typewriter-hook"
 import { useState, useEffect, useRef } from "react";
 import { Container, Carousel } from "react-bootstrap";
 import { Row, Col, Media, Jumbotron, Image, Tooltip, OverlayTrigger } from "react-bootstrap";
-import { Button } from 'antd';
+import { Button, Icon } from 'antd';
 
 
 const MagicOcean = [
@@ -129,7 +129,7 @@ class Home extends Component {
                             <Col className="col-md-offset-12 col-md-12 titlee">
                                 <h2> What is Insurance Dapp </h2>
                                 <div className="heading-line"></div>
-                                <p> BlockChain x Insurance </p>
+                                <p> BlockChain x Insurance Application</p>
                             </Col>
                         </Row>
 
@@ -210,7 +210,7 @@ class Home extends Component {
                                 }}>
                        
                             <h3>問題一</h3>
-                            <p><strong>中間經理人</strong><br/>
+                            <p><u>中間經理人</u><br/>
                                 1. 投保人不會接觸保險公司與真實的合約<br/>
                                 2. 有任何狀況都與經紀人溝通<br/>
                                 3. 不對稱的資訊<br/>
@@ -222,7 +222,7 @@ class Home extends Component {
                             <br/>
                             <br/>
                             <h3>問題二</h3>
-                            <p>繁複的理賠程序<br/>
+                            <p><u>繁複的理賠程序</u><br/>
                                 1. 投保人需自行準理賠相關文件<br/>
                                 2. 等待保險公司漫長的理賠程序<br/>
                                 3. 有心人士有機可乘<br/>
@@ -466,10 +466,17 @@ class Home extends Component {
                 </Jumbotron> */}
 
                 <Jumbotron fluid id="end">
-                    <OverlayTrigger
+                    <Row className="r-1">
+                        <Col span={12} offset={6}>
+                            <Button type="link" href="https://github.com/Chaoyuuu/InsuranceWeb" ghost><Icon style={{ fontSize: '30px' }} type="github" /></Button>
+                            <Button  type="link" href="https://www.facebook.com/chaoyu.lee.1" ghost> <Icon style={{ fontSize: '30px' }} type="facebook" /></Button>
+                            <Button  type="link" ghost><Icon style={{ fontSize: '30px' }} type="star" theme="filled" /></Button>
+                        </Col>
+                    </Row>
+                     {/*<OverlayTrigger
                         overlay={
                             <Tooltip>
-                            C.Y LEE in <strong>facebook</strong>.
+                            <Rate allowHalf defaultValue={2.5} />
                             </Tooltip>
                         }>
                         <Image 
@@ -478,7 +485,9 @@ class Home extends Component {
                             className="mr-4 img"
                             src="https://i.imgur.com/BdWdkzx.png"
                             alt="facebook"/>
+
                     </OverlayTrigger>
+                    
 
                     <OverlayTrigger
                         overlay={
@@ -509,18 +518,21 @@ class Home extends Component {
                             className="mr-4 img"
                             src="https://i.imgur.com/P12PjVr.png"
                             alt="email"/>
-                    </OverlayTrigger>
-
+                    </OverlayTrigger> */}
+                    <Row>
+                    <Col>
                     <h2>All rights reserved by C.Y.LEE NCKU</h2>  
                     
-                    <br/>
-
-                </Jumbotron>
-                <div>
+                    
+                    <div>
                         Icons made by monkik
                         from www.flaticon.com
                         is licensed by CC 3.0 BY
                         </div>
+                        </Col>
+                        </Row>
+                </Jumbotron>
+                
     </div>
     </ParallaxProvider>     
         );

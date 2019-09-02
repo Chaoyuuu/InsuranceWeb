@@ -73,7 +73,7 @@ class Company extends Component{
     };
 
     componentDidUpdate = async() => {
-        const { accounts, contract, flag } = this.state;
+        const { web3, accounts, contract, flag } = this.state;
         if(flag === 1){
             //get userid in blockchain
             console.log('in getUserID')
@@ -92,7 +92,7 @@ class Company extends Component{
 
                                     if(error.message.includes('revert not insurer')){
                                         console.log("revert not insurer")
-                                        error_msg = "很抱歉，但是你不能存取"
+                                        error_msg = "非特定使用者"
                                     }else{
                                         error_msg = "error";
                                     }
@@ -102,15 +102,13 @@ class Company extends Component{
                                 }
                             }.bind(this));
 
+            var value = web3.utils.fromWei(a.events.moreinfo.returnValues.contract_ether, 'ether');
             this.setState({flag: 2, 
                             user_no: a.events.moreinfo.returnValues.total_usr, 
                             claim_no: a.events.moreinfo.returnValues.claim_usr,
-                            money: a.events.moreinfo.returnValues.contract_ether })
+                            money: value })
 
             console.log(`${this.state.user_no}, ${this.state.claim_no}, ${this.state.money}, ${this.state.flag}`)
-
-            // this.setState({flag: 2, uid: a.events.UID.returnValues.uid, step_state: 1})
-            // console.log(this.state.uid)
         }   
     }
 
@@ -118,7 +116,7 @@ class Company extends Component{
         if(this.state.flag === 1){
             return(
                 <div>
-                    <h3>努力計算中...請稍等...   
+                    <h3>確認資訊中...請稍等...   
                     <Spin />
                     </h3>
                 </div>
@@ -127,10 +125,12 @@ class Company extends Component{
         }else if(this.state.flag === 2){
             return(
                 <div>
-                 
-                <h3>使用者人數: {this.state.user_no}</h3>
-                <h3>已經理賠的和約束: {this.state.claim_no}</h3>
-                <h3>合約餘額: {this.state.money}</h3>
+                    
+                    <h2>方案一詳細內容如下:</h2>
+                    <h3>使用者人數: {this.state.user_no}</h3>
+                    <h3>已經理賠的合約: {this.state.claim_no} </h3>
+                    <h3>合約餘額: {this.state.money} ETH </h3>
+                    
                 </div>
             );
         }else if(this.state.flag === 3){
@@ -138,7 +138,7 @@ class Company extends Component{
                 <div>
                  <Result className="result"
                     status="warning"
-                    title="很抱歉，理賠申請失敗"
+                    title="很抱歉，您不能存取資料"
                     subTitle={this.state.error_msg}  
                     extra={
                     <Button key="1" variant="danger" href="/"> 離開 </Button>
@@ -158,7 +158,7 @@ class Company extends Component{
                 <br/>
                 <br/>
                 <br/>
-                <Container>
+                <Container >
                     {this.setTag()}
                 </Container>
             </div>

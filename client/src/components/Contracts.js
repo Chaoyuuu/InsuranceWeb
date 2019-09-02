@@ -49,6 +49,8 @@ class MyContract extends Component{
 
                                 <h3>給付項目</h3>
                                 <p>身故/完全失能 特定傷病 祝壽金</p>
+
+                                <p><strong>購買: 10 ETH / 理賠: 20 ETH</strong></p>
                                 <Button className="btn" href="\App" variant="outline-danger">選擇</Button>
                             </Panel>
                             <Panel header="方案2" key="2">
@@ -62,6 +64,8 @@ class MyContract extends Component{
 
                                 <h3>給付項目</h3>
                                 <p>住院給付 手術給付 其他給付</p>
+
+                                <p><strong>購買: 10 ETH / 理賠: 20 ETH</strong></p>
                                 <Button className="btn" href="\App" variant="outline-danger">選擇</Button>
                             </Panel>
                             <Panel header="方案3" key="3">
@@ -75,6 +79,8 @@ class MyContract extends Component{
 
                                 <h3>給付項目</h3>
                                 <p>住院給付 手術給付 其他給付</p>
+
+                                <p><strong>購買: 10 ETH / 理賠: 20 ETH</strong></p>
                                 <Button className="btn" href="\App" variant="outline-danger">選擇</Button>
                             </Panel>
                         </Collapse>
