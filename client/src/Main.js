@@ -10,6 +10,8 @@ import App from './App'
 import Claim from "./components/Claim.js";
 import MyContract from "./components/MyContract.js";
 import Contracts from "./components/Contracts.js";
+import Company from "./components/Company.js";
+
 
 class Main extends Component {
   render() {
@@ -26,6 +28,7 @@ class Main extends Component {
             <Route path="/about" component={About}  /> 
             <Route path="/connect" component={Connect}  /> 
             <Route path="/Contracts" component={Contracts}  />
+            <Route path="/Company" component={Company}  />
             <Route component={Error} />
           </Switch>
         </div>

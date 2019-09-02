@@ -75,7 +75,8 @@ class NavBar extends Component {
                     <NavDropdown title="About Dapp" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/About">Smart Contract</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="/Connect">Data Query</NavDropdown.Item>
+                        <NavDropdown.Item href="/Company">Data Query</NavDropdown.Item>
+                        {/* <NavDropdown.Item href="/Connect">Data Query</NavDropdown.Item> */}
                     </NavDropdown>
                     </Nav>
                     

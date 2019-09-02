@@ -184,9 +184,10 @@ body {
   }
   
 #about .body p {
-    line-height: 26px;
+    line-height: 29px;
     text-align: left;
     margin-left: 10px;
+    font-size: 18px;
   }
   
 #about .body p:last-child {
@@ -235,15 +236,27 @@ body {
 #Before p {
     color: #34495E;
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 #Before h3 {
+    color: #5D6D7E;
+    /* align-items: center; */
+    /* position: relative; */
+    font-size: 25px;
+    font-weight: 700;
+    text-align: left;
+    /* font-style: italic; */
+}
+
+#Before h4 {
     color: #34495E;
     /* align-items: center; */
     /* position: relative; */
-    font-size: 20px;
-    font-weight: 100;
+    font-size: 22px;
+    font-weight: 500;
+    text-align: left;
+    /* font-style: italic; */
 }
 
 #Before .row{
@@ -315,12 +328,13 @@ body {
     font-weight: 700;
 }
 
+
+
 #After h3 {
     color: #34495E;
-    /* align-items: center; */
-    /* position: relative; */
-    font-size: 20px;
-    font-weight: 100;
+    font-size: 23px;
+    font-weight: 700;
+    text-align: center;
 }
 
 #After .row{
@@ -376,7 +390,7 @@ body {
 -------------------------*/
 #tool {
     margin-top: 20px;
-    margin-bottom: 90px;
+    margin-bottom: 110px;
     /* height: 70vh; */
     align-items: center;
     text-align: center;
@@ -492,9 +506,10 @@ body {
   }
   
   #about_me .body p {
-    line-height: 26px;
+    line-height: 28px;
     text-align: left;
     margin-left: 10px;
+    font-size: 40px;
   }
   
   #about_me .body p:last-child {

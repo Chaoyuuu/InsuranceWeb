@@ -129,7 +129,7 @@ class Home extends Component {
                             <Col className="col-md-offset-12 col-md-12 titlee">
                                 <h2> What is Insurance Dapp </h2>
                                 <div className="heading-line"></div>
-                                <p> Insurance X BlockChain </p>
+                                <p> BlockChain x Insurance </p>
                             </Col>
                         </Row>
 
@@ -142,9 +142,9 @@ class Home extends Component {
                                 alt="Generic placeholder"
                             />
                             <Media.Body >
-                            <h5>Introduction</h5>
+                            {/* <h5>Introduction</h5> */}
                             <p>
-                            本專題以區塊鏈與智能合約為基礎架構，開發去中心化應用程式，
+                                本專題以區塊鏈與智能合約為基礎架構，開發去中心化應用程式，
                             改善傳統保險理賠的流程，增加理賠的效率與安全。
                             並將所有交易紀錄與相關訊息保存於區塊鏈上，以其高可靠信度、去中心化的優點，
                             使交易過程與相關資訊透 明化，也讓使用者能更安心的使用。
@@ -178,7 +178,7 @@ class Home extends Component {
             <Container id="Before">
                 <Row> 
                     <Col className="col-md-offset-12 col-md-12 tilte">
-                        <h2> Before </h2>
+                        <h2> Issue </h2>
                         <div className="heading-line"></div>
                     </Col>
                 </Row>
@@ -210,7 +210,7 @@ class Home extends Component {
                                 }}>
                        
                             <h3>問題一</h3>
-                            <p>有中間經理人<br/>
+                            <p><strong>中間經理人</strong><br/>
                                 1. 投保人不會接觸保險公司與真實的合約<br/>
                                 2. 有任何狀況都與經紀人溝通<br/>
                                 3. 不對稱的資訊<br/>
@@ -236,7 +236,7 @@ class Home extends Component {
             <Container >
                 <Row> 
                     <Col className="col-md-offset-12 col-md-12 tilte">
-                        <h2> After </h2>
+                        <h2> Solution </h2>
                         <div className="heading-line"></div>
                     </Col>
                 </Row>
@@ -297,16 +297,21 @@ class Home extends Component {
                                 weight={160} 
                                 roundedCircle />
                         </Parallax>
+                        
                     </Col>
+                   
                 </Row>
-
+                <h3>搭建區塊鏈與智能合約</h3>
                 <Row className="row justify-content-md-center" >
-                    <p>搭建區塊鏈與智能合約<br/>
-                        1. 由智能合約計算理賠結果<br/>
-                        2. 區塊鏈保存交易紀錄<br/>
-                        3. 縮短流程、節省時間<br/>
-                        4. 過程透明
+                    <div>
+                    
+                    <p>
+                        1. 保險公司與相關單位主動提供資料證明意外發生<br/>
+                        2. 智能合約計算理賠結果，馬上獲得支付<br/>
+                        3. 區塊鏈保存交易紀錄，資訊透明化<br/>
+                        4. 縮短流程、節省時間、操作簡單<br/>
                     </p>
+                    </div>
                 </Row>
             </Container>
             </Jumbotron>
@@ -315,7 +320,7 @@ class Home extends Component {
                     <Carousel.Item >
                         <img
                         className="h-bg"
-                        src="https://i.imgur.com/NO5YDtS.png"
+                        src="https://i.imgur.com/TqZKl4E.png"
                         alt="First slide-blockchain"
                         // height={870}
                         />
@@ -343,7 +348,7 @@ class Home extends Component {
                     <Carousel.Item>
                         <img
                         className="h-bg"
-                        src="https://i.imgur.com/NO5YDtS.png"
+                        src="https://i.imgur.com/TqZKl4E.png"
                         alt="Second slide-computer"
                         // height={870}
                         />
@@ -426,10 +431,10 @@ class Home extends Component {
                     </Row>
                 </Container>
 
-                <ParallaxBar/>
+                {/* <ParallaxBar/> */}
 
                 {/* about_me */}
-                <Jumbotron fluid id="about_me">
+                {/* <Jumbotron fluid id="about_me">
                     <Container className="about-container">
                         <Row> 
                             <Col className="col-md-offset-12 col-md-12 titlee">
@@ -458,7 +463,7 @@ class Home extends Component {
                             </Media.Body>
                         </Media>
                     </Container>
-                </Jumbotron>
+                </Jumbotron> */}
 
                 <Jumbotron fluid id="end">
                     <OverlayTrigger
@@ -507,14 +512,15 @@ class Home extends Component {
                     </OverlayTrigger>
 
                     <h2>All rights reserved by C.Y.LEE NCKU</h2>  
-                    <div>
-                        Icons made by <a href="https://www.flaticon.com/authors/monkik" title="monkik">monkik</a> 
-                        from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> 
-                        is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC 3.0 BY</a>
-                        </div>
+                    
+                    <br/>
 
                 </Jumbotron>
-        
+                <div>
+                        Icons made by monkik
+                        from www.flaticon.com
+                        is licensed by CC 3.0 BY
+                        </div>
     </div>
     </ParallaxProvider>     
         );

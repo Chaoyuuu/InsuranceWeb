@@ -2,6 +2,7 @@ pragma solidity ^0.5.0;
 
 contract Insurance{
     uint public total_usr = 0;
+     uint claim_usr = 0;
     uint public pay_money = 10 ether;
     uint public buy_money = 10 ether;
     address payable public user;
@@ -52,6 +53,12 @@ contract Insurance{
 
     event done(
         string output
+    );
+
+    event moreinfo(
+        uint total_usr,
+        uint claim_usr,
+        uint256 contract_ether
     );
 
     //modifier function
@@ -127,6 +134,7 @@ contract Insurance{
         require( flag_date , "wrong date.");
         transfer();
         detail[user].if_accident = true;
+         claim_usr++;
 
         emit e_Document(user, document[user].A, document[user].B, detail[user].if_accident);
         return ("in getDocument");
@@ -162,6 +170,10 @@ contract Insurance{
     //insurer add more money
     function lessmoney() payable onlyinsurer public{
         balanceOf[insurer] += msg.value;
+    }
+
+    function moreInfo() public onlyinsurer{
+        emit moreinfo(total_usr, claim_usr, address(this).balance);
     }
 }
 
