@@ -1,4 +1,4 @@
-# 區塊練網頁保險服務系統 Insurance Dapp
+# <img src="https://github.com/Chaoyuuu/InsuranceWeb/blob/master/img/logo.png" width="25"/>區塊練網頁保險服務系統 Insurance Dapp
 
 ## 介紹
    本專案以區塊鏈與智能合約為基礎架構，開發去中心化應用程式，並應用於保險實務，將過去保險理賠過於冗長的流程化繁為簡，加快理賠的效率與安全。並將所有交易紀錄與相關訊息保存於區塊鏈上，以其高可靠信、去中心化的優 點，使交易過程與相關資訊透明化，也讓投保人能更安心的使用。 
@@ -11,7 +11,7 @@
 5. React v16.8.6
 
 ## 系統架構 
-
+<img src="https://github.com/Chaoyuuu/InsuranceWeb/blob/master/img/system.png" width="400"/>
 
 ## 功能介紹
 ### 1. 簽訂合約
