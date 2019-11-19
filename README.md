@@ -22,4 +22,7 @@
 
 ## Demo
 ### 1. Home page
+<img src="https://github.com/Chaoyuuu/InsuranceWeb/blob/master/img/homepage.gif" />
+
 ### 2. 簽訂合約功能
+<img src="https://github.com/Chaoyuuu/InsuranceWeb/blob/master/img/buy.gif" />
